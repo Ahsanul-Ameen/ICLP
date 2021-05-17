@@ -13,11 +13,10 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item to="/about">Courses</b-nav-item>
-          <b-nav-item to="/">Blog</b-nav-item>
-          <b-nav-item to="/">Chellenges</b-nav-item>
-          <b-nav-item to="/">Profile</b-nav-item>
-          <b-nav-item to="/">Instructors</b-nav-item>
+          <b-nav-item to="/courses">Courses</b-nav-item>
+          <b-nav-item to="/blog">Blog</b-nav-item>
+          <b-nav-item to="/challenges">Challenges</b-nav-item>
+          <b-nav-item to="/instructors">Instructors</b-nav-item>
         </b-navbar-nav>
 
         <b-navbar-nav class="ml-auto" v-if="profile">
