@@ -2,7 +2,7 @@
   <b-navbar toggleable="lg" class="shadow-sm font-weight-bold">
     <b-navbar-brand :to="{ name: 'Home' }">
       <img
-        src="../assets/iclp-logo.png"
+        src="../../assets/iclp-logo.png"
         class="d-inline-block navbar-logo"
         alt="ICLP"
       />
@@ -14,7 +14,7 @@
       <b-navbar-nav>
         <b-nav-item :to="{ name: 'Courses' }">Courses</b-nav-item>
         <b-nav-item :to="{ name: 'Blog' }">Blog</b-nav-item>
-        <b-nav-item :to="{ name: 'Challenges'}">Challenges</b-nav-item>
+        <b-nav-item :to="{ name: 'Challenges' }">Challenges</b-nav-item>
         <b-nav-item :to="{ name: 'Instructors' }">Instructors</b-nav-item>
       </b-navbar-nav>
 
@@ -59,8 +59,8 @@ $navbar-light-color: rgba(0, 0, 0, 1);
 $navbar-light-hover-color: rgba(200, 69, 0, 1);
 $navbar-light-active-color: rgba(200, 69, 0, 1);
 
-@import "../../node_modules/bootstrap/scss/bootstrap";
-@import "../../node_modules/bootstrap-vue/src/index.scss";
+@import "../../../node_modules/bootstrap/scss/bootstrap";
+@import "../../../node_modules/bootstrap-vue/src/index.scss";
 .navbar-logo {
   width: 150px;
 }

@@ -36,7 +36,7 @@
               <b-tr>
                 <b-td
                   ><img
-                    src="../assets/iclp-logo-dark.png"
+                    src="../../assets/iclp-logo-dark.png"
                     class="d-inline-block navbar-logo p-5"
                     alt="ICLP"
                     style="width: 300px"
