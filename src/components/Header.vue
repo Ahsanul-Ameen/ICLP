@@ -1,6 +1,6 @@
 <template>
   <b-navbar toggleable="lg" class="shadow-sm font-weight-bold">
-    <b-navbar-brand to="/">
+    <b-navbar-brand :to="{ name: 'Home' }">
       <img
         src="../assets/iclp-logo.png"
         class="d-inline-block navbar-logo"
@@ -12,14 +12,14 @@
 
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
-        <b-nav-item to="/courses">Courses</b-nav-item>
-        <b-nav-item to="/blog">Blog</b-nav-item>
-        <b-nav-item to="/challenges">Challenges</b-nav-item>
-        <b-nav-item to="/instructors">Instructors</b-nav-item>
+        <b-nav-item :to="{ name: 'Courses' }">Courses</b-nav-item>
+        <b-nav-item :to="{ name: 'Blog' }">Blog</b-nav-item>
+        <b-nav-item :to="{ name: 'Challenges'}">Challenges</b-nav-item>
+        <b-nav-item :to="{ name: 'Instructors' }">Instructors</b-nav-item>
       </b-navbar-nav>
 
       <b-navbar-nav class="ml-auto" v-if="profile">
-        <b-nav-item to="/">Messages</b-nav-item>
+        <b-nav-item :to="{ name: 'Home' }">Messages</b-nav-item>
       </b-navbar-nav>
       <b-navbar-nav v-if="profile">
         <b-nav-item-dropdown right>
