@@ -3,7 +3,8 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Courses from '../views/Courses.vue'
 import Blog from '../views/Blog.vue'
-import Challenges from '../views/Challenges.vue'
+import Challenges from '../views/Challenges/'
+import BrowseTopics from '../views/Challenges/SoloChallenge/BrowseTopics.vue'
 import Instructors from '../views/Instructors.vue'
 
 Vue.use(VueRouter)
@@ -28,6 +29,11 @@ const routes = [
     path: '/challenges',
     name: 'Challenges',
     component: Challenges
+  },
+  {
+    path: '/challenges/soloChallenge/browseTopics',
+    name: 'BrowseTopics',
+    component: BrowseTopics
   },
   {
     path: '/instructors',
