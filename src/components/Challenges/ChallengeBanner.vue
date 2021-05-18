@@ -1,7 +1,7 @@
 <template>
-  <div class="banner m-5">
+  <div class="banner m-5 p-2">
     <b-container>
-      <b-row>
+      <b-row v-if="heading">
         <b-col offset-md="1" class="pt-5"
           ><h4 class="font-weight-bold" font-weight-bold>
             <b-icon icon="bar-chart-fill" class="text-primary"></b-icon>
@@ -23,7 +23,6 @@ export default {
   props: {
     heading: {
       type: String,
-      required: true,
     },
   },
 };

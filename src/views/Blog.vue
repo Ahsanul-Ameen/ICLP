@@ -1,13 +1,11 @@
 <template>
-  <h2>This is a dummy page</h2>
+  <b-container>
+    <h2>This is a blog page</h2>
+  </b-container>
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

@@ -4,7 +4,9 @@ import Home from '../views/Home.vue'
 import Courses from '../views/Courses.vue'
 import Blog from '../views/Blog.vue'
 import Challenges from '../views/Challenges/'
-import BrowseTopics from '../views/Challenges/SoloChallenge/BrowseTopics.vue'
+import SoloChallenge from '../views/Challenges/SoloChallenge/'
+import SoloChallengeConfirm from '../views/Challenges/SoloChallenge/SoloChallengeConfirm.vue'
+import SoloChallengeExam from '../views/Challenges/SoloChallenge/SoloChallengeExam.vue'
 import Instructors from '../views/Instructors.vue'
 
 Vue.use(VueRouter)
@@ -31,9 +33,19 @@ const routes = [
     component: Challenges
   },
   {
-    path: '/challenges/soloChallenge/browseTopics',
+    path: '/challenges/soloChallenge/',
     name: 'BrowseTopics',
-    component: BrowseTopics
+    component: SoloChallenge
+  },
+  {
+    path: '/challenges/soloChallenge/:topicId',
+    name: 'SoloChallengeConfirm',
+    component: SoloChallengeConfirm
+  },
+  {
+    path: '/challenges/soloChallenge/:challengeId',
+    name: 'SoloChallengeExam',
+    component: SoloChallengeExam
   },
   {
     path: '/instructors',

@@ -1,12 +1,10 @@
 <template>
-  <div>
-    <div class="text-center mt-4">
-      <h2>
-        <b-icon icon="grip-horizontal" class="text-primary"></b-icon>
-        Select Challenge Category
-        <b-icon icon="grip-horizontal" class="text-primary"></b-icon>
-      </h2>
-    </div>
+  <b-container>
+    <h2 class="text-center mt-4">
+      <b-icon icon="grip-horizontal" class="text-primary"></b-icon>
+      Select Challenge Category
+      <b-icon icon="grip-horizontal" class="text-primary"></b-icon>
+    </h2>
 
     <challenge-banner heading="Take a quiz">
       <p>
@@ -23,7 +21,7 @@
     </challenge-banner>
     <challenge-banner heading="Play"></challenge-banner>
     <challenge-banner heading="Coding Challenge"></challenge-banner>
-  </div>
+  </b-container>
 </template>
 
 <script>
