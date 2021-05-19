@@ -29,6 +29,9 @@
       >Proceed</b-button>
     </challenge-banner>
     <challenge-banner heading="Coding Challenge">
+      <p>
+        A coding challenge where you can choose your preferable topic and solve coding problem on it within fixed time limit.
+      </p>
       <b-button
         pill
         variant="primary"
