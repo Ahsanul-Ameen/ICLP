@@ -8,7 +8,9 @@ import SoloChallenge from '../views/Challenges/SoloChallenge/'
 import SoloChallengeConfirm from '../views/Challenges/SoloChallenge/SoloChallengeConfirm.vue'
 import SoloChallengeExam from '../views/Challenges/SoloChallenge/SoloChallengeExam.vue'
 import Instructors from '../views/Instructors.vue'
-
+import Problems from '../views/Problems.vue'
+import ProblemTopics from '../views/ProblemTopics.vue'
+import Problem from '../views/Problem.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -52,6 +54,23 @@ const routes = [
     name: 'Instructors',
     component: Instructors
   },
+  {
+    path: '/problems',
+    name: 'ProblemTopics',
+    component: ProblemTopics
+  },
+  {
+    path: '/problems/:topic',
+    name: 'Problems',
+    component: Problems,
+    props: route => ({ ...route.params, ...route.query })
+  },
+  {
+    path: '/problem/:id',
+    name: 'Problem',
+    component: Problem,
+    props: true
+  }
 ]
 
 const router = new VueRouter({

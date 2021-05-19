@@ -1,11 +1,7 @@
 <template>
-  <b-navbar toggleable="lg" class="shadow-sm font-weight-bold">
+  <b-navbar toggleable="lg" class="shadow-sm font-weight-bold bg-white">
     <b-navbar-brand :to="{ name: 'Home' }">
-      <img
-        src="../../assets/iclp-logo.png"
-        class="d-inline-block navbar-logo"
-        alt="ICLP"
-      />
+      <img src="../../assets/iclp-logo.png" class="d-inline-block navbar-logo" alt="ICLP" />
     </b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -24,7 +20,7 @@
       <b-navbar-nav v-if="profile">
         <b-nav-item-dropdown right>
           <template #button-content>
-            <b-avatar variant="info" :src="profile"> </b-avatar>
+            <b-avatar variant="info" :src="profile"></b-avatar>
           </template>
           <b-dropdown-item href="#">Profile</b-dropdown-item>
           <b-dropdown-item @click="signOut">Sign Out</b-dropdown-item>
