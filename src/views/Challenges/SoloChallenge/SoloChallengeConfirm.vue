@@ -44,10 +44,18 @@
                 <p>{{ marks }}</p>
               </b-row>
               <b-row>
-                <p class="font-weight-bold mr-2">
+                <p class="font-weight-bold">
                   <b-icon icon="alarm" class="text-primary mr-2" />Time:
                 </p>
-                <p>{{ time }}</p>
+                <p v-if="parseInt(getHours(time)) != 0" class="ml-2">
+                  {{ parseInt(getHours(time)) }} hr
+                </p>
+                <p v-if="parseInt(getMinutes(time)) != 0" class="ml-2">
+                  {{ parseInt(getMinutes(time)) }} min
+                </p>
+                <p v-if="parseInt(getSeconds(time)) != 0" class="ml-2">
+                  {{ parseInt(getSeconds(time)) }} sec
+                </p>
               </b-row>
             </b-col>
             <b-col align-self="center" class="ml-5">
@@ -81,6 +89,7 @@
 
 <script setup>
 import ChallengeBanner from "../../../components/Challenges/ChallengeBanner.vue";
+import timeUtility from "../../../mixins/timeUtility";
 export default {
   components: { ChallengeBanner },
   data() {
@@ -88,14 +97,14 @@ export default {
       backIcon: "arrow-left-circle",
       topicId: "",
       topicName: "",
-      marks: "",
-      hardness: "",
-      time: "",
+      marks: 76,
+      hardness: 80,
+      time: 74744,
       challengeId: "",
     };
   },
+  mixins: [timeUtility],
   created() {
-    console.log(this.$route.params.topicId);
     this.topicId = this.$route.params.topicId;
     this.topicName = "Machine Learning";
     this.challengeId = 22;

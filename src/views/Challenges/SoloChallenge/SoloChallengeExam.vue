@@ -10,7 +10,7 @@
       </b-col>
       <b-col class="pr-5">
         <b-row align-h="end">
-          <Timer :secondsLeft="time" @timesup="submit"></Timer>
+          <Timer :time="time" @timesup="submit"></Timer>
         </b-row>
       </b-col>
     </b-row>
@@ -29,10 +29,18 @@
         <p>{{ marks }}</p>
       </b-row>
       <b-row align-h="center">
-        <p class="font-weight-bold mr-2">
+        <p class="font-weight-bold">
           <b-icon icon="alarm" class="text-primary mr-2" />Time:
         </p>
-        <p>{{ time }}</p>
+        <p v-if="parseInt(getHours(time)) != 0" class="ml-2">
+          {{ parseInt(getHours(time)) }} hr
+        </p>
+        <p v-if="parseInt(getMinutes(time)) != 0" class="ml-2">
+          {{ parseInt(getMinutes(time)) }} min
+        </p>
+        <p v-if="parseInt(getSeconds(time)) != 0" class="ml-2">
+          {{ parseInt(getSeconds(time)) }} sec
+        </p>
       </b-row>
       <b-row
         v-for="(question, index) in questions"
@@ -42,18 +50,27 @@
         <b-col cols="8">
           <b-form-group
             :label="'Q' + (index + 1) + ': ' + question.statement"
-            v-slot="{ index }"
+            :v-slot="index"
             class="font-weight-bold"
           >
             <b-form-radio
               v-for="(option, answerNo) in question.options"
-              :key="option"
-              :v-model="question.answer"
+              :key="option + answerNo"
+              v-model="question.answer"
               :aria-describedby="index"
               :value="answerNo"
+              :name="index.toString()"
               class="font-weight-normal"
-              >{{ option }}</b-form-radio
-            >
+              >{{ option }}
+            </b-form-radio>
+
+            <!-- May use the second form if needed -->
+            <!--b-form-radio-group
+              v-model="question.answer"
+              :options="question.options"
+              :aria-describedby="index"
+              :name="index.toString()"
+            ></!--b-form-radio-group-->
           </b-form-group>
         </b-col>
         <b-col>
@@ -77,6 +94,7 @@
 
 <script>
 import Timer from "../../../components/Timer.vue";
+import timeUtility from "../../../mixins/timeUtility";
 export default {
   components: { Timer },
   data() {
@@ -85,7 +103,7 @@ export default {
       topicName: "Machine Learning",
       marks: "20",
       hardness: "80",
-      time: 10,
+      time: 3603,
       challengeId: "",
       questions: [
         {
@@ -119,12 +137,17 @@ export default {
       ],
     };
   },
+  mixins: [timeUtility],
   methods: {
     submit() {
+      console.log(
+        "submitted answer: ",
+        this.questions.map((a) => a.answer)
+      );
       this.$router.push({ name: "BrowseTopics" });
       this.$root.$bvToast.toast(`Your answers are submitted successfully`, {
-        title: "Solo Challenge Ended",
-        variant: "success",
+        title: "Solo challenge has ended",
+        variant: "dark",
         autoHideDelay: 5000,
         appendToast: true,
       });
