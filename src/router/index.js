@@ -38,7 +38,7 @@ const routes = [
     component: SoloChallenge
   },
   {
-    path: '/challenges/soloChallenge/:topicId',
+    path: '/challenges/soloChallenge/confirm/:topicId',
     name: 'SoloChallengeConfirm',
     component: SoloChallengeConfirm
   },
