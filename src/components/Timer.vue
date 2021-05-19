@@ -1,53 +1,70 @@
 <template>
-  <div class="clock pt-1">
-    <m-row>
-      <m-col>
-        Timer:
-      </m-col>
-      <m-col>
-        <seven-segment
-          v-for="(m, i) in minutes"
-          :key="m + i"
-          :value="m"
-          :rounded="false"
-          :segment-width="10"
-          :segment-height="3"
-          class="mr-1"
-          on-color="#000"
-          off-color="rgba(100, 100, 100, .2)"
-        />
-      </m-col>
-      <m-col class="mr-1">min</m-col>
-      <m-col>
-        <seven-segment
-          v-for="(m, i) in seconds"
-          :key="m + i"
-          :value="m"
-          :rounded="false"
-          :segment-width="10"
-          :segment-height="3"
-          class="mr-1"
-          on-color="#000"
-          off-color="rgba(100, 100, 100, .2)"
-        />
-      </m-col>
-      <m-col class="mr-1">sec</m-col>
-    </m-row>
-  </div>
+  <b-row>
+    <b-table-simple borderless responsive>
+      <b-tbody>
+        <b-tr>
+          <b-td v-if="parseInt(getHours(secondsLeft)) != 0">
+            <seven-segment
+              v-for="(m, i) in hours"
+              :key="m + i"
+              :value="m"
+              :rounded="false"
+              :segment-width="10"
+              :segment-height="3"
+              class="mr-1"
+              on-color="#000"
+              off-color="rgba(100, 100, 100, .2)"
+            />
+            hr
+          </b-td>
+          <b-td>
+            <seven-segment
+              v-for="(m, i) in minutes"
+              :key="m + i"
+              :value="m"
+              :rounded="false"
+              :segment-width="10"
+              :segment-height="3"
+              class="mr-1"
+              on-color="#000"
+              off-color="rgba(100, 100, 100, .2)"
+            />
+            min
+          </b-td>
+          <b-td>
+            <seven-segment
+              v-for="(m, i) in seconds"
+              :key="m + i"
+              :value="m"
+              :rounded="false"
+              :segment-width="10"
+              :segment-height="3"
+              class="mr-1"
+              on-color="#000"
+              off-color="rgba(100, 100, 100, .2)"
+            />
+            sec
+          </b-td>
+        </b-tr>
+      </b-tbody>
+    </b-table-simple>
+  </b-row>
 </template>
 
 <script>
 import SevenSegment from "vue-seven-segment-display";
+import timeUtility from "../mixins/timeUtility";
 export default {
   components: { SevenSegment },
   data() {
     return {
       clock: "",
+      secondsLeft: "",
     };
   },
 
   props: {
-    secondsLeft: {
+    time: {
       type: Number,
       required: true,
       validator: function(value) {
@@ -55,8 +72,9 @@ export default {
       },
     },
   },
-
+  mixins: [timeUtility],
   created() {
+    this.secondsLeft = this.time;
     this.clock = setInterval(() => {
       this.secondsLeft--;
       if (this.secondsLeft <= 0) {
@@ -66,17 +84,14 @@ export default {
     }, 1000);
   },
   computed: {
+    hours() {
+      return this.getHours(this.secondsLeft).split("");
+    },
     minutes() {
-      let minute = Math.floor(this.secondsLeft / 60);
-      minute = minute.toString().split("");
-      if (minute.length === 1) minute.unshift("0");
-      return minute;
+      return this.getMinutes(this.secondsLeft).split("");
     },
     seconds() {
-      let second = this.secondsLeft % 60;
-      second = second.toString().split("");
-      if (second.length === 1) second.unshift("0");
-      return second;
+      return this.getSeconds(this.secondsLeft).split("");
     },
   },
 };
