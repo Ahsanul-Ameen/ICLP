@@ -32,8 +32,8 @@
 							pill
 							class="shadow-sm font-weight-bold bg-light text-dark"
 							:to="{
-								// TODO: update riderction here
-								name: 'ThrowDualConfirm',	
+								// TODO: update riderction here [we'll modify DualConfirm later]
+								name: 'DualConfirm',	
 								params: { topicId: topic.id },
 							}"
 						>
