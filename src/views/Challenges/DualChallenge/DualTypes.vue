@@ -22,8 +22,7 @@
 						It may take some time to find your opponent. If you want quick evaluation browse topics to accept a
 						challenge. You might find your interested topic in the available topics of that section too!!
 					</b-card-text>
-					<!-- TODO: update redirection -->
-					<b-button class="ml-4" variant="primary" :to="{ name: 'Home' }">Browse Topics</b-button>
+					<b-button class="ml-4" variant="primary" :to="{ name: 'DualTopics' }">Browse Topics</b-button>
 				</b-card>
 			</b-row>
 			

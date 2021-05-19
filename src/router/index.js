@@ -8,6 +8,7 @@ import SoloChallenge from '../views/Challenges/SoloChallenge/'
 import SoloChallengeConfirm from '../views/Challenges/SoloChallenge/SoloChallengeConfirm.vue'
 import SoloChallengeExam from '../views/Challenges/SoloChallenge/SoloChallengeExam.vue'
 import DualTypes from '../views/Challenges/DualChallenge/DualTypes.vue'
+import DualTopics from '../views/Challenges/DualChallenge/DualTopics.vue'
 import Instructors from '../views/Instructors.vue'
 import Problems from '../views/Problems.vue'
 import ProblemTopics from '../views/ProblemTopics.vue'
@@ -54,6 +55,11 @@ const routes = [
     path: '/challenges/dualTypes/',
     name: 'DualTypes',
     component: DualTypes
+  },
+  {
+    path: '/challenges/dualTopics/',
+    name: 'DualTopics',
+    component: DualTopics
   },
   {
     path: '/instructors',
