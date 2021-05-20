@@ -5,12 +5,13 @@
 				Dual Challenge
 			<b-icon icon="grip-horizontal" class="text-primary"></b-icon>
 		</h2>
-		<div class="mt-5">
+		<div class="mx-5">
 			<b-row offset-md="1" class="pb-5 pt-5">
 				<b-card
 					tag="article"
 					style="max-width: 60rem;"
 					class="mx-auto place"
+					v-b-popover.hover="'Feeling energetic?'"
 				>
 					<h4 class="font-weight-bold" font-weight-bold>
 						<b-icon icon="arrow90deg-right" class="text-primary"></b-icon>
@@ -31,6 +32,7 @@
 					tag="article"
 					style="max-width: 60rem;"
 					class="mx-auto place"
+					v-b-popover.hover="'Wanna revenge?'"
 				>
 					<h4 class="font-weight-bold" font-weight-bold>
 						<b-icon icon="arrow90deg-down" class="text-primary"></b-icon>
@@ -41,8 +43,7 @@
 						If you want quick evaluation, select your interested topic from the available topics to accept challenge and
 						compete against your opponent.
 					</b-card-text>
-					<!-- TODO: update redirection -->
-					<b-button class="ml-4" variant="primary" :to="{ name: 'Home' }">See Challenges</b-button>
+					<b-button class="ml-4" variant="primary" :to="{ name: 'Invitations' }">See Challenges</b-button>
 				</b-card>
 			</b-row>
 			
@@ -64,5 +65,8 @@ export default {
 	.place {
 		border-radius: 25px;
 		border: 2px solid #ffa358;
+	}
+	.place:hover {
+		background-color:rgb(253, 243, 223)
 	}
 </style>
