@@ -20,6 +20,11 @@
     </div>
     <div v-else>
       <p class="font-weight-bold">
+        <b-icon
+          icon="hand-index-thumb"
+          class="text-primary"
+          rotate="90"
+        ></b-icon>
         By clicking on "Start Quiz" button, the quiz will be started on selected
         topic and you have to submit your answer within the time limit. Your
         rank will be updated after your submission or time is over.
