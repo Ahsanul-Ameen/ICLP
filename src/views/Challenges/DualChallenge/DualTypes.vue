@@ -67,6 +67,6 @@ export default {
 		border: 2px solid #ffa358;
 	}
 	.place:hover {
- 		background-color: rgb(253, 243, 223);
+		background-color:rgb(253, 243, 223)
 	}
 </style>
