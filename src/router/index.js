@@ -9,6 +9,7 @@ import SoloChallengeConfirm from '../views/Challenges/SoloChallenge/SoloChalleng
 import SoloChallengeExam from '../views/Challenges/SoloChallenge/SoloChallengeExam.vue'
 import DualTypes from '../views/Challenges/DualChallenge/DualTypes.vue'
 import DualTopics from '../views/Challenges/DualChallenge/DualTopics.vue'
+import Invitations from '../views/Challenges/DualChallenge/Invitations.vue'
 import DualConfirm from '../views/Challenges/DualChallenge/DualConfirm.vue'
 import Instructors from '../views/Instructors.vue'
 import Problems from '../views/Problems.vue'
@@ -61,6 +62,11 @@ const routes = [
     path: '/challenges/dualChallenge/dualTopics/',
     name: 'DualTopics',
     component: DualTopics
+  },
+  {
+    path: '/challenges/dualChallenge/invitations/',
+    name: 'Invitations',
+    component: Invitations
   },
   {
     path: '/challenges/dualChallenge/confirm/:topicId',
