@@ -33,8 +33,11 @@
 							class="shadow-sm font-weight-bold bg-light text-dark"
 							:to="{
 								// TODO: update riderction here [we'll modify DualConfirm later]
-								name: 'DualConfirm',	
-								params: { topicId: topic.id },
+								name: 'Duellers',	
+								params: { 
+                  topicId: topic.id,
+                  challengerName: userName,
+                }
 							}"
 						>
 						<b-icon icon="bar-chart-fill" class="text-primary"></b-icon> {{ topic.name }}</b-button>
@@ -79,6 +82,8 @@ export default {
         { id: "20", name: "Cyber laws and security", description: "" },
         { id: "21", name: "Algorithms and data structures", description: "" },
       ],
+      userId: "",
+      userName: "",
     };
   },
   computed: {
@@ -103,6 +108,10 @@ export default {
         return this.isSubsequence(str1, str2, m - 1, n - 1);
       return this.isSubsequence(str1, str2, m, n - 1);
     },
+  },
+  created() {
+    this.userId = this.$route.params.userId;
+    this.userName = this.$route.params.userName;
   },
 };
 </script>
