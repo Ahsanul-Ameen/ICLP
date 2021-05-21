@@ -39,7 +39,7 @@
 									:disabled='challenge.isAccepted'
 									block
 									variant="light"
-									class="shadow-sm font-weight-bold text-left"
+									class="shadow-sm font-weight-bold text-left shadow hover-zoom"
 									@click.prevent="choosedChallenge = challenge"
 									v-bind:class="{ 'highlight' : choosedChallenge && challenge.challengeId === choosedChallenge.challengeId}"
 								> 
@@ -78,6 +78,8 @@ export default {
 	data() {
 		return {
 			choosedChallenge: null,
+			userId: "",
+			userName: "",
 			challenges: [	
 				{
 					topicId: "1",
@@ -127,7 +129,7 @@ export default {
 					challengerName: "Erricto",
 					isAccepted: false
 				}
-			]
+			],
 		};
 	},
 	methods: {
@@ -142,7 +144,11 @@ export default {
 				} 
 			}
 		}
-	}
+	},
+	created() {
+		this.userId = this.$route.params.userId;
+		this.userName = this.$route.params.userName;
+	},
 };
 </script>
 
@@ -176,6 +182,6 @@ export default {
 		text-align: center;
 	}
 	.highlight {
-		border: 2px dotted green
+		border: 2px inset green
 	}
 </style>
