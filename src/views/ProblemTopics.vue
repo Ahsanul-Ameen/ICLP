@@ -4,17 +4,19 @@
       <router-link
         :to="topic"
         append
-        exact="true"
+        :exact="true"
         v-slot="{ href, navigate, isActive, isExactActive }"
         custom
         v-for="(topic, index) in topics"
         :key="index"
       >
         <b-list-group-item
-          :class="[isActive && 'router-link-active', isExactActive && 'router-link-exact-active', 'problemcard', 'clickable-card', 'py-3']"
+          :class="[isActive && 'router-link-active', isExactActive && 'router-link-exact-active', 'shadow', 'hover-zoom', 'hover-color-link', 'py-3']"
           :href="href"
           @click="navigate"
-        >{{ topic }}</b-list-group-item>
+        >
+          <div class="link">{{ topic }}</div>
+        </b-list-group-item>
       </router-link>
     </b-list-group>
   </div>

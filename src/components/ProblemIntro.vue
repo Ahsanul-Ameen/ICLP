@@ -2,7 +2,7 @@
   <div>
     <b-row>
       <b-col cols="9">
-        <h3 class="problemname">{{probleminfo.name}}</h3>
+        <h3 class="link">{{probleminfo.name}}</h3>
         {{probleminfo.difficulty}}, Max score: {{probleminfo.maxScore}}, Solved by: {{probleminfo.solvedBy}}, Attempted by: {{probleminfo.attemptedBy}}
       </b-col>
       <b-col cols="3" class="align-self-center">
@@ -26,11 +26,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.problemcard:hover {
-  .problemname {
-    color: orangered;
-  }
-}
 .solvecard {
   border-color: green;
 }

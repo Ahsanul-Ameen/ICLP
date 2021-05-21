@@ -9,7 +9,7 @@
             :key="problem.id"
             :probleminfo="problem"
             :href="`/problem/${problem.id}`"
-            class="problemcard clickable-card py-3"
+            class="shadow hover-zoom hover-color-link py-3"
           >
             <ProblemIntro :probleminfo="problem" />
           </b-list-group-item>
