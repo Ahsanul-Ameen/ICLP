@@ -137,9 +137,9 @@ export default {
 			return {
 				name: 'DualConfirm',
 				params: { 
-							topicId: this.choosedChallenge ? this.choosedChallenge.topicId : -1,
-							challengerName: this.choosedChallenge? this.choosedChallenge.challengerName: ''
-						} 
+					topicId: this.choosedChallenge ? this.choosedChallenge.topicId : -1,
+					challengerName: this.choosedChallenge? this.choosedChallenge.challengerName: ''
+				} 
 			}
 		}
 	}
