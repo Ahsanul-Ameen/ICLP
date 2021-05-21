@@ -52,7 +52,8 @@
 								name: 'DualConfirm',	
 								params: { 
 									topicId: topicId,
-									challengerName: participant.name
+									challengerName: participant.name,
+									throwingType: true
 								},
 							}"
 						>	

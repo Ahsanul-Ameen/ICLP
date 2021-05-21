@@ -17,7 +17,7 @@
 					<b-card-body
 						id="nav-scroller"
 						ref="content"
-						style="max-height:300px; overflow-y: scroll;"
+						style="max-height:400px; overflow-y: scroll;"
 						class="theme"
 					>
 						<b-row
@@ -140,7 +140,8 @@ export default {
 				name: 'DualConfirm',
 				params: { 
 					topicId: this.choosedChallenge ? this.choosedChallenge.topicId : -1,
-					challengerName: this.choosedChallenge? this.choosedChallenge.challengerName: ''
+					challengerName: this.choosedChallenge? this.choosedChallenge.challengerName: '',
+					throwingType: false
 				} 
 			}
 		}

@@ -11,7 +11,7 @@
     />
     <h2 class="text-center">
       <b-icon icon="grip-horizontal" class="text-primary" />
-        Accept a Challenge with 
+        {{ title }}
         <span style="color: indigo; font-style: italic;"> {{ challengerName ? challengerName : 'Whom?' }} </span>
       <b-icon icon="grip-horizontal" class="text-primary" />
     </h2>
@@ -87,16 +87,42 @@
         </b-container>
       </challenge-banner>
       <b-row align-h="center">
-        <b-button
-          pill
-          variant="primary"
-          class="shadow-lg font-weight-bold p-3"
-          :to="{  //TODO: redirect to a dual exam 
-            name: 'SoloChallengeExam',
-            params: { challengeId: challengeId },
-          }"
-          >Start Quiz</b-button
-        >
+        <b-card
+          style="max-width: 70rem;"
+					tag="article"
+					class="mx-auto px-auto place hover-zoom"
+          v-bind:class="{ start: throwingType, accept: !throwingType }"
+				>	
+					<b-card-text 
+            class="pb-2 pl-4 pt-2"
+            v-if="throwingType"
+          >
+						<span style="color: brown; font-size: 20px">Challenge will shortly start after acceptance of you opponent</span>
+					</b-card-text>
+          <b-button
+            v-if="throwingType"
+            pill
+            variant="primary"
+            class="shadow-lg font-weight-bold p-3 ml-4"
+            @click.prevent="$router.go(-1)"
+          >
+            {{ button }}
+          </b-button>
+          <b-button
+            v-else
+            pill
+            variant="primary"
+            class="shadow-lg font-weight-bold p-3"
+            :to="{  //TODO: redirect to a dual exam 
+              name: 'SoloChallengeExam',
+              params: { challengeId: challengeId },
+            }"
+          >
+            {{ button }}
+          </b-button>
+				</b-card>
+
+        
       </b-row>
     </div>
   </b-container>
@@ -109,6 +135,7 @@ export default {
   components: { ChallengeBanner },
   data() {
     return {
+      throwingType: null,
       backIcon: "arrow-left-circle",
       topicId: "",
       topicName: "",
@@ -121,17 +148,34 @@ export default {
   },
   mixins: [timeUtility],
   created() {
+    this.throwingType = this.$route.params.throwingType;
     this.topicId = this.$route.params.topicId;
     this.challengerName = this.$route.params.challengerName;
     //TDOO: adjust these things later with backend?
     this.topicName = "Machine Learning";
     this.challengeId = 22;
   },
+  computed: {
+    title() {
+      return this.throwingType ? 'Arranging a dual with' : 'Accept a Challenge with'
+    },
+    button() {
+      return this.throwingType ? 'Cancel' : 'Start Dual'
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-.left {
-  border-right: 3px solid blueviolet;
-}
+  .left {
+    border-right: 3px solid blueviolet;
+  }
+  .start {
+    background-color: rgb(255, 246, 239);
+  }
+  .accept {
+    background-color: rgb(255, 235, 235);
+    border: 1px;
+    border-radius: 25px;
+  }
 </style>
