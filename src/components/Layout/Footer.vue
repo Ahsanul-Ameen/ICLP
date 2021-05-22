@@ -1,5 +1,5 @@
 <template>
-  <footer class="text-white mt-5" style="background-color: black">
+  <footer class="text-white bg-dark mt-5">
     <b-container fluid>
       <b-row>
         <b-col class="p-5">

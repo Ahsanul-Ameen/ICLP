@@ -1,100 +1,113 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import Courses from '../views/Courses.vue'
-import Blog from '../views/Blog.vue'
-import Challenges from '../views/Challenges/'
-import SoloChallenge from '../views/Challenges/SoloChallenge/'
-import SoloChallengeConfirm from '../views/Challenges/SoloChallenge/SoloChallengeConfirm.vue'
-import SoloChallengeExam from '../views/Challenges/SoloChallenge/SoloChallengeExam.vue'
-import DualTypes from '../views/Challenges/DualChallenge/DualTypes.vue'
-import DualTopics from '../views/Challenges/DualChallenge/DualTopics.vue'
-import DualConfirm from '../views/Challenges/DualChallenge/DualConfirm.vue'
-import Instructors from '../views/Instructors.vue'
-import Problems from '../views/Problems.vue'
-import ProblemTopics from '../views/ProblemTopics.vue'
-import Problem from '../views/Problem.vue'
-Vue.use(VueRouter)
+import Vue from "vue";
+import VueRouter from "vue-router";
+import Home from "../views/Home.vue";
+import Courses from "../views/Courses.vue";
+import Blog from "../views/Blog.vue";
+import Challenges from "../views/Challenges/";
+import SoloChallenge from "../views/Challenges/SoloChallenge/";
+import SoloChallengeConfirm from "../views/Challenges/SoloChallenge/SoloChallengeConfirm.vue";
+import SoloChallengeExam from "../views/Challenges/SoloChallenge/SoloChallengeExam.vue";
+import DualTypes from "../views/Challenges/DualChallenge/DualTypes.vue";
+import DualTopics from "../views/Challenges/DualChallenge/DualTopics.vue";
+import DualConfirm from "../views/Challenges/DualChallenge/DualConfirm.vue";
+import Instructors from "../views/Instructors.vue";
+import Problems from "../views/Problems.vue";
+import ProblemTopics from "../views/ProblemTopics.vue";
+import Problem from "../views/Problem.vue";
+import Login from "../views/auth/Login.vue";
+import Signup from "../views/auth/Signup.vue";
+
+Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: "/",
+    name: "Home",
+    component: Home,
   },
   {
-    path: '/courses',
-    name: 'Courses',
-    component: Courses
+    path: "/login",
+    name: "Login",
+    component: Login,
   },
   {
-    path: '/blog',
-    name: 'Blog',
-    component: Blog
+    path: "/signup",
+    name: "Signup",
+    component: Signup,
   },
   {
-    path: '/challenges',
-    name: 'Challenges',
-    component: Challenges
+    path: "/courses",
+    name: "Courses",
+    component: Courses,
   },
   {
-    path: '/challenges/soloChallenge/',
-    name: 'BrowseTopics',
-    component: SoloChallenge
+    path: "/blog",
+    name: "Blog",
+    component: Blog,
   },
   {
-    path: '/challenges/soloChallenge/confirm/:topicId',
-    name: 'SoloChallengeConfirm',
-    component: SoloChallengeConfirm
+    path: "/challenges",
+    name: "Challenges",
+    component: Challenges,
   },
   {
-    path: '/challenges/soloChallenge/:challengeId',
-    name: 'SoloChallengeExam',
-    component: SoloChallengeExam
+    path: "/challenges/soloChallenge/",
+    name: "BrowseTopics",
+    component: SoloChallenge,
   },
   {
-    path: '/challenges/dualChallenge/dualTypes/',
-    name: 'DualTypes',
-    component: DualTypes
+    path: "/challenges/soloChallenge/confirm/:topicId",
+    name: "SoloChallengeConfirm",
+    component: SoloChallengeConfirm,
   },
   {
-    path: '/challenges/dualChallenge/dualTopics/',
-    name: 'DualTopics',
-    component: DualTopics
+    path: "/challenges/soloChallenge/:challengeId",
+    name: "SoloChallengeExam",
+    component: SoloChallengeExam,
   },
   {
-    path: '/challenges/dualChallenge/confirm/:topicId',
-    name: 'DualConfirm',
-    component: DualConfirm
+    path: "/challenges/dualChallenge/dualTypes/",
+    name: "DualTypes",
+    component: DualTypes,
   },
   {
-    path: '/instructors',
-    name: 'Instructors',
-    component: Instructors
+    path: "/challenges/dualChallenge/dualTopics/",
+    name: "DualTopics",
+    component: DualTopics,
   },
   {
-    path: '/problems',
-    name: 'ProblemTopics',
-    component: ProblemTopics
+    path: "/challenges/dualChallenge/confirm/:topicId",
+    name: "DualConfirm",
+    component: DualConfirm,
   },
   {
-    path: '/problems/:topic',
-    name: 'Problems',
+    path: "/instructors",
+    name: "Instructors",
+    component: Instructors,
+  },
+  {
+    path: "/problems",
+    name: "ProblemTopics",
+    component: ProblemTopics,
+  },
+  {
+    path: "/problems/:topic",
+    name: "Problems",
     component: Problems,
-    props: route => ({ ...route.params, ...route.query })
+    props: (route) => ({ ...route.params, ...route.query }),
   },
   {
-    path: '/problem/:id',
-    name: 'Problem',
+    path: "/problem/:id",
+    name: "Problem",
     component: Problem,
-    props: true
-  }
-]
+    props: true,
+  },
+];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;

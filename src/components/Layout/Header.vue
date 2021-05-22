@@ -1,7 +1,11 @@
 <template>
   <b-navbar toggleable="lg" class="shadow-sm font-weight-bold bg-white">
     <b-navbar-brand :to="{ name: 'Home' }">
-      <img src="../../assets/iclp-logo.png" class="d-inline-block navbar-logo" alt="ICLP" />
+      <img
+        src="../../assets/iclp-logo.png"
+        class="d-inline-block navbar-logo"
+        alt="ICLP"
+      />
     </b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -22,17 +26,36 @@
           }}</b-badge>
         </b-nav-item>
       </b-navbar-nav>
-      <b-navbar-nav v-if="profile">
+      <b-navbar-nav v-if="this.$store.getters.isLoggedIn">
         <b-nav-item-dropdown right>
           <template #button-content>
             <b-avatar variant="info" :src="profile"></b-avatar>
           </template>
           <b-dropdown-item href="#">Profile</b-dropdown-item>
-          <b-dropdown-item @click="signOut">Sign Out</b-dropdown-item>
+          <b-dropdown-item @click="logout">Log Out</b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>
-      <b-navbar-nav class="ml-auto" v-else>
-        <b-nav-item>Log In</b-nav-item>
+      <b-navbar-nav v-else>
+        <b-nav-item v-b-modal.modal-login>Log In</b-nav-item>
+        <b-modal
+          centered
+          ok-only
+          modal-footer
+          id="modal-login"
+          footer-bg-variant="dark"
+          ><login class="p-5" @loggedIn="this.$refs['modal-login'].hide()" />
+
+          <template #modal-header>
+            <img src="../../assets/iclp-logo.png" alt=""
+          /></template>
+          <template #modal-footer>
+            <b-container>
+              <b-row class="text-white" align-h="center">
+                Copyright 2020-2020 by Data. All Rights Reserved.
+              </b-row></b-container
+            ></template
+          >
+        </b-modal>
         <b-nav-item>Sign Up</b-nav-item>
       </b-navbar-nav>
     </b-collapse>
@@ -40,6 +63,7 @@
 </template>
 
 <script>
+import Login from "../auth/Login.vue";
 export default {
   data() {
     return {
@@ -48,10 +72,12 @@ export default {
     };
   },
   methods: {
-    signOut() {
-      console.log("Signing out....");
-      this.profile = "";
+    logout() {
+      this.$store.dispatch("logout");
     },
+  },
+  components: {
+    Login,
   },
 };
 </script>
