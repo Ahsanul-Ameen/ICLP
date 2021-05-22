@@ -42,7 +42,7 @@
           ok-only
           modal-footer
           id="modal-login"
-          footer-bg-variant="dark"
+          footer-bg-variant="secondary"
           ><login class="p-5" @loggedIn="this.$refs['modal-login'].hide()" />
 
           <template #modal-header>
@@ -56,7 +56,24 @@
             ></template
           >
         </b-modal>
-        <b-nav-item>Sign Up</b-nav-item>
+        <b-nav-item v-b-modal.modal-signup>Sign Up</b-nav-item>
+        <b-modal
+          centered
+          ok-only
+          modal-footer
+          id="modal-signup"
+          footer-bg-variant="secondary"
+          ><signup class="p-5" @loggedIn="this.$refs['modal-login'].hide()" />
+
+          <template #modal-header> <div></div></template>
+          <template #modal-footer>
+            <b-container>
+              <b-row class="text-white" align-h="center">
+                Copyright 2020-2020 by Data. All Rights Reserved.
+              </b-row></b-container
+            ></template
+          >
+        </b-modal>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
@@ -64,6 +81,7 @@
 
 <script>
 import Login from "../auth/Login.vue";
+import Signup from "../auth/Signup.vue";
 export default {
   data() {
     return {
@@ -78,12 +96,12 @@ export default {
   },
   components: {
     Login,
+    Signup,
   },
 };
 </script>
 
 <style lang="scss" scoped>
-
 .navbar-logo {
   width: 150px;
 }

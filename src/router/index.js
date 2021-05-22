@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
@@ -10,37 +9,17 @@ import SoloChallengeConfirm from "../views/Challenges/SoloChallenge/SoloChalleng
 import SoloChallengeExam from "../views/Challenges/SoloChallenge/SoloChallengeExam.vue";
 import DualTypes from "../views/Challenges/DualChallenge/DualTypes.vue";
 import DualTopics from "../views/Challenges/DualChallenge/DualTopics.vue";
+import Duellers from "../views/Challenges/DualChallenge/Duellers.vue";
+import Invitations from "../views/Challenges/DualChallenge/Invitations.vue";
 import DualConfirm from "../views/Challenges/DualChallenge/DualConfirm.vue";
+import DualResult from "../views/Challenges/DualChallenge/DualResult.vue";
 import Instructors from "../views/Instructors.vue";
 import Problems from "../views/Problems.vue";
 import ProblemTopics from "../views/ProblemTopics.vue";
 import Problem from "../views/Problem.vue";
 import Login from "../views/auth/Login.vue";
 import Signup from "../views/auth/Signup.vue";
-
 Vue.use(VueRouter);
-=======
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import Courses from '../views/Courses.vue'
-import Blog from '../views/Blog.vue'
-import Challenges from '../views/Challenges/'
-import SoloChallenge from '../views/Challenges/SoloChallenge/'
-import SoloChallengeConfirm from '../views/Challenges/SoloChallenge/SoloChallengeConfirm.vue'
-import SoloChallengeExam from '../views/Challenges/SoloChallenge/SoloChallengeExam.vue'
-import DualTypes from '../views/Challenges/DualChallenge/DualTypes.vue'
-import DualTopics from '../views/Challenges/DualChallenge/DualTopics.vue'
-import Duellers from '../views/Challenges/DualChallenge/Duellers.vue'
-import Invitations from '../views/Challenges/DualChallenge/Invitations.vue'
-import DualConfirm from '../views/Challenges/DualChallenge/DualConfirm.vue'
-import DualResult from '../views/Challenges/DualChallenge/DualResult.vue'
-import Instructors from '../views/Instructors.vue'
-import Problems from '../views/Problems.vue'
-import ProblemTopics from '../views/ProblemTopics.vue'
-import Problem from '../views/Problem.vue'
-Vue.use(VueRouter)
->>>>>>> ada0bccf188ef985ca878b7e57fb9b3c751ac3ef
 
 const routes = [
   {
@@ -94,40 +73,34 @@ const routes = [
     component: DualTypes,
   },
   {
-<<<<<<< HEAD
     path: "/challenges/dualChallenge/dualTopics/",
     name: "DualTopics",
     component: DualTopics,
   },
   {
+    path: "/challenges/dualChallenge/duellers/",
+    name: "Duellers",
+    component: Duellers,
+  },
+  {
+    path: "/challenges/dualChallenge/invitations/",
+    name: "Invitations",
+    component: Invitations,
+  },
+  {
     path: "/challenges/dualChallenge/confirm/:topicId",
     name: "DualConfirm",
     component: DualConfirm,
-=======
-    path: '/challenges/dualChallenge/duellers/',
-    name: 'Duellers',
-    component: Duellers
   },
   {
-    path: '/challenges/dualChallenge/invitations/',
-    name: 'Invitations',
-    component: Invitations
+    path: "/challenges/dualChallenge/result/:challengeId",
+    name: "DualResult",
+    component: DualResult,
   },
   {
-    path: '/challenges/dualChallenge/confirm/:topicId',
-    name: 'DualConfirm',
-    component: DualConfirm
-  },
-  {
-    path: '/challenges/dualChallenge/result/:challengeId',
-    name: 'DualResult',
-    component: DualResult
-  },
-  {
-    path: '/instructors',
-    name: 'Instructors',
-    component: Instructors
->>>>>>> ada0bccf188ef985ca878b7e57fb9b3c751ac3ef
+    path: "/instructors",
+    name: "Instructors",
+    component: Instructors,
   },
   {
     path: "/instructors",

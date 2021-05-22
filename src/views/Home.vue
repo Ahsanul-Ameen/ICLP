@@ -1,9 +1,10 @@
 <template>
-  <b-container>
-    <h2>Home Page</h2>
-    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-    <h2>Home Page</h2>
-  </b-container>
+  <b-jumbotron
+    header="Interactive Code Learning Platform"
+    lead="A shitty project"
+  >
+    <b-button variant="primary" :to="{ name: 'Signup' }">Join Us</b-button>
+  </b-jumbotron>
 </template>
 
 <script>
