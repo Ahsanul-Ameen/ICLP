@@ -45,15 +45,17 @@ $navbar-light-active-color: rgba(200, 69, 0, 1);
 body {
   @extend .default-bg;
 }
-.floating-effect {
-  background-color: white;
-  box-shadow: 0 3px 10px 0 rgb(0 0 0 / 10%);
-}
-.clickable-card {
-  @extend .floating-effect;
-  transition: all 0.2s ease-in-out;
+.hover-zoom {
+  transition: transform 0.2s;
   &:hover {
-    transform: scale(1.03);
+    transform: scale(1.02);
+  }
+}
+.hover-color-link {
+  &:hover {
+    .link {
+      color: $primary;
+    }
   }
 }
 </style>

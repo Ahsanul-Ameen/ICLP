@@ -1,6 +1,6 @@
 <template>
   <div class="mx-5 my-3">
-    <b-tabs content-class="mt-0 p-4 floating-effect">
+    <b-tabs content-class="mt-0 p-4 bg-white shadow">
       <b-tab title="Problem" active :title-item-class="['border-left', 'border-right']">
         <p>I'm the first tab of problem {{id}}</p>
       </b-tab>

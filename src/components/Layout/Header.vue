@@ -83,6 +83,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .navbar-logo {
   width: 150px;
 }
