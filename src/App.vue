@@ -20,9 +20,21 @@ export default {
 
 <style lang="scss">
 $primary: rgba(253, 89, 60, 255);
+$dark: rgba(0, 0, 0, 1);
 $navbar-light-color: rgba(0, 0, 0, 1);
 $navbar-light-hover-color: rgba(200, 69, 0, 1);
 $navbar-light-active-color: rgba(200, 69, 0, 1);
+
+@font-face {
+  font-family: "NeuzeitGro";
+  src: url("./fonts/NeuzeitGro.woff2") format("woff2"),
+    url("./fonts/NeuzeitGro.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+#app {
+  font-family: "NeuzeitGro";
+}
 
 @import "../node_modules/bootstrap/scss/bootstrap";
 @import "../node_modules/bootstrap-vue/src/index.scss";
