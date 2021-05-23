@@ -153,5 +153,5 @@ export default {
 }
 </style>
 
-// NOTE: router-link exact="true" should be default but isn't, use append for relative link
+// NOTE: router-link :exact="true" should be default but isn't, use append for relative link
 // TODO: add current navigating path at top to go back easily
