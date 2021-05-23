@@ -24,8 +24,8 @@
         @click="onSubmit"
         variant="primary"
         class="mt-3"
-        :disabled="this.$store.getters.isLoginLoading"
-        ><span v-if="!this.$store.getters.isLoginLoading">Log In</span>
+        :disabled="loading"
+        ><span v-if="!loading">Log In</span>
         <b-spinner small v-else label="Spinning"></b-spinner>
       </b-button>
     </b-form>
@@ -36,6 +36,7 @@
 export default {
   data() {
     return {
+      loading: false,
       form: {
         email: "",
         password: "",
@@ -44,8 +45,8 @@ export default {
   },
   methods: {
     onSubmit() {
+      this.loading = true;
       this.$store.dispatch("login", this.form).then(() => {
-        console.log("Called");
         if (this.$store.getters.isLoggedIn) {
           this.$root.$bvToast.toast("You are logged in", {
             variant: "success",
@@ -62,6 +63,7 @@ export default {
             noCloseButton: true,
           });
         }
+        this.loading = false;
       });
     },
   },
