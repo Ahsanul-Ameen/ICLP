@@ -103,11 +103,6 @@ const routes = [
     component: Instructors,
   },
   {
-    path: "/instructors",
-    name: "Instructors",
-    component: Instructors,
-  },
-  {
     path: "/problems",
     name: "ProblemTopics",
     component: ProblemTopics,

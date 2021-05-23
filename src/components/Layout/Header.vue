@@ -18,7 +18,7 @@
         <b-nav-item :to="{ name: 'Instructors' }">Instructors</b-nav-item>
       </b-navbar-nav>
 
-      <b-navbar-nav class="ml-auto" v-if="profile">
+      <b-navbar-nav class="ml-auto" v-if="this.$store.getters.isLoggedIn">
         <b-nav-item @click="newMessages = 0">
           Messages
           <b-badge pill variant="primary" style="vertical-align: top">{{
@@ -35,7 +35,10 @@
           <b-dropdown-item @click="logout">Log Out</b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>
-      <b-navbar-nav v-else>
+      <b-navbar-nav
+        class="ml-auto"
+        v-else-if="this.$route.name != 'Login' && this.$route.name != 'Signup'"
+      >
         <b-nav-item v-b-modal.modal-login>Log In</b-nav-item>
         <b-modal
           centered

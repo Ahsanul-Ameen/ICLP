@@ -1,9 +1,11 @@
 <template>
   <b-container>
     <b-row class="m-5">
-      <b-col> <signup /> </b-col>
+      <b-col cols="12" md="8"> <signup /> </b-col>
       <b-col align-self="center">
-        <p class="display-1"><span class="text-primary">Join</span> Us</p>
+        <p class="text-format-2">
+          <span class="text-primary text-format-1">Join</span> Us
+        </p>
       </b-col>
     </b-row>
   </b-container>
@@ -17,4 +19,13 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.text-format-1 {
+  font-size: 6vw;
+  font-weight: 700;
+}
+.text-format-2 {
+  font-size: 5vw;
+  font-weight: 600;
+}
+</style>

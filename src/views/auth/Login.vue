@@ -1,15 +1,17 @@
 <template>
   <b-container>
-    <b-row class="m-5">
-      <b-col class="font-weight-bold">
-        <p class="display-1 text-primary">
+    <b-row class="mt-5 mb-5">
+      <b-col>
+        <p class="text-primary text-format-1">
           Interactive
         </p>
-        <p class="display-2">
-          Code Learning Platform
+        <p class="text-format-2">
+          Code <br />
+          Learning<br />
+          Platform
         </p>
       </b-col>
-      <b-col cols="6" align-self="center">
+      <b-col cols="12" md="6" align-self="center">
         <login @loggedIn="loginRoutine" />
       </b-col>
     </b-row>
@@ -27,7 +29,6 @@ export default {
     },
   },
   created() {
-    console.log(this.$store.state.user);
     if (this.$store.getters.isLoggedIn) {
       this.loginRoutine();
     }
@@ -35,4 +36,13 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.text-format-1 {
+  font-size: 6vw;
+  font-weight: 700;
+}
+.text-format-2 {
+  font-size: 5vw;
+  font-weight: 600;
+}
+</style>
