@@ -31,6 +31,15 @@ export default {
   created() {
     if (this.$store.getters.isLoggedIn) {
       this.loginRoutine();
+      if (this.$store.getters.isLoggedIn) {
+        this.$root.$bvToast.toast("You are already logged in", {
+          variant: "success",
+          autoHideDelay: 2000,
+          appendToast: true,
+          noCloseButton: true,
+          toaster: "b-toaster-top-center",
+        });
+      }
     }
   },
 };

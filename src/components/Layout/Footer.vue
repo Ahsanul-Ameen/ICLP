@@ -51,7 +51,7 @@
           </b-table-simple>
         </b-col>
 
-        <b-col align-self="end" class="text-center pb-3 pr-0">
+        <b-col align-self="center" class="text-center">
           FOLLOW ME ON
           <a href="https://facebook.com"><b-icon icon="facebook"></b-icon></a>
           <a href="https://github.com"><b-icon icon="github"></b-icon></a>
