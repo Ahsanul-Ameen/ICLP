@@ -34,47 +34,49 @@ const routes = [
     component: () => import('./views/Challenges'),
   },
   {
-    path: "/challenges/soloChallenge/",
+    path: "/challenges/solo",
     name: "BrowseTopics",
-    component: () => import("../views/Challenges/SoloChallenge/"),
+    component: () => import("./views/Challenges/SoloChallenge"),
   },
   {
-    path: "/challenges/soloChallenge/confirm/:topicId",
+    // TODO: make nested route
+    path: "/challenges/solo/confirm/:topicId",
     name: "SoloChallengeConfirm",
     component: () => import('./views/Challenges/SoloChallenge/SoloChallengeConfirm'),
   },
   {
-    path: "/challenges/soloChallenge/:challengeId",
+    path: "/challenges/solo/:challengeId",
     name: "SoloChallengeExam",
     component: () => import('./views/Challenges/SoloChallenge/SoloChallengeExam'),
   },
   {
-    path: "/challenges/dualChallenge/dualTypes/",
+    path: "/challenges/dual/dualTypes",
     name: "DualTypes",
     component: () => import('./views/Challenges/DualChallenge/DualTypes'),
   },
   {
-    path: "/challenges/dualChallenge/dualTopics/",
+    path: "/challenges/dual/dualTopics",
     name: "DualTopics",
     component: () => import('./views/Challenges/DualChallenge/DualTopics'),
   },
   {
-    path: "/challenges/dualChallenge/duellers/",
+    path: "/challenges/dual/duellers",
     name: "Duellers",
     component: () => import('./views/Challenges/DualChallenge/Duellers'),
   },
   {
-    path: "/challenges/dualChallenge/invitations/",
+    path: "/challenges/dual/invitations",
     name: "Invitations",
     component: () => import('./views/Challenges/DualChallenge/Invitations'),
   },
   {
-    path: "/challenges/dualChallenge/confirm/:topicId",
+    // TODO: make nested route
+    path: "/challenges/dual/confirm/:topicId",
     name: "DualConfirm",
     component: () => import('./views/Challenges/DualChallenge/DualConfirm'),
   },
   {
-    path: "/challenges/dualChallenge/result/:challengeId",
+    path: "/challenges/dual/result/:challengeId",
     name: "DualResult",
     component: () => import('./views/Challenges/DualChallenge/DualResult'),
   },

@@ -1,5 +1,5 @@
 <template>
-<!-- sample_test_link: http://localhost:8080/challenges/dualChallenge/result/:1 -->
+<!-- sample_test_link: http://localhost:8080/challenges/dual/result/:1 -->
   <b-container class="mt-4 py-2 px-2" 
     style="background-color: #fafafa; border-radius: 25px;"
   >
