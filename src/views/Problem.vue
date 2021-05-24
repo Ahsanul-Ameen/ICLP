@@ -32,8 +32,8 @@
 </template>
 
 <script>
-import Submissions from "../components/Submissions";
-import FileSubmit from "../components/FileSubmit";
+import Submissions from "@/components/Submissions";
+import FileSubmit from "@/components/FileSubmit";
 
 export default {
   name: "Problem",

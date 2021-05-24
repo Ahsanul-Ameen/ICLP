@@ -4,7 +4,7 @@
     <div>
       <b-table striped hover :items="submissions">
         <template #cell(id)="data">
-          <a :to="`/submission/${data.value}`">{{data.value}}</a>
+          <router-link :to="{name: 'Submission', params: {id: data.value}}">{{data.value}}</router-link>
         </template>
       </b-table>
     </div>

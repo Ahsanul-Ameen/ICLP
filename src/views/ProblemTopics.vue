@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import apiUtil from "../mixins/apiUtil";
+import apiUtil from "@/mixins/apiUtil";
 export default {
   name: "ProblemTopics",
   mixins: [apiUtil],

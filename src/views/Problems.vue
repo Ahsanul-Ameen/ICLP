@@ -8,7 +8,7 @@
             v-for="problem in problems"
             :key="problem.id"
             :probleminfo="problem"
-            :to="`/problem/${problem.id}`"
+            :to=" { name: 'Problem', params: {id: problem.id } }"
             class="shadow hover-zoom hover-color-link py-3"
           >
             <ProblemIntro :probleminfo="problem" />
@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import ProblemIntro from "../components/ProblemIntro";
+import ProblemIntro from "@/components/ProblemIntro";
 
 export default {
   name: "Problems",

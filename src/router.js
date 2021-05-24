@@ -103,6 +103,11 @@ const routes = [
     props: true,
   },
   {
+    path: '/submission/:id',
+    name: 'Submission',
+    component: () => import('./views/Submission'),
+  },
+  {
     path: "/admin/create-problem",
     name: "CreateProblem",
     component: () => import('./views/modifyChallenges/CreateProblem'),
