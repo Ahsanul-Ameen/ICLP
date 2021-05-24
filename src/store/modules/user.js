@@ -1,14 +1,19 @@
-import Vue from "vue";
-import Vuex from "vuex";
 import axios from "axios";
-import createPersistedState from "vuex-persistedstate";
+
 const instance = axios.create({
   withCredentials: true,
 });
 
-Vue.use(Vuex);
-
-export default new Vuex.Store({
+/**
+ * This store contains user's profile
+ *
+ * This is a global module.
+ * So, this module is not namespaced.
+ * In case of other modules,
+ * namespaced field should be true.
+ */
+export default {
+  namespaced: false,
   state: {
     user: undefined,
   },
@@ -57,6 +62,4 @@ export default new Vuex.Store({
         });
     },
   },
-  modules: {},
-  plugins: [createPersistedState()],
-});
+};
