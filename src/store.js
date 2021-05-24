@@ -48,7 +48,7 @@ export default new Vuex.Store({
     },
     logout(context) {
       instance
-        .post("/logout")
+        .get("/logout")
         .then(() => {
           context.commit("clearUser");
         })

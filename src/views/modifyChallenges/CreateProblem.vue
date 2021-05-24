@@ -36,7 +36,7 @@ export default {
     };
   },
   mounted() {
-    this.apiGet("/problem-topics").then((result) => {
+    this.apiGet("/public/problem-topics").then((result) => {
       this.topics = result || [];
     });
   },
