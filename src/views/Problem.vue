@@ -9,14 +9,7 @@
             submit solution:
             <b-form @submit.prevent="onsubmit">
               <b-form-select v-model="language" :options="languageOptions"></b-form-select>
-              <b-form-file
-                v-model="file"
-                :state="Boolean(file)"
-                placeholder="Choose a file or drop it here..."
-                drop-placeholder="Drop file here..."
-                required
-              ></b-form-file>
-              <div class="mt-3">Selected file: {{ file ? file.name : '' }}</div>
+              <FileSubmit v-model="file" />
               <b-button type="submit" variant="primary">Submit</b-button>
             </b-form>
           </div>
@@ -39,7 +32,8 @@
 </template>
 
 <script>
-import Submissions from "../components/Submissions.vue";
+import Submissions from "../components/Submissions";
+import FileSubmit from "../components/FileSubmit";
 
 export default {
   name: "Problem",
@@ -60,7 +54,7 @@ export default {
           text: "Loops",
         },
       ],
-      file: undefined,
+      file: null,
       languageOptions: [
         {
           value: "cpp",
@@ -78,6 +72,7 @@ export default {
   },
   components: {
     Submissions,
+    FileSubmit,
   },
   mounted() {
     //TODO: either create own blog, or use vue-disqus

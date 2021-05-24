@@ -93,8 +93,8 @@
 </template>
 
 <script>
-import Timer from "../../../components/Timer.vue";
-import timeUtility from "../../../mixins/timeUtility";
+import Timer from "@/components/Timer.vue";
+import timeUtility from "@/mixins/timeUtility";
 export default {
   components: { Timer },
   data() {

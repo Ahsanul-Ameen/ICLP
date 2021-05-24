@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import Signup from "../../components/auth/Signup";
+import Signup from "@/components/auth/Signup";
 
 export default {
   components: { Signup },

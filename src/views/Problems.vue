@@ -8,7 +8,7 @@
             v-for="problem in problems"
             :key="problem.id"
             :probleminfo="problem"
-            :href="`/problem/${problem.id}`"
+            :to="`/problem/${problem.id}`"
             class="shadow hover-zoom hover-color-link py-3"
           >
             <ProblemIntro :probleminfo="problem" />
@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import ProblemIntro from "../components/ProblemIntro.vue";
+import ProblemIntro from "../components/ProblemIntro";
 
 export default {
   name: "Problems",
@@ -153,5 +153,7 @@ export default {
 }
 </style>
 
-// NOTE: router-link :exact="true" should be default but isn't, use append for relative link
+// NOTE: router-link exact should be default but isn't, use append for relative link 
+//      , relative link doesn't work correctly with href
 // TODO: add current navigating path at top to go back easily
+// FIXME: navbar color doesn't change when using keyboard to go back

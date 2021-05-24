@@ -4,7 +4,7 @@
     <div>
       <b-table striped hover :items="submissions">
         <template #cell(id)="data">
-          <a :href="`/submission/${data.value}`">{{data.value}}</a>
+          <a :to="`/submission/${data.value}`">{{data.value}}</a>
         </template>
       </b-table>
     </div>

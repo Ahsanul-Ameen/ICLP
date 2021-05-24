@@ -1,5 +1,14 @@
 {
   "include": [
     "./src/**/*"
-  ]
+  ],
+  // from https://vuejs.github.io/vetur/guide/setup.html#path-mapping:
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    }
+  },
 }

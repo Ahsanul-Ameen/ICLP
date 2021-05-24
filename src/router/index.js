@@ -1,24 +1,25 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
-import Courses from "../views/Courses.vue";
-import Blog from "../views/Blog.vue";
+import Home from "../views/Home";
+import Courses from "../views/Courses";
+import Blog from "../views/Blog";
 import Challenges from "../views/Challenges/";
 import SoloChallenge from "../views/Challenges/SoloChallenge/";
-import SoloChallengeConfirm from "../views/Challenges/SoloChallenge/SoloChallengeConfirm.vue";
-import SoloChallengeExam from "../views/Challenges/SoloChallenge/SoloChallengeExam.vue";
-import DualTypes from "../views/Challenges/DualChallenge/DualTypes.vue";
-import DualTopics from "../views/Challenges/DualChallenge/DualTopics.vue";
-import Duellers from "../views/Challenges/DualChallenge/Duellers.vue";
-import Invitations from "../views/Challenges/DualChallenge/Invitations.vue";
-import DualConfirm from "../views/Challenges/DualChallenge/DualConfirm.vue";
-import DualResult from "../views/Challenges/DualChallenge/DualResult.vue";
-import Instructors from "../views/Instructors.vue";
-import Problems from "../views/Problems.vue";
-import ProblemTopics from "../views/ProblemTopics.vue";
-import Problem from "../views/Problem.vue";
-import Login from "../views/auth/Login.vue";
-import Signup from "../views/auth/Signup.vue";
+import SoloChallengeConfirm from "../views/Challenges/SoloChallenge/SoloChallengeConfirm";
+import SoloChallengeExam from "../views/Challenges/SoloChallenge/SoloChallengeExam";
+import DualTypes from "../views/Challenges/DualChallenge/DualTypes";
+import DualTopics from "../views/Challenges/DualChallenge/DualTopics";
+import Duellers from "../views/Challenges/DualChallenge/Duellers";
+import Invitations from "../views/Challenges/DualChallenge/Invitations";
+import DualConfirm from "../views/Challenges/DualChallenge/DualConfirm";
+import DualResult from "../views/Challenges/DualChallenge/DualResult";
+import Instructors from "../views/Instructors";
+import Problems from "../views/Problems";
+import ProblemTopics from "../views/ProblemTopics";
+import Problem from "../views/Problem";
+import Login from "../views/auth/Login";
+import Signup from "../views/auth/Signup";
+import CreateProblem from "../views/modifyChallenges/CreateProblem";
 Vue.use(VueRouter);
 
 const routes = [
@@ -118,6 +119,11 @@ const routes = [
     name: "Problem",
     component: Problem,
     props: true,
+  },
+  {
+    path: "/admin/create-problem",
+    name: "CreateProblem",
+    component: CreateProblem,
   },
 ];
 

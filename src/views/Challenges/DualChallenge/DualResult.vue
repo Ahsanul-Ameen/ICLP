@@ -148,7 +148,7 @@
 </template>
 
 <script setup>
-import ChallengeBanner from "../../../components/Challenges/ChallengeBanner.vue";
+import ChallengeBanner from "@/components/Challenges/ChallengeBanner.vue";
 
 export default {
   components: { ChallengeBanner },

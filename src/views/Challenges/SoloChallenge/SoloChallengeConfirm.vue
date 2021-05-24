@@ -93,8 +93,8 @@
 </template>
 
 <script setup>
-import ChallengeBanner from "../../../components/Challenges/ChallengeBanner.vue";
-import timeUtility from "../../../mixins/timeUtility";
+import ChallengeBanner from "@/components/Challenges/ChallengeBanner.vue";
+import timeUtility from "@/mixins/timeUtility";
 export default {
   components: { ChallengeBanner },
   data() {

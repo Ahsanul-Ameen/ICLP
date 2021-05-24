@@ -2,7 +2,7 @@
   <b-navbar toggleable="lg" class="shadow-sm font-weight-bold bg-white">
     <b-navbar-brand :to="{ name: 'Home' }">
       <img
-        src="../../assets/iclp-logo.png"
+        src="@/assets/iclp-logo.png"
         class="d-inline-block navbar-logo"
         alt="ICLP"
       />
@@ -49,7 +49,7 @@
           ><login class="p-5" @loggedIn="this.$refs['modal-login'].hide()" />
 
           <template #modal-header>
-            <img src="../../assets/iclp-logo.png" alt=""
+            <img src="@/assets/iclp-logo.png" alt=""
           /></template>
           <template #modal-footer>
             <b-container>

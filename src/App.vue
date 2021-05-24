@@ -9,8 +9,10 @@
 </template>
 
 <script>
+import axios from "axios";
 import Header from "./components/Layout/Header.vue";
 import Footer from "./components/Layout/Footer.vue";
+axios.defaults.baseURL = "http://localhost:5000";
 
 export default {
   components: {

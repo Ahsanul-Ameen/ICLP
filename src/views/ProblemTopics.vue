@@ -4,7 +4,7 @@
       <router-link
         :to="topic"
         append
-        :exact="true"
+        exact
         v-slot="{ href, navigate, isActive, isExactActive }"
         custom
         v-for="(topic, index) in topics"
@@ -23,11 +23,18 @@
 </template>
 
 <script>
+import apiUtil from "../mixins/apiUtil";
 export default {
   name: "ProblemTopics",
+  mixins: [apiUtil],
   data: () => ({
-    topics: ["python", "c++"],
+    topics: [],
   }),
+  mounted() {
+    this.apiGet("/problem-topics").then((result) => {
+      this.topics = result || [];
+    });
+  },
 };
 </script>
 

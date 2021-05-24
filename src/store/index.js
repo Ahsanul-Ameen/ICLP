@@ -4,7 +4,6 @@ import axios from "axios";
 import createPersistedState from "vuex-persistedstate";
 const instance = axios.create({
   withCredentials: true,
-  baseURL: "http://localhost:5000",
 });
 
 Vue.use(Vuex);

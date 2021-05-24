@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   css: {
     loaderOptions: {
@@ -7,5 +9,13 @@ module.exports = {
         `
       }
     }
+  },
+  configureWebpack: {
+    resolve: {
+      alias: {
+        // following alias lets you use "@/...." in imports
+        '@': path.resolve(__dirname, 'src')
+      }
+    },
   }
 }
