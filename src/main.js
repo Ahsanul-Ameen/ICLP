@@ -3,8 +3,8 @@ import "mutationobserver-shim";
 import Vue from "vue";
 import "./plugins/bootstrap-vue";
 import App from "./App.vue";
-import router from "./router";
-import store from "./store";
+import router from "./router.js";
+import store from "./store.js";
 import VuePageTransition from "vue-page-transition";
 
 Vue.use(VuePageTransition);

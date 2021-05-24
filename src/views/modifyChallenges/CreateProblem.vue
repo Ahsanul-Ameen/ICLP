@@ -13,6 +13,7 @@
       <b-form-group label="Correct solution" label-for="solution">
         <FileSubmit v-model="file" />
       </b-form-group>
+      <!-- TODO: input tests -->
       <b-button type="submit" variant="primary">Submit</b-button>
     </b-form>
   </div>
