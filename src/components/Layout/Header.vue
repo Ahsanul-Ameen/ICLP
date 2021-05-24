@@ -94,7 +94,26 @@ export default {
   },
   methods: {
     logout() {
-      this.$store.dispatch("logout");
+      this.$store.dispatch("logout").then(
+        () => {
+          this.$root.$bvToast.toast("Logged out successfully", {
+            variant: "success",
+            autoHideDelay: 2000,
+            appendToast: true,
+            noCloseButton: true,
+            solid: true,
+          });
+        },
+        () => {
+          this.$root.$bvToast.toast("Logging out failed", {
+            variant: "danger",
+            autoHideDelay: 2000,
+            appendToast: true,
+            noCloseButton: true,
+            solid: true,
+          });
+        }
+      );
     },
   },
   components: {

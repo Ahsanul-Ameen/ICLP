@@ -1,6 +1,6 @@
 <template>
   <b-card title="Login">
-    <b-form>
+    <b-form @submit.prevent="onSubmit">
       <b-form-group id="input-group-1" label="Email:" label-for="email">
         <b-form-input
           id="email"
@@ -21,7 +21,7 @@
       </b-form-group>
       <b-button
         block
-        @click="onSubmit"
+        type="submit"
         variant="primary"
         class="mt-3"
         :disabled="loading"
@@ -46,25 +46,32 @@ export default {
   methods: {
     onSubmit() {
       this.loading = true;
-      this.$store.dispatch("login", this.form).then(() => {
-        if (this.$store.getters.isLoggedIn) {
-          this.$root.$bvToast.toast("You are logged in", {
-            variant: "success",
-            autoHideDelay: 2000,
-            appendToast: true,
-            noCloseButton: true,
-          });
-          this.$emit("loggedIn");
-        } else {
-          this.$root.$bvToast.toast("Login Failed", {
-            variant: "danger",
-            autoHideDelay: 2000,
-            appendToast: true,
-            noCloseButton: true,
-          });
-        }
-        this.loading = false;
-      });
+      this.$store
+        .dispatch("login", this.form)
+        .then(
+          (name) => {
+            this.$root.$bvToast.toast(`Hi! ${name}`, {
+              variant: "success",
+              autoHideDelay: 2000,
+              appendToast: true,
+              noCloseButton: true,
+              solid: true,
+            });
+            this.$emit("loggedIn");
+          },
+          () => {
+            this.$root.$bvToast.toast("Login failed", {
+              variant: "danger",
+              autoHideDelay: 2000,
+              appendToast: true,
+              noCloseButton: true,
+              solid: true,
+            });
+          }
+        )
+        .finally(() => {
+          this.loading = false;
+        });
     },
   },
 };

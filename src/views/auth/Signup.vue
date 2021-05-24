@@ -16,6 +16,20 @@ import Signup from "@/components/auth/Signup";
 
 export default {
   components: { Signup },
+  created() {
+    if (this.$store.getters.isLoggedIn) {
+      this.$router.push({ name: "Home" });
+      if (this.$store.getters.isLoggedIn) {
+        this.$root.$bvToast.toast("You already have an account", {
+          variant: "primary",
+          autoHideDelay: 2000,
+          appendToast: true,
+          noCloseButton: true,
+          toaster: "b-toaster-top-center",
+        });
+      }
+    }
+  },
 };
 </script>
 

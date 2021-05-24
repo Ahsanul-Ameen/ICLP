@@ -31,8 +31,27 @@ export default {
     },
   },
   actions: {
+    signup(context, payload) {
+      return new Promise((success, failure) => {
+        setTimeout(() => {
+          instance
+            .post("/signup", {
+              name: payload.name,
+              email: payload.email,
+              password: payload.password,
+              confirm_password: payload.confirm_password,
+            })
+            .then(() => {
+              success();
+            })
+            .catch(() => {
+              failure();
+            });
+        }, 1000);
+      });
+    },
     login(context, payload) {
-      return new Promise((resolve) => {
+      return new Promise((success, failure) => {
         setTimeout(() => {
           instance
             .post("/login", {
@@ -41,25 +60,26 @@ export default {
             })
             .then((response) => {
               context.commit("setUser", response.data.user);
+              success(response.data.user.name);
             })
             .catch(() => {
-              console.log("login error caught");
-            })
-            .finally(() => {
-              resolve();
+              failure();
             });
         }, 1000);
       });
     },
     logout(context) {
-      instance
-        .get("/logout")
-        .then(() => {
-          context.commit("clearUser");
-        })
-        .catch(() => {
-          console.log("logout error caught");
-        });
+      return new Promise((success, failure) => {
+        instance
+          .get("/logout")
+          .then(() => {
+            context.commit("clearUser");
+            success();
+          })
+          .catch(() => {
+            failure();
+          });
+      });
     },
   },
 };
