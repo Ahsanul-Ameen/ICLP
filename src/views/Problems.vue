@@ -46,6 +46,8 @@ import ProblemIntro from "@/components/ProblemIntro";
 export default {
   name: "Problems",
   props: {
+    // many of these props shouldn't be String, but router by default sends them as string
+    // TODO: change router props to cast to correct type
     topic: String,
     solved: {
       type: String,

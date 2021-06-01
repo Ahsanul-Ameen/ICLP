@@ -2,7 +2,7 @@
   <div class="mx-5 my-3">
     <b-list-group>
       <router-link
-        :to="topic"
+        :to="topic.name"
         append
         exact
         v-slot="{ href, navigate, isActive, isExactActive }"
@@ -15,7 +15,7 @@
           :href="href"
           @click="navigate"
         >
-          <div class="link">{{ topic }}</div>
+          <div class="link">{{ topic.name }}</div>
         </b-list-group-item>
       </router-link>
     </b-list-group>
