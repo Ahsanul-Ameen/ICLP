@@ -95,7 +95,7 @@ export default {
 		values: [1, 2, 3, 4, 5, 6],
         max: 7,
 		animate: true,
-		topicId: "",
+		topicId: Math.floor( Math.random() * 10 + 1),
 		keyword: "",
 		participants: [
 			{ userid: "1", name: "Shafin Khadem", level: 5, logo: "https://placekitten.com/300/300" },
