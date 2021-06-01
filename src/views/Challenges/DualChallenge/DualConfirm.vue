@@ -123,7 +123,7 @@
             variant="primary"
             class="shadow-lg font-weight-bold p-3"
             :to="{  //TODO: redirect to a dual exam 
-              name: 'SoloChallengeExam',
+              name: 'DualExam',
               params: { challengeId: challengeId },
             }"
           >
@@ -162,7 +162,7 @@ export default {
     this.challengerName = this.$route.params.challengerName;
     //TDOO: adjust these things later with backend?
     this.topicName = "Machine Learning";
-    this.challengeId = 22;
+    this.challengeId = Math.floor(Math.random() * 10 + 1);
   },
   computed: {
     title() {

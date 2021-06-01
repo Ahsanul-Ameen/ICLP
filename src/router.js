@@ -76,6 +76,11 @@ const routes = [
     component: () => import('./views/Challenges/DualChallenge/DualConfirm'),
   },
   {
+    path: "/challenges/dual/:challengeId",
+    name: "DualExam",
+    component: () => import('./views/Challenges/DualChallenge/DualExam'),
+  },
+  {
     path: "/challenges/dual/result/:challengeId",
     name: "DualResult",
     component: () => import('./views/Challenges/DualChallenge/DualResult'),
