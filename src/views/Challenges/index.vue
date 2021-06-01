@@ -1,7 +1,7 @@
 <template>
   <b-container>
     <h2 class="text-center mt-4">
-      <b-icon icon="grip-horizontal" class="text-primary"></b-icon>Select Challenge Category
+      <b-icon icon="grip-horizontal" class="text-primary"></b-icon> Select Challenge Category
       <b-icon icon="grip-horizontal" class="text-primary"></b-icon>
     </h2>
 
