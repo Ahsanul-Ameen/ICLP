@@ -3,9 +3,9 @@
     <b-table-simple borderless responsive>
       <b-tbody>
         <b-tr>
-          <b-td v-if="parseInt(getHours(secondsLeft)) != 0">
+          <b-td v-for="time_unit in getFormattedTime" :key="time_unit.key">
             <seven-segment
-              v-for="(m, i) in hours"
+              v-for="(m, i) in time_unit.val"
               :key="m + i"
               :value="m"
               :rounded="false"
@@ -15,35 +15,7 @@
               on-color="#000"
               off-color="rgba(100, 100, 100, .2)"
             />
-            hr
-          </b-td>
-          <b-td>
-            <seven-segment
-              v-for="(m, i) in minutes"
-              :key="m + i"
-              :value="m"
-              :rounded="false"
-              :segment-width="10"
-              :segment-height="3"
-              class="mr-1"
-              on-color="#000"
-              off-color="rgba(100, 100, 100, .2)"
-            />
-            min
-          </b-td>
-          <b-td>
-            <seven-segment
-              v-for="(m, i) in seconds"
-              :key="m + i"
-              :value="m"
-              :rounded="false"
-              :segment-width="10"
-              :segment-height="3"
-              class="mr-1"
-              on-color="#000"
-              off-color="rgba(100, 100, 100, .2)"
-            />
-            sec
+            {{ time_unit.key }}
           </b-td>
         </b-tr>
       </b-tbody>
@@ -84,14 +56,13 @@ export default {
     }, 1000);
   },
   computed: {
-    hours() {
-      return this.getHours(this.secondsLeft).split("");
-    },
-    minutes() {
-      return this.getMinutes(this.secondsLeft).split("");
-    },
-    seconds() {
-      return this.getSeconds(this.secondsLeft).split("");
+    getFormattedTime() {
+      let d = this.getTime(this.secondsLeft);
+      d = d.map((item) => {
+        item.val = String(item.val);
+        return item;
+      });
+      return d;
     },
   },
 };

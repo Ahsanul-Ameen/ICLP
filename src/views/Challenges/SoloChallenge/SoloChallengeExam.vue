@@ -3,9 +3,15 @@
     <b-row class="p-3 shadow-sm">
       <b-col align-self="center" class="ml-5">
         <h5>
-          <b-icon icon="grip-horizontal" class="text-primary" />
+          <b-icon
+            icon="grip-horizontal"
+            class="text-primary d-none d-md-inline"
+          />
           Solo Challenge
-          <b-icon icon="grip-horizontal" class="text-primary" />
+          <b-icon
+            icon="grip-horizontal"
+            class="text-primary d-none d-md-inline"
+          />
         </h5>
       </b-col>
       <b-col class="pr-5">
@@ -32,14 +38,8 @@
         <p class="font-weight-bold">
           <b-icon icon="alarm" class="text-primary mr-2" />Time:
         </p>
-        <p v-if="parseInt(getHours(time)) != 0" class="ml-2">
-          {{ parseInt(getHours(time)) }} hr
-        </p>
-        <p v-if="parseInt(getMinutes(time)) != 0" class="ml-2">
-          {{ parseInt(getMinutes(time)) }} min
-        </p>
-        <p v-if="parseInt(getSeconds(time)) != 0" class="ml-2">
-          {{ parseInt(getSeconds(time)) }} sec
+        <p v-for="time_unit in getTime(time)" :key="time_unit.key" class="ml-2">
+          {{ time_unit.val }} {{ time_unit.key }}
         </p>
       </b-row>
       <b-row
@@ -53,24 +53,24 @@
             :v-slot="index"
             class="font-weight-bold"
           >
-            <b-form-radio
-              v-for="(option, answerNo) in question.options"
-              :key="option + answerNo"
-              v-model="question.answer"
-              :aria-describedby="index"
-              :value="answerNo"
-              :name="index.toString()"
-              class="font-weight-normal"
-              >{{ option }}
-            </b-form-radio>
-
-            <!-- May use the second form if needed -->
-            <!--b-form-radio-group
+            <div v-if="question.type === 1">
+              <b-form-radio
+                v-for="option in question.options"
+                :key="option"
+                v-model="question.answer"
+                :aria-describedby="index"
+                :value="option"
+                :name="index.toString()"
+                class="font-weight-normal"
+                >{{ option }}
+              </b-form-radio>
+            </div>
+            <b-form-checkbox-group
+              v-else
               v-model="question.answer"
               :options="question.options"
               :aria-describedby="index"
-              :name="index.toString()"
-            ></!--b-form-radio-group-->
+            ></b-form-checkbox-group>
           </b-form-group>
         </b-col>
         <b-col>
@@ -103,7 +103,7 @@ export default {
       topicName: "Machine Learning",
       marks: "20",
       hardness: "80",
-      time: 3603,
+      time: 10,
       challengeId: "",
       questions: [
         {
@@ -144,13 +144,19 @@ export default {
         "submitted answer: ",
         this.questions.map((a) => a.answer)
       );
-      this.$router.push({ name: "BrowseTopics" });
-      this.$root.$bvToast.toast(`Your answers are submitted successfully`, {
-        title: "Solo challenge has ended",
-        variant: "dark",
-        autoHideDelay: 5000,
-        appendToast: true,
-      });
+      this.$router
+        .push({ name: "BrowseTopics" })
+        .then(() => {
+          this.$root.$bvToast.toast(`Your answers are submitted successfully`, {
+            title: "Solo challenge has ended",
+            variant: "dark",
+            autoHideDelay: 5000,
+            appendToast: true,
+          });
+        })
+        .catch(() => {
+          console.log("Already gone back to topic browsing page");
+        });
     },
   },
   beforeCreate() {

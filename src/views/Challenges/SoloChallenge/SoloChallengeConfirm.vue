@@ -52,14 +52,12 @@
                 <p class="font-weight-bold">
                   <b-icon icon="alarm" class="text-primary mr-2" />Time:
                 </p>
-                <p v-if="parseInt(getHours(time)) != 0" class="ml-2">
-                  {{ parseInt(getHours(time)) }} hr
-                </p>
-                <p v-if="parseInt(getMinutes(time)) != 0" class="ml-2">
-                  {{ parseInt(getMinutes(time)) }} min
-                </p>
-                <p v-if="parseInt(getSeconds(time)) != 0" class="ml-2">
-                  {{ parseInt(getSeconds(time)) }} sec
+                <p
+                  v-for="time_unit in getTime(time)"
+                  :key="time_unit.key"
+                  class="ml-2"
+                >
+                  {{ time_unit.val }} {{ time_unit.key }}
                 </p>
               </b-row>
             </b-col>
