@@ -94,6 +94,7 @@ export default {
     return {
 		values: [1, 2, 3, 4, 5, 6],
         max: 7,
+		animate: true,
 		topicId: "",
 		keyword: "",
 		participants: [
