@@ -52,7 +52,7 @@
         </b-col>
 
         <b-col align-self="center" class="text-center">
-          FOLLOW ME ON
+          FOLLOW US ON
           <a href="https://facebook.com"><b-icon icon="facebook"></b-icon></a>
           <a href="https://github.com"><b-icon icon="github"></b-icon></a>
           <a href="https://instagram.com"><b-icon icon="instagram"></b-icon></a>

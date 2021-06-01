@@ -2,7 +2,7 @@
   <div id="app">
     <Header />
     <vue-page-transition name="fade-in-up">
-      <router-view />
+      <router-view class="content" />
     </vue-page-transition>
     <Footer />
   </div>
@@ -42,6 +42,10 @@ $navbar-light-active-color: rgba(200, 69, 0, 1);
 
 @import "../node_modules/bootstrap/scss/bootstrap";
 @import "../node_modules/bootstrap-vue/src/index.scss";
+
+.content {
+  min-height: calc(80vh - 40px);
+}
 
 .default-bg {
   background-color: #f3f7f7;

@@ -11,7 +11,14 @@
         :key="index"
       >
         <b-list-group-item
-          :class="[isActive && 'router-link-active', isExactActive && 'router-link-exact-active', 'shadow', 'hover-zoom', 'hover-color-link', 'py-3']"
+          :class="[
+            isActive && 'router-link-active',
+            isExactActive && 'router-link-exact-active',
+            'shadow',
+            'hover-zoom',
+            'hover-color-link',
+            'py-3',
+          ]"
           :href="href"
           @click="navigate"
         >
@@ -38,5 +45,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

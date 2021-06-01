@@ -1,6 +1,6 @@
 <template>
   <b-container>
-    <h2>This is instructor's page</h2>
+    <h2 class="mt-5">This is instructor's page</h2>
   </b-container>
 </template>
 

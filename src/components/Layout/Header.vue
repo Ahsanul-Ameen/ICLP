@@ -1,5 +1,5 @@
 <template>
-  <b-navbar toggleable="lg" class="shadow-sm font-weight-bold bg-white">
+  <b-navbar toggleable="md" class="shadow-sm font-weight-bold bg-white">
     <b-navbar-brand :to="{ name: 'Home' }">
       <img
         src="@/assets/iclp-logo.png"

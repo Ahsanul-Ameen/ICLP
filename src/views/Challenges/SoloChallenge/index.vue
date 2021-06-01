@@ -7,7 +7,15 @@
     </h2>
     <div class="mt-5">
       <b-row>
-        <b-col>
+        <b-col class="ml-5 mr-5">
+          <b-card>
+            <b-form-input
+              v-model="keyword"
+              placeholder="Search topic"
+            ></b-form-input>
+          </b-card>
+        </b-col>
+        <b-col cols="12" md="8">
           <b-card>
             Select Challenge Topic
             <b-card-body
@@ -44,9 +52,6 @@
               </b-row>
             </b-card-body>
           </b-card>
-        </b-col>
-        <b-col class="ml-5 mr-5">
-          <b-form-input v-model="keyword" placeholder="Search"></b-form-input>
         </b-col>
       </b-row>
     </div>
