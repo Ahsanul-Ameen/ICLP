@@ -21,7 +21,15 @@
       <b-button @click="$router.go(-1)">Go Back</b-button>
     </div>
     <div v-else style="margin-top: 25px;">
-      <p class="font-weight-bold" style="margin-left: 25px;">
+      <p class="font-weight-bold" style="margin-left: 25px;" v-if="throwingType">
+        <b-icon
+          icon="hand-index-thumb"
+          class="text-primary"
+          rotate="90"
+        ></b-icon>
+        The challenge will start shortly after your opponent accepts...
+      </p>
+      <p class="font-weight-bold" style="margin-left: 25px;" v-else>
         <b-icon
           icon="hand-index-thumb"
           class="text-primary"
@@ -30,6 +38,7 @@
         By clicking on "Start Quiz" button, the quiz will be started on selected
         topic and you have to submit your answer within the time limit.
       </p>
+
       <p class="font-weight-bold" style="margin-left: 25px;">
         <b-icon
           icon="hand-index-thumb"
