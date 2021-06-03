@@ -1,9 +1,9 @@
 <template>
-  <b-form-group label="Select program language" label-for="language">
+  <b-form-group label="Select program language" :label-for="id">
     <b-form-select
+      :id="id"
       :value="value"
       @input="$emit('input', $event)"
-      id="language"
       :options="languages"
       required
     />
@@ -13,7 +13,7 @@
 <script>
 export default {
   name: "SolutionLanguages",
-  props: ["value"],
+  props: ["value", "id"],
   mixins: [],
   components: {},
   data() {

@@ -8,8 +8,8 @@
           <div class="w-25">
             submit solution:
             <b-form @submit.prevent="onsubmit">
-              <FileSubmit v-model="submission" />
-              <SolutionLanguages v-model="language" />
+              <FileSubmit id="submission" v-model="submission" />
+              <SolutionLanguages id="language" v-model="language" />
               <b-button type="submit" variant="primary">Submit</b-button>
             </b-form>
           </div>
