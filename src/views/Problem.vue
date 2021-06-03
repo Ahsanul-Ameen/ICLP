@@ -8,8 +8,8 @@
           <div class="w-25">
             submit solution:
             <b-form @submit.prevent="onsubmit">
-              <b-form-select v-model="language" :options="languageOptions"></b-form-select>
-              <FileSubmit v-model="file" />
+              <FileSubmit v-model="submission" />
+              <SolutionLanguages v-model="language" />
               <b-button type="submit" variant="primary">Submit</b-button>
             </b-form>
           </div>
@@ -34,6 +34,7 @@
 <script>
 import Submissions from "@/components/Submissions";
 import FileSubmit from "@/components/FileSubmit";
+import SolutionLanguages from "@/components/SolutionLanguages";
 
 export default {
   name: "Problem",
@@ -50,15 +51,8 @@ export default {
           text: "Loops",
         },
       ],
-      file: null,
-      languageOptions: [
-        {
-          value: "cpp",
-          text: "C++ (g++17)",
-        },
-        "python",
-      ],
-      language: "cpp",
+      submission: null,
+      language: "c++ 17",
       statement: `
       *Problems* in Computer Science are often classified as belonging to a certain class of problems (e.g.,
       NP, Unsolvable, Recursive). In this problem you will be analyzing a property of an algorithm whose
@@ -108,12 +102,13 @@ export default {
   },
   methods: {
     onsubmit() {
-      alert(`${this.file.name} ${this.language}`);
+      alert(`${this.submission.name} ${this.language}`);
     },
   },
   components: {
     Submissions,
     FileSubmit,
+    SolutionLanguages,
   },
   mounted() {
     //TODO: either create own blog, or use vue-disqus
