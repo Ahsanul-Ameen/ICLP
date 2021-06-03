@@ -18,7 +18,8 @@ export default {
   components: {},
   data() {
     return {
-      languages: ["c++ 17", "python3"],
+      // languages: ["c++ 17", "python3"],
+      languages: ["c++ 17"],
     };
   },
 };

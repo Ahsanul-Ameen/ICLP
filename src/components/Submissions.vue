@@ -1,6 +1,6 @@
 <template>
   <div>
-    problem id: {{problem_id}} user id: {{user_id}}
+    problem id: {{problemid}} user id: {{userid}}
     <div>
       <b-table striped hover :items="submissions">
         <template #cell(id)="data">
@@ -14,7 +14,7 @@
 <script>
 export default {
   name: "Submissions",
-  props: ["problem_id", "user_id"],
+  props: ["problemid", "userid"],
   data() {
     return {
       submissions: [
