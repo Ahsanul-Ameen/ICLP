@@ -26,13 +26,15 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "@/styles/bootstrap_colors.scss";
+
 .solvecard {
-  border-color: green;
+  border-color: $primary;
 }
 .solve {
-  color: green;
+  color: $primary;
   &.solved {
-    background-color: #1ba94c;
+    background-color: $primary;
     color: white;
   }
 }

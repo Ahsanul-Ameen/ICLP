@@ -23,11 +23,11 @@ export default {
 </script>
 
 <style lang="scss">
-$primary: rgba(253, 89, 60, 255);
-$dark: rgba(0, 0, 0, 1);
-$navbar-light-color: rgba(0, 0, 0, 1);
-$navbar-light-hover-color: rgba(200, 69, 0, 1);
-$navbar-light-active-color: rgba(200, 69, 0, 1);
+@import "styles/bootstrap_colors.scss";
+
+$navbar-light-color: $black;
+$navbar-light-hover-color: $primary;
+// $navbar-light-active-color: $primary; // navbar active class needs to be set/removed manually, so screw it
 
 @font-face {
   font-family: "NeuzeitGro";
@@ -48,10 +48,7 @@ $navbar-light-active-color: rgba(200, 69, 0, 1);
 }
 
 .default-bg {
-  background-color: #f3f7f7;
-}
-body {
-  @extend .default-bg;
+  background-color: $body-bg;
 }
 .hover-zoom {
   transition: transform 0.2s;
