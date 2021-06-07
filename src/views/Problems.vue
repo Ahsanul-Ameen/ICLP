@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-5 my-3">
+  <div>
     <h1>{{topic}}</h1>
     <b-row>
       <b-col cols="12" lg="10">

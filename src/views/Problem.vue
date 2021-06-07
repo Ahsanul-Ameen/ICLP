@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-breadcrumb :items="ancestors" />
-    <div class="mx-5 my-3">
+    <div>
       <b-tabs content-class="mt-0 p-4 bg-white shadow">
         <b-tab title="Problem" active :title-item-class="['border-left', 'border-right']">
           <pre>{{statement}}</pre>

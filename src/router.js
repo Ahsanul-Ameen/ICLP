@@ -117,6 +117,12 @@ const routes = [
     name: "CreateProblem",
     component: () => import('./views/modifyChallenges/CreateProblem'),
   },
+  {
+    path: '/profile/:id',
+    name: 'Profile',
+    component: () => import('./views/Profile'),
+    props: true,
+  },
 ];
 
 const router = new VueRouter({

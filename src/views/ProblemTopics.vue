@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-5 my-3">
+  <div>
     <b-list-group>
       <router-link
         :to="topic.name"
