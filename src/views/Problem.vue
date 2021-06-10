@@ -44,20 +44,17 @@ export default {
   data() {
     return {
       ancestors: [
-        // TODO: make it dynamic
         {
           text: "Coding challenge",
           href: "/problems",
         },
         {
-          text: "Loops",
+          text: null,
         },
       ],
+      statement: null,
       submission: null,
       language: "c++ 17",
-      statement: `
-      you will be given an integer n (1 < n < 100) as input. output n*5.
-      `,
     };
   },
   methods: {
@@ -82,6 +79,10 @@ export default {
           this.submission = null;
           alert("error " + err);
         });
+      this.apiGet(`/public/problem/${this.id}`).then((data) => {
+        this.ancestors[this.ancestors.length - 1].text = data.title;
+        this.statement = data.content;
+      });
     },
   },
   components: {
@@ -90,7 +91,7 @@ export default {
     SolutionLanguages,
   },
   mounted() {
-    //TODO: either create own blog, or use vue-disqus
+    // maybe we shold use vue-disqus instead
     /**
      *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
      *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */

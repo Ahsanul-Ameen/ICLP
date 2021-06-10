@@ -99,7 +99,14 @@ const routes = [
     path: "/problems/:topic",
     name: "Problems",
     component: () => import('./views/Problems'),
-    props: (route) => ({ ...route.params, ...route.query }),
+    props: ({ params, query }) => ({
+      ...params,
+      solved: query.solved !== 'false',
+      unsolved: query.unsolved !== 'false',
+      easy: query.easy !== 'false',
+      medium: query.medium !== 'false',
+      hard: query.hard !== 'false',
+    }),
   },
   {
     path: "/problem/:id",

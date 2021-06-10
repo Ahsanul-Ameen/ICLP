@@ -1,5 +1,6 @@
 <template>
   <div>
+    Hello, user id {{this.userid}}
     <h1>{{topic}}</h1>
     <b-row>
       <b-col cols="12" lg="10">
@@ -42,69 +43,28 @@
 
 <script>
 import ProblemIntro from "@/components/ProblemIntro";
+import apiUtil from "@/mixins/apiUtil";
 
 export default {
   name: "Problems",
-  props: {
-    // many of these props shouldn't be String, but router by default sends them as string
-    // TODO: change router props to cast to correct type
-    topic: String,
-    solved: {
-      type: String,
-      default: "false",
-    },
-    unsolved: {
-      type: String,
-      default: "false",
-    },
-    easy: {
-      type: String,
-      default: "false",
-    },
-    medium: {
-      type: String,
-      default: "false",
-    },
-    hard: {
-      type: String,
-      default: "false",
-    },
-  },
+  mixins: [apiUtil],
+  props: ["topic", "solved", "unsolved", "easy", "medium", "hard"],
   components: {
     ProblemIntro,
   },
   data: (vm) => ({
-    problems: [
-      {
-        id: 5,
-        name: "Loops",
-        difficulty: "Easy",
-        maxScore: 10,
-        solvedBy: 1,
-        attemptedBy: 2,
-        solved: true,
-      },
-      {
-        id: 8,
-        name: "Array",
-        difficulty: "Medium",
-        maxScore: 15,
-        solvedBy: 1,
-        attemptedBy: 3,
-        solved: false,
-      },
-    ],
+    problems: null,
     filters: [
       {
         type: "Status",
         values: [
           {
             label: "solved",
-            active: vm.solved == "true",
+            active: vm.solved,
           },
           {
             label: "unsolved",
-            active: vm.unsolved == "true",
+            active: vm.unsolved,
           },
         ],
       },
@@ -113,21 +73,26 @@ export default {
         values: [
           {
             label: "easy",
-            active: vm.easy == "true",
+            active: vm.easy,
           },
           {
             label: "medium",
-            active: vm.medium == "true",
+            active: vm.medium,
           },
           {
             label: "hard",
-            active: vm.hard == "true",
+            active: vm.hard,
           },
         ],
       },
     ],
   }),
-  computed: {},
+  computed: {
+    userid() {
+      const user = this.$store.state.user.user;
+      return user === undefined ? 0 : user.id;
+    },
+  },
   watch: {
     filters: {
       handler(val) {
@@ -140,6 +105,23 @@ export default {
         this.$router.push({ query: filterparams });
       },
       deep: true,
+    },
+    userid: {
+      handler(val) {
+        this.getScore(val);
+      },
+    },
+  },
+  mounted() {
+    this.getScore(this.userid);
+  },
+  methods: {
+    getScore(val) {
+      this.apiGet(`/public/problems/${this.topic}?userid=${val}`).then(
+        (data) => {
+          this.problems = data;
+        }
+      );
     },
   },
 };
@@ -157,5 +139,4 @@ export default {
 
 // NOTE: router-link exact should be default but isn't, use append for relative link 
 //      , relative link doesn't work correctly with href
-// TODO: add current navigating path at top to go back easily
 // FIXME: navbar color doesn't change when using keyboard to go back
