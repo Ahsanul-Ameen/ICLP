@@ -1,9 +1,10 @@
 <template>
   <div>
     user id: {{id}}
+    Rank: {{rank}}
+    Total score: {{total_score}}
     <div class="small">
       <line-chart :chart-data="datacollection" :options="chartoptions"></line-chart>
-      <button @click="fillData()">Randomize</button>
     </div>
   </div>
 </template>
@@ -36,6 +37,8 @@ export default {
           ],
         },
       },
+      rank: null,
+      total_score: null,
     };
   },
   mounted() {
@@ -44,10 +47,13 @@ export default {
   methods: {
     fillData() {
       this.apiGet(`/public/best/${this.id}`).then((data) => {
-        let plotdata = data.map(
+        const bgn = { ...data[0] };
+        bgn.score = 0;
+        data.unshift(bgn);
+        console.log(data);
+        const plotdata = data.map(
           ((s) => (v) => ({ x: moment(v.time), y: (s += v.score) }))(0)
         );
-        console.log(plotdata);
         this.datacollection = {
           datasets: [
             {
@@ -57,9 +63,10 @@ export default {
           ],
         };
       });
-    },
-    getRandomInt() {
-      return Math.floor(Math.random() * (50 - 5 + 1)) + 5;
+      this.apiGet(`/public/rank?userid=${this.id}`).then((data) => {
+        this.rank = data[0].rank;
+        this.total_score = data[0].total_score;
+      });
     },
   },
 };

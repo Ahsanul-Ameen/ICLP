@@ -123,6 +123,11 @@ const routes = [
     component: () => import('./views/Profile'),
     props: true,
   },
+  {
+    path: '/rank',
+    name: 'Rank',
+    component: () => import('./views/Rank'),
+  },
 ];
 
 const router = new VueRouter({

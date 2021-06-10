@@ -16,6 +16,7 @@
         <b-nav-item :to="{ name: 'Blog' }">Blog</b-nav-item>
         <b-nav-item :to="{ name: 'Challenges' }">Challenges</b-nav-item>
         <b-nav-item :to="{ name: 'Instructors' }">Instructors</b-nav-item>
+        <b-nav-item :to="{ name: 'Rank' }">Rank</b-nav-item>
       </b-navbar-nav>
 
       <b-navbar-nav class="ml-auto" v-if="this.$store.getters.isLoggedIn">
