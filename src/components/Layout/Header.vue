@@ -12,11 +12,11 @@
 
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
-        <b-nav-item :to="{ name: 'Courses' }">Courses</b-nav-item>
-        <b-nav-item :to="{ name: 'Blog' }">Blog</b-nav-item>
         <b-nav-item :to="{ name: 'Challenges' }">Challenges</b-nav-item>
         <b-nav-item :to="{ name: 'Admin' }">Admin</b-nav-item>
         <b-nav-item :to="{ name: 'Rank' }">Rank</b-nav-item>
+        <!-- <b-nav-item :to="{ name: 'Courses' }">Courses</b-nav-item>
+        <b-nav-item :to="{ name: 'Blog' }">Blog</b-nav-item> -->
       </b-navbar-nav>
 
       <b-navbar-nav class="ml-auto" v-if="this.$store.getters.isLoggedIn">
