@@ -3,7 +3,7 @@
     Hello, user id {{this.userid}}
     <h1>{{topic}}</h1>
     <b-row>
-      <b-col cols="12" lg="10">
+      <b-col cols="12" lg="9">
         <b-list-group>
           <b-list-group-item
             v-for="problem in problems"
@@ -16,7 +16,8 @@
           </b-list-group-item>
         </b-list-group>
       </b-col>
-      <b-col cols="2" class="d-none d-lg-block">
+      <!-- TODO: implement the filers and pagination -->
+      <!-- <b-col cols="3" class="d-none d-lg-block">
         <b-list-group flush>
           <b-list-group-item v-for="(filter, index) in filters" :key="index" class="default-bg">
             <div class="filtertype">{{filter.type}}</div>
@@ -36,7 +37,7 @@
             </div>
           </b-list-group-item>
         </b-list-group>
-      </b-col>
+      </b-col>-->
     </b-row>
   </div>
 </template>
