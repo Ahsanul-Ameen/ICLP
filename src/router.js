@@ -86,9 +86,14 @@ const routes = [
     component: () => import('./views/Challenges/DualChallenge/DualResult'),
   },
   {
-    path: "/instructors",
-    name: "Instructors",
-    component: () => import('./views/Instructors'),
+    path: "/admin",
+    name: "Admin",
+    component: () => import('./views/Admin'),
+  },
+  {
+    path: "/admin/create-problem",
+    name: "CreateProblem",
+    component: () => import('./views/modifyChallenges/CreateProblem'),
   },
   {
     path: "/problems",
@@ -118,11 +123,6 @@ const routes = [
     path: '/submission/:id',
     name: 'Submission',
     component: () => import('./views/Submission'),
-  },
-  {
-    path: "/admin/create-problem",
-    name: "CreateProblem",
-    component: () => import('./views/modifyChallenges/CreateProblem'),
   },
   {
     path: '/profile/:id',
