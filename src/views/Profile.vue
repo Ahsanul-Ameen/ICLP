@@ -1,6 +1,6 @@
 <template>
   <div>
-    user id: {{id}}
+    user: {{user}}
     Rank: {{rank}}
     Total score: {{total_score}}
     <div class="small">
@@ -23,6 +23,7 @@ export default {
   },
   data() {
     return {
+      user: null,
       datacollection: {},
       chartoptions: {
         maintainAspectRatio: false,
@@ -46,11 +47,13 @@ export default {
   },
   methods: {
     fillData() {
+      this.apiGet(`/public/user/${this.id}`).then(([{ user }]) => {
+        this.user = user;
+      });
       this.apiGet(`/public/best/${this.id}`).then((data) => {
         const bgn = { ...data[0] };
         bgn.score = 0;
         data.unshift(bgn);
-        console.log(data);
         const plotdata = data.map(
           ((s) => (v) => ({ x: moment(v.time), y: (s += v.score) }))(0)
         );
