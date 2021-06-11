@@ -1,6 +1,6 @@
 <template>
   <div>
-    problem id: {{problemid}} user id: {{userid}}
+    problem id: {{problemid}}, current user id: {{userid}}
     <div>
       <b-table striped hover :items="submissions">
         <template #cell(id)="data">
@@ -12,9 +12,12 @@
 </template>
 
 <script>
+import thisuser from "@/mixins/thisuser";
+
 export default {
   name: "Submissions",
-  props: ["problemid", "userid"],
+  mixins: [thisuser],
+  props: ["problemid"],
   data() {
     return {
       submissions: [

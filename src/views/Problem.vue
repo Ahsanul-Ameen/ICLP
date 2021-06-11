@@ -5,7 +5,7 @@
       <b-tabs content-class="mt-0 p-4 bg-white shadow">
         <b-tab title="Problem" active :title-item-class="['border-left', 'border-right']">
           <pre>{{statement}}</pre>
-          <div class="w-25">
+          <div class="w-25" v-if="userid">
             submit solution:
             <b-form @submit.prevent="onsubmit">
               <FileSubmit id="submission" v-model="submission" />
@@ -13,9 +13,12 @@
               <b-button type="submit" variant="primary">Submit</b-button>
             </b-form>
           </div>
+          <div v-else>
+            <h3>Login/signup to submit solution.</h3>
+          </div>
         </b-tab>
         <b-tab title="Submissions" :title-item-class="['border-right']">
-          <Submissions :problemid="id" :userid="45" />
+          <Submissions :problemid="id" />
         </b-tab>
         <b-tab title="Discussions" :title-item-class="['border-right']">
           <div id="disqus_thread"></div>
@@ -36,10 +39,11 @@ import apiUtil from "@/mixins/apiUtil";
 import Submissions from "@/components/Submissions";
 import FileSubmit from "@/components/FileSubmit";
 import SolutionLanguages from "@/components/SolutionLanguages";
+import thisuser from "@/mixins/thisuser";
 
 export default {
   name: "Problem",
-  mixins: [apiUtil],
+  mixins: [apiUtil, thisuser],
   props: ["id"],
   data() {
     return {
@@ -87,7 +91,6 @@ export default {
     SolutionLanguages,
   },
   mounted() {
-    // maybe we shold use vue-disqus instead
     /**
      *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
      *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
