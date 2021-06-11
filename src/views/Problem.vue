@@ -79,10 +79,6 @@ export default {
           this.submission = null;
           alert("error " + err);
         });
-      this.apiGet(`/public/problem/${this.id}`).then((data) => {
-        this.ancestors[this.ancestors.length - 1].text = data.title;
-        this.statement = data.content;
-      });
     },
   },
   components: {
@@ -107,6 +103,11 @@ export default {
       s.setAttribute("data-timestamp", +new Date());
       (d.head || d.body).appendChild(s);
     })();
+    this.apiGet(`/public/problem/${this.id}`).then(([data]) => {
+      console.log(data);
+      this.ancestors[this.ancestors.length - 1].text = data.title;
+      this.statement = data.content;
+    });
   },
 };
 </script>

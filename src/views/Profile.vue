@@ -63,9 +63,9 @@ export default {
           ],
         };
       });
-      this.apiGet(`/public/rank?userid=${this.id}`).then((data) => {
-        this.rank = data[0].rank;
-        this.total_score = data[0].total_score;
+      this.apiGet(`/public/rank?userid=${this.id}`).then(([data]) => {
+        this.rank = data.rank;
+        this.total_score = data.total_score;
       });
     },
   },
