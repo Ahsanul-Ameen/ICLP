@@ -13,20 +13,21 @@
 
 <script>
 import thisuser from "@/mixins/thisuser";
+import apiUtil from "@/mixins/apiUtil";
 
 export default {
   name: "Submissions",
-  mixins: [thisuser],
+  mixins: [thisuser, apiUtil],
   props: ["problemid"],
   data() {
     return {
-      submissions: [
-        { id: 40, first_name: "Dickerson", last_name: "Macdonald" },
-        { id: 21, first_name: "Larsen", last_name: "Shaw" },
-        { id: 89, first_name: "Geneva", last_name: "Wilson" },
-        { id: 38, first_name: "Jami", last_name: "Carney" },
-      ],
+      submissions: [],
     };
+  },
+  mounted() {
+    this.apiGet(`/public/submissions/${this.problemid}`).then((data) => {
+      this.submissions = data;
+    });
   },
 };
 </script>

@@ -18,10 +18,10 @@
               <h3>Login/signup to submit solution.</h3>
             </div>
           </b-tab>
-          <b-tab title="Submissions" :title-item-class="['border-right']">
+          <b-tab title="Submissions" :title-item-class="['border-right']" lazy>
             <Submissions :problemid="id" />
           </b-tab>
-          <b-tab title="Discussions" :title-item-class="['border-right']">
+          <b-tab title="Discussions" :title-item-class="['border-right']" lazy>
             <div id="disqus_thread"></div>
             <noscript>
               Please enable JavaScript to view the
