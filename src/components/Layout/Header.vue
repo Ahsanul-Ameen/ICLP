@@ -32,7 +32,7 @@
           <template #button-content>
             <b-avatar variant="info" :src="profile"></b-avatar>
           </template>
-          <b-dropdown-item href="#">Profile</b-dropdown-item>
+          <b-dropdown-item :href="`/profile/${userid}`">Profile</b-dropdown-item>
           <b-dropdown-item @click="logout">Log Out</b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>
@@ -84,9 +84,12 @@
 </template>
 
 <script>
+import thisuser from '@/mixins/thisuser';
 import Login from "../auth/Login.vue";
 import Signup from "../auth/Signup.vue";
+
 export default {
+  mixins: [thisuser],
   data() {
     return {
       newMessages: 6,
