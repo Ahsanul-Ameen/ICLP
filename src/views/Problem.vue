@@ -104,7 +104,6 @@ export default {
       (d.head || d.body).appendChild(s);
     })();
     this.apiGet(`/public/problem/${this.id}`).then(([data]) => {
-      console.log(data);
       this.ancestors[this.ancestors.length - 1].text = data.title;
       this.statement = data.content;
     });

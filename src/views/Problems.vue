@@ -44,10 +44,11 @@
 <script>
 import ProblemIntro from "@/components/ProblemIntro";
 import apiUtil from "@/mixins/apiUtil";
+import thisuser from "@/mixins/thisuser";
 
 export default {
   name: "Problems",
-  mixins: [apiUtil],
+  mixins: [apiUtil, thisuser],
   props: ["topic", "solved", "unsolved", "easy", "medium", "hard"],
   components: {
     ProblemIntro,
@@ -87,12 +88,6 @@ export default {
       },
     ],
   }),
-  computed: {
-    userid() {
-      const user = this.$store.state.user.user;
-      return user === undefined ? 0 : user.id;
-    },
-  },
   watch: {
     filters: {
       handler(val) {
