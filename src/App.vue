@@ -45,8 +45,8 @@ $navbar-light-hover-color: $primary;
 
 .content {
   min-height: calc(80vh - 40px);
-  @extend .mx-4;
-  @extend .my-4;
+  @extend .container-fluid;
+  @extend .p-4;
 }
 
 .default-bg {

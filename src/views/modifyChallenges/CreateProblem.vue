@@ -1,5 +1,5 @@
 <template>
-  <div class="p-3">
+  <div>
     <b-form @submit.prevent="onSubmit">
       <b-form-group label="Topic" label-for="topic">
         <b-select id="topic" v-model="topicid" :options="topics" required />
@@ -36,7 +36,7 @@ export default {
     return {
       topics: [],
       difficulties: ["easy", "medium", "hard"],
-      topicid: 2,
+      topicid: 1,
       title: "dummy",
       statement: `
       you will be given an integer n (1 < n < 100) as input. output n*5.
