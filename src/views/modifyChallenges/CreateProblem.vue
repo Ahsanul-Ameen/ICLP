@@ -8,7 +8,7 @@
         <b-input id="title" v-model="title" required />
       </b-form-group>
       <b-form-group label="Problem statement:" label-for="statement">
-        <b-textarea id="statement" v-model="statement" rows="15" required />
+        <b-textarea id="statement" v-model="statement" rows="8" required />
       </b-form-group>
       <b-form-group label="Difficulty" label-for="difficulty">
         <b-select id="difficulty" v-model="difficulty" :options="difficulties" required />
@@ -16,10 +16,20 @@
       <b-form-group label="Score" label-for="score">
         <b-input type="number" id="score" v-model="score" min="5" max="100" step="5" required />
       </b-form-group>
-      <b-form-group label="Checker executable for linux" label-for="checker">
-        <FileSubmit id="checker" v-model="checker" />
-      </b-form-group>
-      <!-- TODO: input tests -->
+      <div>
+        Tests:
+        <b-list-group>
+          <b-list-group-item v-for="(test, index) in tests" :key="index">
+            <b-form-group :label="`Test ${index}`" :label-for="`test_${index}`">
+              <b-textarea :id="`test_${index}`" v-model="tests[index]" rows="5" required />
+            </b-form-group>
+          </b-list-group-item>
+        </b-list-group>
+        <b-button @click="addTest">Add test</b-button>
+        <b-form-group label="Checker executable for linux" label-for="checker">
+          <FileSubmit id="checker" v-model="checker" />
+        </b-form-group>
+      </div>
       <b-button type="submit" variant="primary">Submit</b-button>
     </b-form>
   </div>
@@ -44,6 +54,7 @@ export default {
       checker: null,
       difficulty: "easy",
       score: 5,
+      tests: ["3", "5"],
     };
   },
   mounted() {
@@ -59,6 +70,7 @@ export default {
       formData.append("statement", this.statement);
       formData.append("difficulty", this.difficulty);
       formData.append("score", this.score);
+      formData.append("tests", this.tests);
       formData.append("checker", this.checker);
       for (var pair of formData.entries()) {
         console.log(pair[0] + ", " + pair[1]);
@@ -67,7 +79,12 @@ export default {
         headers: {
           "Content-Type": "multipart/form-data",
         },
+      }).then(([data]) => {
+        alert(`problem created with id: ${data.id}`);
       });
+    },
+    addTest() {
+      this.tests.push("");
     },
   },
   components: { FileSubmit },
