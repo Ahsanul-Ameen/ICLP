@@ -1,36 +1,38 @@
 <template>
   <div>
     <b-breadcrumb :items="ancestors" />
-    <div>
-      <b-tabs content-class="mt-0 p-4 bg-white shadow">
-        <b-tab title="Problem" active :title-item-class="['border-left', 'border-right']">
-          <pre>{{statement}}</pre>
-          <div class="w-25" v-if="userid">
-            submit solution:
-            <b-form @submit.prevent="onsubmit">
-              <FileSubmit id="submission" v-model="submission" />
-              <SolutionLanguages id="language" v-model="language" />
-              <b-button type="submit" variant="primary">Submit</b-button>
-            </b-form>
-          </div>
-          <div v-else>
-            <h3>Login/signup to submit solution.</h3>
-          </div>
-        </b-tab>
-        <b-tab title="Submissions" :title-item-class="['border-right']">
-          <Submissions :problemid="id" />
-        </b-tab>
-        <b-tab title="Discussions" :title-item-class="['border-right']">
-          <div id="disqus_thread"></div>
-          <noscript>
-            Please enable JavaScript to view the
-            <a
-              href="https://disqus.com/?ref_noscript"
-            >comments powered by Disqus.</a>
-          </noscript>
-        </b-tab>
-      </b-tabs>
-    </div>
+    <b-overlay :show="judging">
+      <div>
+        <b-tabs content-class="mt-0 p-4 bg-white shadow">
+          <b-tab title="Problem" active :title-item-class="['border-left', 'border-right']">
+            <pre>{{statement}}</pre>
+            <div class="w-25" v-if="userid">
+              submit solution:
+              <b-form @submit.prevent="onsubmit">
+                <FileSubmit id="submission" v-model="submission" />
+                <SolutionLanguages id="language" v-model="language" />
+                <b-button type="submit" variant="primary">Submit</b-button>
+              </b-form>
+            </div>
+            <div v-else>
+              <h3>Login/signup to submit solution.</h3>
+            </div>
+          </b-tab>
+          <b-tab title="Submissions" :title-item-class="['border-right']">
+            <Submissions :problemid="id" />
+          </b-tab>
+          <b-tab title="Discussions" :title-item-class="['border-right']">
+            <div id="disqus_thread"></div>
+            <noscript>
+              Please enable JavaScript to view the
+              <a
+                href="https://disqus.com/?ref_noscript"
+              >comments powered by Disqus.</a>
+            </noscript>
+          </b-tab>
+        </b-tabs>
+      </div>
+    </b-overlay>
   </div>
 </template>
 
@@ -59,10 +61,12 @@ export default {
       statement: null,
       submission: null,
       language: "c++ 17",
+      judging: false,
     };
   },
   methods: {
     onsubmit() {
+      this.judging = true;
       let formData = new FormData();
       formData.append("problemid", this.id);
       formData.append("language", this.language);
@@ -75,13 +79,15 @@ export default {
           "Content-Type": "multipart/form-data",
         },
       })
-        .then(({ score }) => {
-          this.submission = null;
-          alert(`You received score: ${score}`);
+        .then(({ score, details }) => {
+          alert(`You received score: ${score}, ${details}`);
         })
         .catch((err) => {
-          this.submission = null;
           alert("error " + err);
+        })
+        .finally(() => {
+          this.submission = null;
+          this.judging = false;
         });
     },
   },
