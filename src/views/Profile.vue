@@ -1,17 +1,16 @@
 <template>
-  <div>
-    user: {{user}}
+  <b-container>
+    user: {{ user }}
     <div>
       <h3>Statistics</h3>
       <b-form-group label="Topic" label-for="topic">
         <b-select id="topic" v-model="topicid" :options="topics" required />
       </b-form-group>
-      Rank: {{rank}}
-      Total score: {{total_score}}
+      Rank: {{ rank }} Total score: {{ total_score }}
       <line-chart :chart-data="linedata" :options="chartoptions" />
       <bar-chart :chart-data="bardata" :options="chartoptions" />
     </div>
-  </div>
+  </b-container>
 </template>
 
 <script>
@@ -85,7 +84,9 @@ export default {
             ((s) => (v) => ({ x: moment(v.time), y: (s += v.score) }))(0)
           );
           const barplotdata = data.map((v) =>
-            moment(v.time).startOf("day").format("YYYY-MM-DD")
+            moment(v.time)
+              .startOf("day")
+              .format("YYYY-MM-DD")
           );
           const counts = {};
           for (var i = 0; i < barplotdata.length; i++) {
@@ -129,5 +130,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>
