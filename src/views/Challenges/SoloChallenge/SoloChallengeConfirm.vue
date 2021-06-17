@@ -14,10 +14,10 @@
       Solo Challenge
       <b-icon icon="grip-horizontal" class="text-primary" />
     </h2>
-    <div v-if="topicName.length == 0">
-      Link is broken
-      <b-button @click="$router.go(-1)">Go Back</b-button>
-    </div>
+
+    <h1 class="text-center mt-5" v-if="challengeId == null">
+      Sorry, no challenge found.
+    </h1>
     <div v-else>
       <p class="font-weight-bold">
         <b-icon
@@ -44,9 +44,9 @@
               </b-row>
               <b-row>
                 <p class="font-weight-bold mr-2">
-                  <b-icon icon="box" class="text-primary mr-2" />Total Marks:
+                  <b-icon icon="box" class="text-primary mr-2" />Total Score:
                 </p>
-                <p>{{ marks }}</p>
+                <p>{{ score }}</p>
               </b-row>
               <b-row>
                 <p class="font-weight-bold">
@@ -67,7 +67,7 @@
                   <b-icon
                     icon="file-earmark-text"
                     class="text-primary mr-2"
-                  />Hardness: {{ hardness }}%
+                  />Difficulty: {{ difficulty }}
                 </p>
               </b-row>
             </b-col>
@@ -93,24 +93,30 @@
 <script setup>
 import ChallengeBanner from "@/components/Challenges/ChallengeBanner.vue";
 import timeUtility from "@/mixins/timeUtility";
+import apiUtil from "@/mixins/apiUtil";
 export default {
   components: { ChallengeBanner },
   data() {
     return {
       backIcon: "arrow-left-circle",
-      topicId: "",
-      topicName: "",
-      marks: 76,
-      hardness: 80,
-      time: 74744,
-      challengeId: "",
+      topicId: null,
+      topicName: null,
+      score: null,
+      difficulty: null,
+      time: null,
+      challengeId: null,
     };
   },
-  mixins: [timeUtility],
+  mixins: [timeUtility, apiUtil],
   created() {
     this.topicId = this.$route.params.topicId;
-    this.topicName = "Machine Learning";
-    this.challengeId = 22;
+    this.apiGet(`/mcq/find/${this.topicId}`).then((data) => {
+      this.topicName = data.topicName;
+      this.score = data.score;
+      this.difficulty = data.difficulty;
+      this.challengeId = data.challengeId;
+      this.time = data.time;
+    });
   },
 };
 </script>

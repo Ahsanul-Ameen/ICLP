@@ -59,35 +59,20 @@
 </template>
 
 <script>
+import apiUtil from "@/mixins/apiUtil";
 export default {
   data() {
     return {
       keyword: "",
-      topics: [
-        { id: "1", name: "Python", description: "" },
-        { id: "2", name: "C programming", description: "" },
-        { id: "3", name: "C++ ", description: "" },
-        { id: "4", name: "Java", description: "" },
-        { id: "5", name: "JavaScript", description: "" },
-        { id: "6", name: "PHP", description: "" },
-        { id: "7", name: "Operating System", description: "" },
-        { id: "8", name: "Cloud computing", description: "" },
-        { id: "9", name: "Blockchain", description: "" },
-        { id: "10", name: "Machine learning", description: "" },
-        { id: "11", name: "Database management system", description: "" },
-        { id: "12", name: "Artificial intelligence", description: "" },
-        { id: "13", name: "Front end technique", description: "" },
-        { id: "14", name: "Networking fundamental", description: "" },
-        { id: "15", name: "Web designing", description: "" },
-        { id: "16", name: "Computer graphics", description: "" },
-        { id: "17", name: "Software development", description: "" },
-        { id: "18", name: "E-commerce", description: "" },
-        { id: "19", name: "Computer architecture", description: "" },
-        { id: "20", name: "Cyber laws and security", description: "" },
-        { id: "21", name: "Algorithms and data structures", description: "" },
-      ],
+      topics: [],
     };
   },
+  mounted() {
+    this.apiGet("/public/problem-topics").then((result) => {
+      this.topics = result || [];
+    });
+  },
+  mixins: [apiUtil],
   computed: {
     relevantTopics() {
       if (this.keyword.length == 0) return this.topics;

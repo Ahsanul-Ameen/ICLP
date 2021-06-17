@@ -68,9 +68,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.clock {
-  border-style: solid;
-  border-radius: 5px;
-}
-</style>
+<style lang="scss" scoped></style>
