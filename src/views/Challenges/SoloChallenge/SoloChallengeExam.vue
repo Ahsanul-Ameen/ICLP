@@ -159,7 +159,6 @@ export default {
             this.questions[i].answer = data.questions[i].answer;
           }
           this.achievedScore = data.score;
-          console.log(data);
           this.finished = true;
         })
         .catch(() => {
