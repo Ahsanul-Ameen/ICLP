@@ -52,23 +52,33 @@
 </template>
 
 <script>
+import thisuser from "@/mixins/thisuser";
 export default {
 	components: {},
 	data() {
 		return {
-			userId: 20,
-			userName: "Tintin"
+			userId: "",
+			userName: "",
 		};
 	},
-	methods: {},
+	methods: {
+		setUser(id, name) {
+			this.userId = id;
+			this.userName = name;
+		}
+	},
 	computed: {
 		userInfo() {
 			return {
 				userId: this.userId,
-				userName: this.userName
+				userName: this.userName,
 			}
 		}
-	}
+	},
+	mounted() {
+		this.setUser(this.userid, this.username);
+	},
+	mixins: [thisuser],
 };
 </script>
 

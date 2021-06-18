@@ -89,6 +89,7 @@
 </template>
 
 <script>
+import apiUtil from "@/mixins/apiUtil";
 export default {
   data() {
     return {
@@ -97,6 +98,7 @@ export default {
 		animate: true,
 		topicId: Math.floor( Math.random() * 10 + 1),
 		keyword: "",
+		ranks: null,
 		participants: [
 			{ userid: "1", name: "Shafin Khadem", level: 5, logo: "https://placekitten.com/300/300" },
 			{ userid: "2", name: "Washief Hossain", level: 6, logo: "https://placekitten.com/300/300" },
@@ -138,6 +140,10 @@ export default {
         return this.isSubsequence(str1, str2, m - 1, n - 1);
       return this.isSubsequence(str1, str2, m, n - 1);
     },
+  },
+  mixins: [apiUtil],
+  mounted() {
+    
   },
 };
 </script>

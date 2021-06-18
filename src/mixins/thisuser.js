@@ -6,5 +6,9 @@ export default {
       const user = this.$store.state.user.user;
       return user === undefined ? 0 : user.id;
     },
+    username() {
+      const user = this.$store.state.user.user;
+      return user === undefined ? "Guest" : user.name;
+    }
   }
 }
