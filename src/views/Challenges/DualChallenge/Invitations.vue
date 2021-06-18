@@ -7,7 +7,14 @@
 		</h2>
 		<div class="mt-5 message-box">
 			<h4 class="text-center my-3 inv">
-				Invitations
+				Invitations 
+				<b-icon 
+					icon="arrow-clockwise" 
+					animation="throb" 
+					font-scale="1" 
+					@click.prevent="refresh">
+						
+				</b-icon>
 			</h4>
 			<div class="mx-1 my-2 px-1 pt-3 message-body">
 				<b-card 
@@ -73,6 +80,7 @@
 </template>
 
 <script>
+import thisuser from "@/mixins/thisuser";
 export default {
 	components: {},
 	data() {
@@ -129,6 +137,11 @@ export default {
 		};
 	},
 	methods: {
+		refresh() {},
+		setUser(id, name) {
+			this.userId = id;
+			this.userName = name;
+		}
 	},
 	computed: {
 		DualConfirm() {
@@ -146,10 +159,10 @@ export default {
 			}
 		}
 	},
-	created() {
-		this.userId = this.$route.params.userId;
-		this.userName = this.$route.params.userName;
+	mounted() {
+		this.setUser(this.userid, this.username);
 	},
+	mixins: [thisuser],
 };
 </script>
 

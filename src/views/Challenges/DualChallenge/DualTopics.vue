@@ -58,6 +58,7 @@
 
 <script>
 import apiUtil from "@/mixins/apiUtil";
+import thisuser from '@/mixins/thisuser';
 export default {
   data() {
     return {
@@ -84,8 +85,9 @@ export default {
     this.apiGet("/public/problem-topics").then((result) => {
       this.topics = result || [];
     });
+    this.setUser(this.userid, this.username);
   },
-  mixins: [apiUtil],
+  mixins: [apiUtil, thisuser],
   methods: {
     isSubsequence(str1, str2, m, n) {
       if (m == 0) return true;
@@ -95,6 +97,10 @@ export default {
         return this.isSubsequence(str1, str2, m - 1, n - 1);
       return this.isSubsequence(str1, str2, m, n - 1);
     },
+    setUser(id, name) {
+			this.userId = id;
+			this.userName = name;
+		}
   },
   created() {
     this.userId = this.$route.params.userId;
