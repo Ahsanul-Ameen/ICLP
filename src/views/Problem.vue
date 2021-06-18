@@ -1,11 +1,15 @@
 <template>
-  <div>
+  <b-container>
     <b-breadcrumb :items="ancestors" />
     <b-overlay :show="judging">
       <div>
         <b-tabs content-class="mt-0 p-4 bg-white shadow">
-          <b-tab title="Problem" active :title-item-class="['border-left', 'border-right']">
-            <pre>{{statement}}</pre>
+          <b-tab
+            title="Problem"
+            active
+            :title-item-class="['border-left', 'border-right']"
+          >
+            <pre>{{ statement }}</pre>
             <div class="w-25" v-if="userid">
               submit solution:
               <b-form @submit.prevent="onsubmit">
@@ -25,15 +29,15 @@
             <div id="disqus_thread"></div>
             <noscript>
               Please enable JavaScript to view the
-              <a
-                href="https://disqus.com/?ref_noscript"
-              >comments powered by Disqus.</a>
+              <a href="https://disqus.com/?ref_noscript"
+                >comments powered by Disqus.</a
+              >
             </noscript>
           </b-tab>
         </b-tabs>
       </div>
     </b-overlay>
-  </div>
+  </b-container>
 </template>
 
 <script>
@@ -100,11 +104,11 @@ export default {
     /**
      *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
      *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-    window.disqus_config = function () {
+    window.disqus_config = function() {
       // this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
       this.page.identifier = `problem_${this.id}`; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
-    (function () {
+    (function() {
       // DON'T EDIT BELOW THIS LINE
       var d = document,
         s = d.createElement("script");
@@ -120,5 +124,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

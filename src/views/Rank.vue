@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <b-container>
     <b-table striped hover :items="ranks">
       <template #cell(user_id)="data">
         <router-link :to="{name: 'Profile', params: {id: data.value}}">{{data.value}}</router-link>
       </template>
     </b-table>
-  </div>
+  </b-container>
 </template>
 
 <script>

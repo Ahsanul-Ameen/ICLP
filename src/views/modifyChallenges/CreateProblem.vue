@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <b-container>
     <b-form @submit.prevent="onSubmit">
       <b-form-group label="Topic" label-for="topic">
         <b-select id="topic" v-model="topicid" :options="topics" required />
@@ -11,17 +11,35 @@
         <b-textarea id="statement" v-model="statement" rows="8" required />
       </b-form-group>
       <b-form-group label="Difficulty" label-for="difficulty">
-        <b-select id="difficulty" v-model="difficulty" :options="difficulties" required />
+        <b-select
+          id="difficulty"
+          v-model="difficulty"
+          :options="difficulties"
+          required
+        />
       </b-form-group>
       <b-form-group label="Score" label-for="score">
-        <b-input type="number" id="score" v-model="score" min="5" max="100" step="5" required />
+        <b-input
+          type="number"
+          id="score"
+          v-model="score"
+          min="5"
+          max="100"
+          step="5"
+          required
+        />
       </b-form-group>
       <div>
         Tests:
         <b-list-group>
           <b-list-group-item v-for="(test, index) in tests" :key="index">
             <b-form-group :label="`Test ${index}`" :label-for="`test_${index}`">
-              <b-textarea :id="`test_${index}`" v-model="tests[index]" rows="5" required />
+              <b-textarea
+                :id="`test_${index}`"
+                v-model="tests[index]"
+                rows="5"
+                required
+              />
             </b-form-group>
           </b-list-group-item>
         </b-list-group>
@@ -32,7 +50,7 @@
       </div>
       <b-button type="submit" variant="primary">Submit</b-button>
     </b-form>
-  </div>
+  </b-container>
 </template>
 
 <script>
@@ -91,5 +109,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
