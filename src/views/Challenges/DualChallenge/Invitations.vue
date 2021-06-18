@@ -2,7 +2,7 @@
 	<b-container>
 		<h2 class="text-center mt-4">
 			<b-icon icon="grip-horizontal" class="text-primary"></b-icon>
-				Accept a Challenge
+				Accept an Invitation
 			<b-icon icon="grip-horizontal" class="text-primary"></b-icon>
 		</h2>
 		<div class="mt-5 message-box">
@@ -23,31 +23,31 @@
 						<b-row
 							align-h="center"
 							class="m-2 text-danger"
-							v-if="challenges.length === 0"
+							v-if="invitations.length === 0"
 						>
-							<h4>No one have challenged you yet</h4>
+							<h4>No one have invited you yet</h4>
 						</b-row>
 
 						<b-row
 							align-h="center"
 							class="m-2 text-danger"
 							v-else
-							v-for="(challenge, index) in challenges" :key="index"
+							v-for="(invitation, index) in invitations" :key="index"
 						>
 							<b-col>
 								<b-button
-									:disabled='challenge.isAccepted'
+									:disabled='invitation.isAccepted'
 									block
 									variant="light"
 									class="shadow-sm font-weight-bold text-left shadow hover-zoom"
-									@click.prevent="choosedChallenge = challenge"
-									v-bind:class="{ 'highlight' : choosedChallenge && challenge.challengeId === choosedChallenge.challengeId}"
+									@click.prevent="choosedInvitation = invitation"
+									v-bind:class="{ 'highlight' : choosedInvitation && invitation.index === choosedInvitation.index}"
 								> 
 									<span class="dot"> {{ index + 1 }} </span>
-									<span style="color: blue"> {{ challenge.challengerName }} </span>
-									<span style="color: #f59300">has challenged you in </span>
-									<span style="color: brown"> {{ challenge.topicName }} </span>
-									<b-icon v-show='challenge.isAccepted' icon="check-all"></b-icon>
+									<span style="color: blue"> {{ invitation.challengerName }} </span>
+									<span style="color: #f59300">has invitated you in </span>
+									<span style="color: brown"> {{ invitation.topicName }} </span>
+									<b-icon v-show='invitation.isAccepted' icon="check-all"></b-icon>
 								</b-button>
 							</b-col>
 						</b-row>
@@ -63,7 +63,7 @@
 				pill
 				variant="primary"	
 				class="shadow-lg font-weight-bold"
-				:disabled="choosedChallenge === null"
+				:disabled="choosedInvitation === null"
 				:to="DualConfirm"
 			>
 				Accept
@@ -77,22 +77,22 @@ export default {
 	components: {},
 	data() {
 		return {
-			choosedChallenge: null,
-			userId: "",
-			userName: "",
-			challenges: [	
+			choosedInvitation: null,
+			userId: null,
+			userName: null,
+			challengerId: null,
+			challengerName: null,
+			invitations: [	
 				{
 					topicId: "1",
 					topicName: "Unity",
-					challengeId: "1",
 					challengerId: "1",
 					challengerName: "BarcaLover",
-					isAccepted: true	// TODO: add way to update status in case challenge is accepted
+					isAccepted: true	// TODO: add way to update status in case invitation is accepted
 				}, 
 				{
 					topicId: "2",
 					topicName: "Machine Learning",
-					challengeId: "2",
 					challengerId: "2",
 					challengerName: "Andrew NG",
 					isAccepted: true
@@ -100,7 +100,6 @@ export default {
 				{
 					topicId: "3",
 					topicName: "Ruby on Rails",
-					challengeId: "3",
 					challengerId: "3",
 					challengerName: "Lorence Macorthy",
 					isAccepted: false
@@ -108,7 +107,6 @@ export default {
 				{
 					topicId: "4",
 					topicName: "Functional Programming",
-					challengeId: "4",
 					challengerId: "4",
 					challengerName: "Noam Nishan",
 					isAccepted: false
@@ -116,7 +114,6 @@ export default {
 				{
 					topicId: "5",
 					topicName: "Java",
-					challengeId: "5",
 					challengerId: "5",
 					challengerName: "Peter Metrichev",
 					isAccepted: false
@@ -124,7 +121,6 @@ export default {
 				{
 					topicId: "6",
 					topicName: "C++",
-					challengeId: "6",
 					challengerId: "6",
 					challengerName: "Erricto",
 					isAccepted: false
@@ -139,8 +135,12 @@ export default {
 			return {
 				name: 'DualConfirm',
 				params: { 
-					topicId: this.choosedChallenge ? this.choosedChallenge.topicId : -1,
-					challengerName: this.choosedChallenge? this.choosedChallenge.challengerName: '',
+					topicId: this.choosedInvitation ? this.choosedInvitation.topicId : null,
+					topicName: this.choosedInvitation ? this.choosedInvitation.topicName : null,
+					challengerName: this.choosedInvitation? this.choosedInvitation.challengerName: null,
+					challengerId: this.choosedInvitation? this.choosedInvitation.challengerId: null,
+					challengeeId: this.userId,
+					challengeeName: this.userName,
 					throwingType: false
 				} 
 			}

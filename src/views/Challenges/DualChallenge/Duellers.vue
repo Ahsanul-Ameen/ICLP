@@ -52,7 +52,14 @@
 								name: 'DualConfirm',	
 								params: { 
 									topicId: topicId,
-									challengerName: participant.name,
+									topicName: topicName,
+
+									challengerName: challengerName,
+									challengerId: challengerId,
+
+									challengeeName: participant.name,
+									challengeeId: participant.userid,
+									
 									throwingType: true
 								},
 							}"
@@ -96,7 +103,10 @@ export default {
 		values: [1, 2, 3, 4, 5, 6],
         max: 7,
 		animate: true,
-		topicId: Math.floor( Math.random() * 10 + 1),
+		topicId: null,
+		topicName: null,
+		challengerId: null,
+		challengerName: null,
 		keyword: "",
 		ranks: null,
 		participants: [
@@ -140,6 +150,12 @@ export default {
         return this.isSubsequence(str1, str2, m - 1, n - 1);
       return this.isSubsequence(str1, str2, m, n - 1);
     },
+  },
+  created() {
+	this.topicId = this.$route.params.topicId;
+	this.topicName = this.$route.params.topicName;
+	this.challengerId = this.$route.params.challengerId;
+	this.challengerName = this.$route.params.challengerName;
   },
   mixins: [apiUtil],
   mounted() {

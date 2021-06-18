@@ -23,7 +23,12 @@
 						It may take some time to find your opponent. If you want quick evaluation browse topics to accept a
 						challenge. You might find your interested topic in the available topics of that section too!!
 					</b-card-text>
-					<b-button class="ml-4" variant="primary" :to="{ name: 'DualTopics', params: userInfo }">Browse Topics</b-button>
+					<b-button class="ml-4" variant="primary" :to="{ name: 'DualTopics', 
+						params: {
+							userId: userId,
+							userName: userName
+						}
+					}">Browse Topics</b-button>
 				</b-card>
 			</b-row>
 			
@@ -43,7 +48,12 @@
 						If you want quick evaluation, select your interested topic from the available topics to accept challenge and
 						compete against your opponent.
 					</b-card-text>
-					<b-button class="ml-4" variant="primary" :to="{ name: 'Invitations', params: userInfo }">See Challenges</b-button>
+					<b-button class="ml-4" variant="primary" :to="{ name: 'Invitations', 
+						params: {
+							userId: userId,
+							userName: userName
+						}
+					}">See Challenges</b-button>
 				</b-card>
 			</b-row>
 			
@@ -57,8 +67,8 @@ export default {
 	components: {},
 	data() {
 		return {
-			userId: "",
-			userName: "",
+			userId: null,
+			userName: null,
 		};
 	},
 	methods: {
@@ -67,14 +77,7 @@ export default {
 			this.userName = name;
 		}
 	},
-	computed: {
-		userInfo() {
-			return {
-				userId: this.userId,
-				userName: this.userName,
-			}
-		}
-	},
+	computed: {},
 	mounted() {
 		this.setUser(this.userid, this.username);
 	},

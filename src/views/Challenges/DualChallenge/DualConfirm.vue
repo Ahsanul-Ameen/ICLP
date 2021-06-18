@@ -12,11 +12,11 @@
     <h2 class="text-center">
       <b-icon icon="grip-horizontal" class="text-primary" />
         {{ title }}
-        <span style="color: indigo; font-style: italic;"> {{ challengerName ? challengerName : 'Whom?' }} </span>
+        <span style="color: indigo; font-style: italic;"> {{ opponentName }} </span>
       <b-icon icon="grip-horizontal" class="text-primary" />
     </h2>
 
-    <div v-if="topicName.length == 0 || !challengerName || challengerName.length == 0" style="margin-top: 25px;">
+    <div v-if="!topicName || !challengerName || !challengerName" style="margin-top: 25px;">
       <span style="color: red;"> Link is broken </span>
       <b-button @click="$router.go(-1)">Go Back</b-button>
     </div>
@@ -124,7 +124,7 @@
             class="shadow-lg font-weight-bold p-3"
             :to="{  //TODO: redirect to a dual exam 
               name: 'DualExam',
-              params: { challengeId: challengeId },
+              params: { challengerId: challengerId },
             }"
           >
             {{ button }}
@@ -146,23 +146,26 @@ export default {
     return {
       throwingType: null,
       backIcon: "arrow-left-circle",
-      topicId: "",
-      topicName: "",
+      topicId: null,
+      topicName: null,
       marks: 76,
       hardness: 80,
       time: 74744,
-      challengeId: "",
-      challengerName: "",
+      challengerId: null,
+      challengerName: null,
+      challengeeId: null,
+      challengeeName: null,
     };
   },
   mixins: [timeUtility],
   created() {
-    this.throwingType = this.$route.params.throwingType;
     this.topicId = this.$route.params.topicId;
+    this.topicName = this.$route.params.topicName;
     this.challengerName = this.$route.params.challengerName;
-    //TDOO: adjust these things later with backend?
-    this.topicName = "Machine Learning";
-    this.challengeId = Math.floor(Math.random() * 10 + 1);
+    this.challengerId = this.$route.params.challengerId;
+    this.challengeeName = this.$route.params.challengeeName;
+    this.challengeeId = this.$route.params.challengeeId;
+    this.throwingType = this.$route.params.throwingType;
   },
   computed: {
     title() {
@@ -170,6 +173,13 @@ export default {
     },
     button() {
       return this.throwingType ? 'Cancel' : 'Start Dual'
+    },
+    opponentName() {
+      if(this.throwingType === true) {
+        return this.challengeeName ? this.challengeeName : 'Whom?'
+      } else {
+        return this.challengerName ? this.challengerName : 'Whom?'
+      }
     }
   }
 };

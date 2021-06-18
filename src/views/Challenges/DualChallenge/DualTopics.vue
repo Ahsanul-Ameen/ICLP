@@ -36,6 +36,8 @@
                       name: 'Duellers',	
                       params: { 
                         topicId: topic.id,
+                        topicName: topic.name,
+                        challengerId: userId,
                         challengerName: userName,
                       }
                     }"
@@ -61,8 +63,8 @@ export default {
     return {
       keyword: "",
       topics: [],
-      userId: "",
-      userName: "",
+      userId: null,
+      userName: null,
     };
   },
   computed: {
