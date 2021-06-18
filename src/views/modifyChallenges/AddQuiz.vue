@@ -226,7 +226,7 @@ export default {
         if (this.validateQuestion(i)) questions.push(this.questions[i]);
       //this.questions = questions;
       if (questions.length < 3) {
-        this.$root.$bvToast.toast("Questionset is not complete. Try again.", {
+        this.$root.$bvToast.toast("Question set is not complete. Try again.", {
           variant: "danger",
           autoHideDelay: 2000,
           appendToast: true,

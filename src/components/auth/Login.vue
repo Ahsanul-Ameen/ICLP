@@ -38,8 +38,8 @@ export default {
     return {
       loading: false,
       form: {
-        email: "1605047@ugrad.cse.buet.ac.bd",
-        password: "kjdhfH:O*&^%87ww5kladybug",
+        email: "tomriddle@hogwarts.edu",
+        password: "kjdhfH:O*&^%87ww5k",
       },
     };
   },

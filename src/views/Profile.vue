@@ -1,30 +1,73 @@
 <template>
   <b-container>
-    <b-card class="mb-3">
-        <b-row>
-            <b-col cols="fluid" class="p-3">
-        <b-avatar src="https://placekitten.com/300/300" size="10rem"></b-avatar>
+    <b-card v-if="user" class="mb-3">
+      <b-row>
+        <b-col cols="fluid" class="p-3">
+          <b-avatar
+            src="https://placekitten.com/300/300"
+            size="10rem"
+          ></b-avatar>
         </b-col>
         <b-col align-self="center">
-        <h3>{{user.name}}</h3>
-        <h5>{{user.email}}</h5>
-        <h5 v-if="user.affiliation" class="text-primary"> {{user.affiliation}}</h5>
+          <h3>{{ user.name }}</h3>
+          <h5>{{ user.email }}</h5>
+          <h5 v-if="user.affiliation" class="text-primary">
+            {{ user.affiliation }}
+          </h5>
         </b-col>
-        </b-row>
+        <b-col class="text-primary" align-self="center">
+          <b-table-simple borderless>
+            <b-thead>
+              <b-tr class="display-4">
+                  <b-td class="font-weight-bold">{{ rank }}</b-td>
+                <b-td class="font-weight-bold">{{ total_score }}</b-td>
+              </b-tr>
+            </b-thead>
+            <b-tbody class="text-primary text-weight-bold">
+              <b-tr>
+                <b-td class="font-weight-bold">RANK</b-td>
+                <b-td class="font-weight-bold">TOTAL SCORE</b-td>
+              </b-tr>
+            </b-tbody>
+          </b-table-simple>
+        </b-col>
+      </b-row>
     </b-card>
-    <div>
-      <h3>Statistics</h3>
-      <b-form-group label="Topic" label-for="topic">
-        <b-select id="topic" v-model="topicid" :options="topics" required />
-      </b-form-group>
-      Rank: {{ rank }} Total score: {{ total_score }}
-      <line-chart :chart-data="linedata" :options="chartoptions" />
-      <bar-chart :chart-data="bardata" :options="chartoptions" />
-    </div>
+    
+    <h3>Statistics</h3>
+    <b-form-group label="Topic" label-for="topic">
+      <b-select id="topic" v-model="topicid" :options="topics" required />
+    </b-form-group>
+
+    <b-row>
+      <b-col>
+        <line-chart :chart-data="linedata" :options="chartoptions" />
+      </b-col>
+      <b-col>
+        <bar-chart :chart-data="bardata" :options="chartoptions" />
+      </b-col>
+    </b-row>
+    <b-row>
+    <h3 class="mt-5">Activity</h3>
+    <calendar-heatmap
+      :values="activity"
+      :endDate="new Date()"
+      tooltip-unit="submissions"
+      :range-color="[
+        '#eeeeee',
+        '#ffded8',
+        '#fecdc5',
+        '#feac9e',
+        '#fe8b77',
+        '#fd593c',
+      ]"
+    />
+    </b-row>
   </b-container>
 </template>
 
 <script>
+import { CalendarHeatmap } from "vue-calendar-heatmap";
 import LineChart from "@/components/LineChart.js";
 import BarChart from "@/components/BarChart.js";
 import apiUtil from "@/mixins/apiUtil";
@@ -37,6 +80,7 @@ export default {
   components: {
     LineChart,
     BarChart,
+    CalendarHeatmap,
   },
   data() {
     return {
@@ -45,6 +89,7 @@ export default {
       topicid: 0,
       linedata: {},
       bardata: {},
+      activity: [],
       chartoptions: {
         maintainAspectRatio: false,
         scales: {
@@ -81,6 +126,9 @@ export default {
     });
     this.apiGet(`/public/user/${this.id}`).then(([{ user }]) => {
       this.user = user;
+    });
+    this.apiGet(`/public/activity/${this.id}`).then((data) => {
+      this.activity = data;
     });
     this.fillData();
   },
@@ -141,4 +189,7 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.table td {
+  text-align: center;
+}</style>
