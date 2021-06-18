@@ -1,6 +1,5 @@
 <template>
   <b-container>
-    **This view is incomplete
     <b-form @submit.prevent="onSubmit">
       <b-form-group id="input-group-0" label="Title:" label-for="title">
         <b-form-input

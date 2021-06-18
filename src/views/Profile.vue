@@ -1,6 +1,17 @@
 <template>
   <b-container>
-    user: {{ user }}
+    <b-card class="mb-3">
+        <b-row>
+            <b-col cols="fluid" class="p-3">
+        <b-avatar src="https://placekitten.com/300/300" size="10rem"></b-avatar>
+        </b-col>
+        <b-col align-self="center">
+        <h3>{{user.name}}</h3>
+        <h5>{{user.email}}</h5>
+        <h5 v-if="user.affiliation" class="text-primary"> {{user.affiliation}}</h5>
+        </b-col>
+        </b-row>
+    </b-card>
     <div>
       <h3>Statistics</h3>
       <b-form-group label="Topic" label-for="topic">
