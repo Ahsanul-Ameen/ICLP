@@ -33,39 +33,35 @@ export default {
   actions: {
     signup(context, payload) {
       return new Promise((success, failure) => {
-        setTimeout(() => {
-          instance
-            .post("/signup", {
-              name: payload.name,
-              email: payload.email,
-              password: payload.password,
-              confirm_password: payload.confirm_password,
-            })
-            .then(() => {
-              success();
-            })
-            .catch(() => {
-              failure();
-            });
-        }, 1000);
+        instance
+          .post("/signup", {
+            name: payload.name,
+            email: payload.email,
+            password: payload.password,
+            confirm_password: payload.confirm_password,
+          })
+          .then(() => {
+            success();
+          })
+          .catch(() => {
+            failure();
+          });
       });
     },
     login(context, payload) {
       return new Promise((success, failure) => {
-        setTimeout(() => {
-          instance
-            .post("/login", {
-              email: payload.email,
-              password: payload.password,
-            })
-            .then((response) => {
-              context.commit("setUser", response.data.user);
-              success(response.data.user.name);
-            })
-            .catch(() => {
-              failure();
-            });
-        }, 1000);
+        instance
+          .post("/login", {
+            email: payload.email,
+            password: payload.password,
+          })
+          .then((response) => {
+            context.commit("setUser", response.data.user);
+            success(response.data.user.name);
+          })
+          .catch(() => {
+            failure();
+          });
       });
     },
     logout(context) {

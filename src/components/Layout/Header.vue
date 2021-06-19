@@ -32,7 +32,9 @@
           <template #button-content>
             <b-avatar variant="info" :src="profile"></b-avatar>
           </template>
-          <b-dropdown-item :href="`/profile/${userid}`">Profile</b-dropdown-item>
+          <b-dropdown-item :href="`/profile/${userid}`"
+            >Profile</b-dropdown-item
+          >
           <b-dropdown-item @click="logout">Log Out</b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>
@@ -84,7 +86,7 @@
 </template>
 
 <script>
-import thisuser from '@/mixins/thisuser';
+import thisuser from "@/mixins/thisuser";
 import Login from "../auth/Login.vue";
 import Signup from "../auth/Signup.vue";
 
@@ -102,16 +104,17 @@ export default {
         () => {
           this.$root.$bvToast.toast("Logged out successfully", {
             variant: "success",
-            autoHideDelay: 2000,
+            autoHideDelay: 1000,
             appendToast: true,
             noCloseButton: true,
             solid: true,
           });
+          this.$router.push({ name: "Home" });
         },
         () => {
           this.$root.$bvToast.toast("Logging out failed", {
             variant: "danger",
-            autoHideDelay: 2000,
+            autoHideDelay: 1000,
             appendToast: true,
             noCloseButton: true,
             solid: true,
