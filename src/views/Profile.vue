@@ -19,8 +19,8 @@
           <b-table-simple borderless>
             <b-thead>
               <b-tr class="display-4">
-                  <b-td class="font-weight-bold">{{ rank }}</b-td>
-                <b-td class="font-weight-bold">{{ total_score }}</b-td>
+                <b-td class="font-weight-bold">{{ combinedRank }}</b-td>
+                <b-td class="font-weight-bold">{{ combinedScore }}</b-td>
               </b-tr>
             </b-thead>
             <b-tbody class="text-primary text-weight-bold">
@@ -33,7 +33,7 @@
         </b-col>
       </b-row>
     </b-card>
-    
+
     <h3>Statistics</h3>
     <b-form-group label="Topic" label-for="topic">
       <b-select id="topic" v-model="topicid" :options="topics" required />
@@ -48,20 +48,20 @@
       </b-col>
     </b-row>
     <b-row>
-    <h3 class="mt-5">Activity</h3>
-    <calendar-heatmap
-      :values="activity"
-      :endDate="new Date()"
-      tooltip-unit="submissions"
-      :range-color="[
-        '#eeeeee',
-        '#ffded8',
-        '#fecdc5',
-        '#feac9e',
-        '#fe8b77',
-        '#fd593c',
-      ]"
-    />
+      <h3 class="mt-5">Activity</h3>
+      <calendar-heatmap
+        :values="activity"
+        :endDate="new Date()"
+        tooltip-unit="submissions"
+        :range-color="[
+          '#eeeeee',
+          '#ffded8',
+          '#fecdc5',
+          '#feac9e',
+          '#fe8b77',
+          '#fd593c',
+        ]"
+      />
     </b-row>
   </b-container>
 </template>
@@ -115,11 +115,17 @@ export default {
           ],
         },
       },
+      combinedRank: null,
+      combinedScore: null,
       rank: null,
       total_score: null,
     };
   },
   mounted() {
+    this.apiGet(`/public/rank?userid=${this.id}`).then(([data]) => {
+      this.combinedRank = data.rank;
+      this.combinedScore = data.total_score;
+    });
     this.apiGet("/public/problem-topics").then((result) => {
       this.topics = result.map((a) => ({ value: a.id, text: a.name })) || [];
       this.topics.push({ value: 0, text: "all" });
@@ -192,4 +198,5 @@ export default {
 <style scoped>
 .table td {
   text-align: center;
-}</style>
+}
+</style>
