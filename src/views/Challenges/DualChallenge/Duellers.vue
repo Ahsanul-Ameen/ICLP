@@ -2,7 +2,7 @@
   <b-container class="text-center mt-4">
     <h2>
       <b-icon icon="align-end" class="text-primary"></b-icon>
-      Duellers
+      Find a dueller on {{topicName}}
       <b-icon icon="align-start" class="text-primary"></b-icon>
     </h2>
     <div class="mt-5">
@@ -69,7 +69,7 @@
 									style="border-right: 2px solid violet;"
 									cols="7"
 								>
-									<b-avatar variant="info" :src="participant.logo"></b-avatar>
+									<b-avatar variant="info" :src="logo"></b-avatar>
 									{{ participant.name }}
 								</b-col>
 								<b-col>
@@ -96,6 +96,7 @@
 </template>
 
 <script>
+import thisuser from '@/mixins/thisuser';
 import apiUtil from "@/mixins/apiUtil";
 export default {
   data() {
@@ -103,29 +104,14 @@ export default {
 		values: [1, 2, 3, 4, 5, 6],
         max: 7,
 		animate: true,
-		topicId: null,
-		topicName: null,
+		topicId: 2,	//default
+		topicName: "python", //default
 		challengerId: null,
 		challengerName: null,
 		keyword: "",
+		logo: "https://placekitten.com/300/300",//default
 		ranks: null,
-		participants: [
-			{ userid: "1", name: "Shafin Khadem", level: 5, logo: "https://placekitten.com/300/300" },
-			{ userid: "2", name: "Washief Hossain", level: 6, logo: "https://placekitten.com/300/300" },
-			{ userid: "3", name: "Ahsanul Ameen", level: 4, logo: "https://placekitten.com/300/300" },
-			{ userid: "4", name: "Tahmidur Rafid", level: 4, logo: "https://placekitten.com/300/300" },
-			{ userid: "5", name: "Najrin Sultana", level: 5, logo: "https://placekitten.com/300/300" },
-			{ userid: "6", name: "Ibrat Rabeeb", level: 5, logo: "https://placekitten.com/300/300" },
-			{ userid: "7", name: "Harry Potter", level: 2, logo: "https://placekitten.com/300/300" },
-			{ userid: "8", name: "You Know Who!", level: 6, logo: "https://placekitten.com/300/300" },
-			{ userid: "9", name: "Ronald Ross", level: 5, logo: "https://placekitten.com/300/300" },
-			{ userid: "10", name: "Benjamin Netaniahu", level: 0, logo: "https://placekitten.com/300/300" },
-			{ userid: "11", name: "Erricto", level: 5, logo: "https://placekitten.com/300/300" },
-			{ userid: "12", name: "Peter Parker", level: 3, logo: "https://placekitten.com/300/300" },
-			{ userid: "13", name: "Willium Lin", level: 6, logo: "https://placekitten.com/300/300" },
-			{ userid: "14", name: "Fundamentalist", level: 5, logo: "https://placekitten.com/300/300" },
-			{ userid: "15", name: "Dragon Warrior", level: 4, logo: "https://placekitten.com/300/300" },
-		]
+		participants: []
     };
   },
   computed: {
@@ -150,14 +136,41 @@ export default {
         return this.isSubsequence(str1, str2, m - 1, n - 1);
       return this.isSubsequence(str1, str2, m, n - 1);
     },
+	maxScore(data) {
+		var len = data.length, max = -Infinity;
+		while (len--) {
+			if (Number(data[len]['score']) > max) {
+				max = Number(data[len]['score']);
+			}
+		}
+		return max;
+	},
+	setParticipants(data) {
+		const maxScore = this.maxScore(data);
+		data.forEach((r) => {
+			var d = {
+				userid : r.userid,
+				name : r.name,
+				level : parseInt( (parseFloat(r.score) * 7.0 + maxScore - 1) / maxScore )
+			};
+			if(parseInt(d.userid)  != parseInt(this.challengerId)) {
+				this.participants.push(d);
+			}
+		});
+	},
   },
   created() {
-	this.topicId = this.$route.params.topicId;
-	this.topicName = this.$route.params.topicName;
-	this.challengerId = this.$route.params.challengerId;
-	this.challengerName = this.$route.params.challengerName;
+	this.topicId = this.$route.params.topicId ? this.$route.params.topicId : this.topicId;
+	this.topicName = this.$route.params.topicName ? this.$route.params.topicName : this.topicName;
+	this.challengerId = this.userid;
+	this.challengerName = this.username;
+	this.apiGet(
+        `/public/activeusers/`
+      ).then((data) => {
+		this.setParticipants(data);
+      });
   },
-  mixins: [apiUtil],
+  mixins: [apiUtil, thisuser],
   mounted() {
     
   },
