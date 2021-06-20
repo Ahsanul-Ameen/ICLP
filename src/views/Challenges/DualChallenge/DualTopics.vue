@@ -37,8 +37,6 @@
                       params: { 
                         topicId: topic.id,
                         topicName: topic.name,
-                        challengerId: userId,
-                        challengerName: userName,
                       }
                     }"
                   >
