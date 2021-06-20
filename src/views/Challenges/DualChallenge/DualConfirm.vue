@@ -131,7 +131,7 @@
           </b-button>
 				</b-card>
 
-        
+
       </b-row>
     </div>
   </b-container>
