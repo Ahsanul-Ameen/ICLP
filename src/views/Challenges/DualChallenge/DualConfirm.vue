@@ -11,8 +11,13 @@
     />
     <h2 class="text-center">
       <b-icon icon="grip-horizontal" class="text-primary" />
-        {{ title }}
-        <span style="color: indigo; font-style: italic;"> {{ opponentName }} </span>
+        <b-badge :to="{ name: 'Profile', params: { id: `${challengerId}` } }" target="_blank" variant="light">
+          <span style="color: blue"> {{ challengerName }} </span>
+        </b-badge>
+        <span style="color: indigo; font-style: italic;"> vs </span>
+        <b-badge :to="{ name: 'Profile', params: { id: `${challengeeId}` } }" target="_blank" variant="light">
+          <span style="color: blue"> {{ challengeeName }} </span>
+        </b-badge>
       <b-icon icon="grip-horizontal" class="text-primary" />
     </h2>
 
@@ -27,7 +32,7 @@
           class="text-primary"
           rotate="90"
         ></b-icon>
-        The challenge will start shortly after your opponent accepts...
+        The challenge could be started shortly after your opponent accepts...
       </p>
       <p class="font-weight-bold" style="margin-left: 25px;" v-else>
         <b-icon
@@ -45,7 +50,7 @@
           class="text-primary"
           rotate="90"
         ></b-icon>
-        Your rank will be updated according to the performance of your opponent.
+        Your rank will be updated according to the performance of you and your opponent.
       </p>
       
       <challenge-banner>
@@ -88,7 +93,7 @@
                   <b-icon
                     icon="file-earmark-text"
                     class="text-primary mr-2"
-                  />Hardness: {{ hardness }}%
+                  />Hardness: {{ difficulty }}
                 </p>
               </b-row>
             </b-col>
@@ -106,32 +111,62 @@
             class="pb-2 pl-4 pt-2"
             v-if="throwingType"
           >
-						<span style="color: brown; font-size: 20px">Challenge will shortly start after acceptance of you opponent</span>
+						<span style="color: brown; font-size: 20px">Confirm your invitation. You'll be redirected to the notifications pane. 
+              Don't forget to refresh for checking the status...
+            </span>
 					</b-card-text>
           <b-button
             v-if="throwingType"
             pill
             variant="primary"
-            class="shadow-lg font-weight-bold p-3 ml-4"
-            @click.prevent="$router.go(-1)"
+            class="shadow-lg font-weight-bold m-5 p-3"
+            @click.prevent="sendInvitation" 
+            :to="{  //redirects to notification pane (sending invitation)
+              name: 'ToDo',
+              params: {},
+            }"
+          >
+            {{ button }}
+          </b-button>
+          <b-button
+            v-else-if="status === 'pending'"
+            pill
+            variant="success"
+            class="shadow-lg font-weight-bold m-5 p-3"
+            @click.prevent="updateInvitation('accept')" 
+            :to="{  //TODO: redirects to a dual exam (accepting)
+              name: 'DualExam',
+              params: { examId: examId, challengeId: challengeId, },
+            }"
           >
             {{ button }}
           </b-button>
           <b-button
             v-else
             pill
-            variant="primary"
-            class="shadow-lg font-weight-bold p-3"
-            :to="{  //TODO: redirect to a dual exam 
+            variant="success"
+            class="shadow-lg font-weight-bold m-5 p-3"
+            :to="{  //TODO: redirects to a dual exam (full_completing)
               name: 'DualExam',
-              params: { challengerId: challengerId },
+              params: { examId: examId, challengeId: challengeId, },
             }"
           >
             {{ button }}
           </b-button>
+          <b-button
+            v-if="throwingType === false && status === 'pending'"
+            pill
+            variant="danger"
+            class="shadow-lg font-weight-bold m-5 p-3"
+            @click.prevent="updateInvitation('reject')" 
+            :to="{  //redirects to notification pane (rejecting)
+              name: 'ToDo',
+              params: {},
+            }"
+          >
+            reject
+          </b-button>
 				</b-card>
-
-
       </b-row>
     </div>
   </b-container>
@@ -140,6 +175,7 @@
 <script setup>
 import ChallengeBanner from "@/components/Challenges/ChallengeBanner.vue";
 import timeUtility from "@/mixins/timeUtility";
+import apiUtil from "@/mixins/apiUtil";
 export default {
   components: { ChallengeBanner },
   data() {
@@ -148,16 +184,19 @@ export default {
       backIcon: "arrow-left-circle",
       topicId: null,
       topicName: null,
-      marks: 76,
-      hardness: 80,
-      time: 74744,
+      marks: null,
+      difficulty: null,
+      time: null,
       challengerId: null,
       challengerName: null,
       challengeeId: null,
       challengeeName: null,
+      challengeId: null, // this is important
+      examId: null, // required during accepting invitations,
+      status: null // required during processing challenge
     };
   },
-  mixins: [timeUtility],
+  mixins: [timeUtility, apiUtil],
   created() {
     this.topicId = this.$route.params.topicId;
     this.topicName = this.$route.params.topicName;
@@ -166,13 +205,23 @@ export default {
     this.challengeeName = this.$route.params.challengeeName;
     this.challengeeId = this.$route.params.challengeeId;
     this.throwingType = this.$route.params.throwingType;
+    this.examId = this.$route.params.examId;
+    this.status = this.$route.params.status;
+  },
+  mounted() {
+    this.apiGet(`/mcq/find/${this.topicId}`).then((data) => {
+      this.marks = data.marks;
+      this.difficulty = data.difficulty;
+      this.challengeId = data.challengeId;
+      this.time = data.time;
+    });
   },
   computed: {
     title() {
       return this.throwingType ? 'Arranging a dual with' : 'Accept a Challenge with'
     },
     button() {
-      return this.throwingType ? 'Cancel' : 'Start Dual'
+      return this.throwingType ? 'Invite' : 'Start'
     },
     opponentName() {
       if(this.throwingType === true) {
@@ -180,7 +229,77 @@ export default {
       } else {
         return this.challengerName ? this.challengerName : 'Whom?'
       }
+    },
+    opponentId() {
+      if(this.throwingType === true) {
+        return this.challengeeId ? this.challengeeId : 0
+      } else {
+        return this.challengerId ? this.challengerId : 0
+      }
     }
+  },
+  methods: {
+    sendInvitation() {
+      let body = {
+        "challengerId" : this.challengerId,
+        "challengeeId": this.challengeeId,
+        "topicId": this.topicId,
+        "challengeId": this.challengeId
+      };
+      console.log(JSON.stringify(body));
+      console.log("invitation sending with above dataset");
+
+      this.apiPostPromise("/dual/invite", body)
+      .then(() => {
+        //alert(`Invitations sent to: ${this.challengeeName}`);
+        this.$root.$bvToast.toast(`Invitations sent to: ${this.challengeeName}`, {
+          variant: "success",
+          autoHideDelay: 2000,
+          appendToast: true,
+          noCloseButton: true,
+          toaster: "b-toaster-top-center",
+        });
+      })
+      .catch (() => {
+        this.$root.$bvToast.toast("ERROR! Try again...", {
+          variant: "danger",
+          autoHideDelay: 2000,
+          appendToast: true,
+          noCloseButton: true,
+          toaster: "b-toaster-top-center",
+        });
+      });
+    },
+    updateInvitation(nextStatus) { // accept or reject a message
+      if(!this.examId) {
+        alert(`Error in invitation: no examId found!`);
+      }
+      let body = {
+        "examId" : this.examId
+      };
+      console.log(JSON.stringify(body));
+      console.log("invitation of ", this.challengerName, " on ", this.topicName, " :: -> ", nextStatus);
+      this.apiPostPromise(`/dual/${nextStatus}`, body)
+      .then(() => {
+        //alert(`Invitations of ${this.challengeeName} is ${path}ed!`);
+        this.$root.$bvToast.toast(`Invitations of ${this.challengerName} on ${this.topicName} ${nextStatus}ed!`, {
+          variant: "info",
+          autoHideDelay: 5000,
+          appendToast: true,
+          noCloseButton: true,
+          toaster: "b-toaster-top-left",
+        });
+      })
+      .catch (() => {
+        this.$root.$bvToast.toast("ERROR! Try again...", {
+          variant: "danger",
+          autoHideDelay: 2000,
+          appendToast: true,
+          noCloseButton: true,
+          toaster: "b-toaster-top-center",
+        });
+      });
+    },
   }
 };
 </script>

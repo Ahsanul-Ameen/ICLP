@@ -14,25 +14,27 @@
           />
         </h5>
       </b-col>
-      <b-col class="pr-5">
+      <b-col v-if="time !== null && !finished" class="pr-5">
         <b-row align-h="end">
           <Timer :time="time" @timesup="submit"></Timer>
         </b-row>
+      </b-col>
+      <b-col v-if="finished" class="pr-5 font-weight-bold">
+        <b-row align-h="end"> Marks : {{ achievedScore }}</b-row>
       </b-col>
     </b-row>
     <b-container>
       <b-row align-h="center" class="mt-5">
         <p class="font-weight-bold mr-2">
-          <b-icon icon="file-earmark-text" class="text-primary mr-2" />Selected
-          Topic:
+         <b-icon icon="file-earmark-text" class="text-primary mr-2" />
+          {{ title }}
         </p>
-        <p>{{ topicName }}</p>
       </b-row>
       <b-row align-h="center">
         <p class="font-weight-bold mr-2">
-          <b-icon icon="box" class="text-primary mr-2" />Total Marks:
+          <b-icon icon="box" class="text-primary mr-2" />Total Score:
         </p>
-        <p>{{ marks }}</p>
+        <p>{{ score }}</p>
       </b-row>
       <b-row align-h="center">
         <p class="font-weight-bold">
@@ -61,6 +63,7 @@
                 :aria-describedby="index"
                 :value="option"
                 :name="index.toString()"
+                :state="question.state"
                 class="font-weight-normal"
                 >{{ option }}
               </b-form-radio>
@@ -70,6 +73,7 @@
               v-model="question.answer"
               :options="question.options"
               :aria-describedby="index"
+              :state="question.state"
             ></b-form-checkbox-group>
           </b-form-group>
         </b-col>
@@ -81,6 +85,7 @@
       </b-row>
       <b-row align-h="center">
         <b-button
+          v-if="!finished"
           pill
           variant="primary"
           class="shadow-lg font-weight-bold"
@@ -95,72 +100,122 @@
 <script>
 import Timer from "@/components/Timer.vue";
 import timeUtility from "@/mixins/timeUtility";
+import apiUtil from "@/mixins/apiUtil";
 export default {
   components: { Timer },
   data() {
     return {
-      topicId: "",
-      topicName: "Machine Learning",
-      marks: "20",
-      hardness: "80",
-      time: 10, 
-      challengeId: "",
-      questions: [
-        {
-          type: 1,
-          points: 5,
-          statement:
-            "Which of the following is an example of a deterministic algorithm?",
-          options: ["PCA", "K-Means", "None of the above"],
-          answer: undefined,
-        },
-        {
-          type: 2,
-          points: 9,
-          statement:
-            "Which of the following statement(s) is / are true for Gradient Decent (GD) and Stochastic Gradient Decent (SGD)?",
-          options: [
-            "In GD and SGD, you update a set of parameters in an iterative manner to minimize the error function.",
-            "In SGD, you have to run through all the samples in your training set for a single update of a parameter in each iteration.",
-            "In GD, you either use the entire data or a subset of training data to update a parameter in each iteration.",
-          ],
-          answer: undefined,
-        },
-        {
-          type: 2,
-          points: 6,
-          statement:
-            "Which of the following hyper parameter(s), when increased may cause random forest to over fit the data?",
-          options: ["Number of Trees", "Depth of Tree", "Learning Rate"],
-          answer: undefined,
-        },
-      ],
+      finished: false,
+      title: null,
+      difficulty: null,
+      score: null,
+      time: null,
+      questions: null,
+      resultId: null,
+      achievedScore: 0,
+      examId: null,
     };
   },
-  mixins: [timeUtility],
+  mixins: [timeUtility, apiUtil],
   methods: {
     submit() {
-      console.log(
-        "submitted answer: ",
-        this.questions.map((a) => a.answer)
-      );
-      this.$router
-        .push({  name: "DualResult" })
-        .then(() => {
+      //this.finished = true;
+      this.apiPostPromise(`/mcq/submit/${this.resultId}`, {
+        answers: this.questions.map((question) => question.answer),
+      })
+        .then((data) => {
+          this.completeDual(); // update the status of dual
           this.$root.$bvToast.toast(`Your answers are submitted successfully`, {
-            title: "Dual challenge has ended",
-            variant: "dark",
+            title: "You've completed the dual",
+            variant: "success",
             autoHideDelay: 5000,
             appendToast: true,
           });
+          data = data.data;
+          for (
+            let i = 0;
+            i < Math.min(this.questions.length, data.questions.length);
+            i++
+          ) {
+            if (typeof this.questions[i].answer !== "undefined") {
+              if (this.questions[i].type === 1) {
+                if (data.questions[i].answer == this.questions[i].answer)
+                  this.questions[i].state = true;
+                else this.questions[i].state = false;
+              } else {
+                this.questions[i].answer.sort();
+                data.questions[i].answer.sort();
+                if (
+                  data.questions[i].answer.length ===
+                  this.questions[i].answer.length
+                ) {
+                  this.questions[i].state = true;
+                  for (let j = 0; j < this.questions[i].answer.length; j++)
+                    if (
+                      data.questions[i].answer[j] != this.questions[i].answer[j]
+                    )
+                      this.questions[i].state = false;
+                } else this.questions[i].state = false;
+              }
+            }
+            this.questions[i].answer = data.questions[i].answer;
+          }
+          this.achievedScore = data.score;
+          this.finished = true;
         })
         .catch(() => {
-          console.log("Showing result of the dual");
+          this.$router.push({ name: "ToDo" });
+          this.$root.$bvToast.toast(
+            "An error has occured during submitting the answer.",
+            {
+              variant: "danger",
+              autoHideDelay: 2000,
+              appendToast: true,
+              noCloseButton: true,
+              solid: true,
+            }
+          );
         });
     },
+    completeDual() { // half/full_completion of a dual
+      if(!this.examId) {
+        alert(`Error in Dual: no examId found!`);
+      }
+      let body = {
+        "examId" : this.examId
+      };
+      console.log(JSON.stringify(body));
+      console.log("examId", this.examId);
+
+      this.apiPostPromise(`/dual/complete`, body)
+      .then(() => {
+        //alert(`Completeion of ${this.challengeeName} is gonna ${path}ed!`);
+        this.$root.$bvToast.toast(`Challenge completed`, {
+          variant: "info",
+          autoHideDelay: 5000,
+          appendToast: true,
+          noCloseButton: true,
+          toaster: "b-toaster-top-left",
+        });
+      })
+      .catch (() => {
+        this.$root.$bvToast.toast("ERROR! Try again...", {
+          variant: "danger",
+          autoHideDelay: 2000,
+          appendToast: true,
+          noCloseButton: true,
+          toaster: "b-toaster-top-center",
+        });
+      });
+    },
   },
-  beforeCreate() {
+  created() {
+    this.examId = this.$route.params.examId;
     this.challengeId = this.$route.params.challengeId;
+    this.apiPost(`/dual/start?examId=${this.examId}&challengeId=${this.challengeId}`).then((data) => {
+      for (const property in data) this[property] = data[property];
+      this.title = this.title.toUpperCase();
+    });
   },
 };
 </script>

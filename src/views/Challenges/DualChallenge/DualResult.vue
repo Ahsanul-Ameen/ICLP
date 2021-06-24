@@ -158,12 +158,14 @@ export default {
       throwingType: null,
       backIcon: "arrow-left-circle",
       topicId: "",
-      topicName: "",
+      topicName: "Machine Learning",
       marks: 76,
       hardness: 80,
       time: 74744,
-      challengeId: "",
+      challengeId: 1,
       challengerName: "Shafin Khadem",
+      examId: null,
+      resultId: null,
       results: {
         myResults: [true, false, true, true, false],
         opponentResults: [false, true, true, true, true]
@@ -171,13 +173,17 @@ export default {
     };
   },
   created() {
-    this.challengeId = this.$route.params.challengeId;
-    //TDOO: adjust these things later with backend?
-    this.topicName = "Machine Learning";
-    this.challengeId = 22;
+    this.examId = this.$route.params.examId;
+    this.$root.$bvToast.toast(`This page is not synced with back-end yet`, {
+      title: "Implementation Issu",
+      variant: "danger",
+      autoHideDelay: 5000,
+      appendToast: true,
+    });
   },
   computed: {}
 };
+// TODO : COMPLETE THIS PART
 </script>
 
 <style lang="scss" scoped>
