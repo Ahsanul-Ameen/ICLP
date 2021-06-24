@@ -67,23 +67,18 @@ const routes = [
     component: () => import("./views/Challenges/DualChallenge/Duellers"),
   },
   {
-    path: "/challenges/dual/invitations",
-    name: "Invitations",
-    component: () => import("./views/Challenges/DualChallenge/Invitations"),
-  },
-  {
     // TODO: make nested route
     path: "/challenges/dual/confirm/:topicId",
     name: "DualConfirm",
     component: () => import("./views/Challenges/DualChallenge/DualConfirm"),
   },
   {
-    path: "/challenges/dual/:challengeId",
+    path: "/challenges/dual/:examId",
     name: "DualExam",
     component: () => import("./views/Challenges/DualChallenge/DualExam"),
   },
   {
-    path: "/challenges/dual/result/:challengeId",
+    path: "/challenges/dual/result/:examId",
     name: "DualResult",
     component: () => import("./views/Challenges/DualChallenge/DualResult"),
   },
@@ -141,6 +136,11 @@ const routes = [
     path: "/rank",
     name: "Rank",
     component: () => import("./views/Rank"),
+  },
+  {
+    path: "/todo",
+    name: "ToDo",
+    component: () => import("./views/ToDo"),
   },
 ];
 

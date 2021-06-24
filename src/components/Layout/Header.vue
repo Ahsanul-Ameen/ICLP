@@ -20,8 +20,10 @@
       </b-navbar-nav>
 
       <b-navbar-nav class="ml-auto" v-if="this.$store.getters.isLoggedIn">
-        <b-nav-item @click="newMessages = 0">
-          Messages
+        <b-nav-item @click="newMessages = 0" :to="{ name: 'ToDo' }">
+          <b-iconstack font-scale="1">
+            <b-icon icon="bell-fill" class="border rounded p-2"></b-icon>
+          </b-iconstack>
           <b-badge pill variant="primary" style="vertical-align: top">{{
             newMessages
           }}</b-badge>
