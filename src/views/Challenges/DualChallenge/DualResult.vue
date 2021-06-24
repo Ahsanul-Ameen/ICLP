@@ -183,7 +183,7 @@ export default {
   },
   computed: {}
 };
-// TODO : COMPLETE THIS PART
+// TODO : COMPLETE THIS PART [add support for comparative result viewing]
 </script>
 
 <style lang="scss" scoped>

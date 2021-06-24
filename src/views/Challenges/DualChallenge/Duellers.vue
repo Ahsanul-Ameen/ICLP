@@ -47,8 +47,6 @@
 							variant="light"
 							class="shadow-sm font-weight-bold text-left shadow hover-zoom"
 							:to="{
-									// TODO: update riderction here [we'll modify DualConfirm later]
-									// render to a waiting page
 									name: 'DualConfirm',	
 									params: { 
 										topicId: topicId,

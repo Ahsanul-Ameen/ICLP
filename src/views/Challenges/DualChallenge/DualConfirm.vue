@@ -134,7 +134,7 @@
             variant="success"
             class="shadow-lg font-weight-bold m-5 p-3"
             @click.prevent="updateInvitation('accept')" 
-            :to="{  //TODO: redirects to a dual exam (accepting)
+            :to="{  //redirects to a dual exam (accepting)
               name: 'DualExam',
               params: { examId: examId, challengeId: challengeId, },
             }"
@@ -146,7 +146,7 @@
             pill
             variant="success"
             class="shadow-lg font-weight-bold m-5 p-3"
-            :to="{  //TODO: redirects to a dual exam (full_completing)
+            :to="{  //redirects to a dual exam (full_completing)
               name: 'DualExam',
               params: { examId: examId, challengeId: challengeId, },
             }"
