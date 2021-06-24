@@ -48,7 +48,7 @@
 						If you want quick evaluation, select your interested topic from the available topics to accept challenge and
 						compete against your opponent.
 					</b-card-text>
-					<b-button class="ml-4" variant="primary" :to="{ name: 'Invitations' }">See Challenges</b-button>
+					<b-button class="ml-4" variant="primary" :to="{ name: 'ToDo' }">See Challenges</b-button>
 				</b-card>
 			</b-row>
 			
