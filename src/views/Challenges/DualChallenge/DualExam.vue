@@ -145,15 +145,10 @@ export default {
               } else {
                 this.questions[i].answer.sort();
                 data.questions[i].answer.sort();
-                if (
-                  data.questions[i].answer.length ===
-                  this.questions[i].answer.length
-                ) {
+                if ( data.questions[i].answer.length === this.questions[i].answer.length) {
                   this.questions[i].state = true;
                   for (let j = 0; j < this.questions[i].answer.length; j++)
-                    if (
-                      data.questions[i].answer[j] != this.questions[i].answer[j]
-                    )
+                    if (data.questions[i].answer[j] != this.questions[i].answer[j])
                       this.questions[i].state = false;
                 } else this.questions[i].state = false;
               }
