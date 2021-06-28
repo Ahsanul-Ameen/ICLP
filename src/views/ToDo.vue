@@ -6,15 +6,27 @@
 			<b-icon icon="grip-horizontal" class="text-primary"></b-icon>
 		</h2>
 		<div class="mt-5 message-box">
-			<h4 class="text-center my-3 inv hover-zoom" @click.prevent="refresh">
-				Messages 
-				<b-icon 
-					icon="arrow-repeat" 
-					animation="throb" 
-					font-scale="1" 
-				>
-				</b-icon>
-			</h4>
+			<b-row>
+				<b-col cols="9">
+					<h4 class="text-center my-3 inv hover-zoom" @click.prevent="refresh">
+						Messages 
+						<b-icon 
+							icon="arrow-repeat" 
+							animation="throb" 
+							font-scale="1" 
+						>
+						</b-icon>
+					</h4>
+				</b-col>
+				<b-col cols="2">	
+					<b-form-select v-model="days" :options="options" class="m-2 pl-3">
+						<!-- This slot appears above the options from 'options' prop -->
+						<template #first>
+							<b-form-select-option :value="null" disabled>-- time-span --</b-form-select-option>
+						</template>
+					</b-form-select>
+				</b-col>
+			</b-row>
 			<Notifications :userId="userId" :userName="userName" :messages="messages" @choose-a-message="updateChoice"/>
 		</div>
 		<b-row
@@ -71,13 +83,20 @@ export default {
 				//	last_accessed: "timestamp"
 				// },
 			],
-			choosedMessage: null
+			choosedMessage: null,
+			days: 1,
+			options: [
+				{ value: 1, text: 'last day' },
+				{ value: 7, text: 'last week' },
+				{ value: 30, text: 'last month' },
+				{ value: 365, text: 'last year' }
+			]
 		};
 	},
 	methods: {
 		refresh() {
 			console.log("refreshing messages...");
-			this.apiGet(`/dual/invitations?userid=${this.userId}`)
+			this.apiGet(`/dual/invitations?userid=${this.userId}&days=${this.days}`)
 			.then((data) => {
 				this.messages = data;
 				//this.printJsonArray(this.messages);
@@ -135,8 +154,6 @@ export default {
 		this.setUser(this.userid, this.username);
 	},
 	mixins: [thisuser, apiUtil],
-
-
 };
 </script>
 
