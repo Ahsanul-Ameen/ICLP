@@ -120,7 +120,9 @@ export default {
 			return {
 				name: 'DualResult',
 				params: { 
-					examId: this.choosedMessage? this.choosedMessage.exam_id: null
+					idOne: this.choosedMessage? this.choosedMessage.challenger_id: null,
+					idTwo: this.choosedMessage? this.choosedMessage.challengee_id: null,
+					examId: this.choosedMessage? this.choosedMessage.exam_id: null,
 				}
 			}
 		},
