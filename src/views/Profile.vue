@@ -143,12 +143,11 @@ export default {
     fillData() {
       this.apiGet(`/public/best/${this.id}?topicid=${this.topicid}`).then(
         (data) => {
-          // const bgn = { ...data[0] };
-          // bgn.score = 0;
-          // data.unshift(bgn);
           const lineplotdata = data.map(
             ((s) => (v) => ({ x: moment(v.time), y: (s += v.score) }))(0)
           );
+          const bgn = { x: data.length === 0 ? moment().startOf("day") : moment(lineplotdata[0].x).subtract(1, 'days'), y: 0 };
+          lineplotdata.unshift(bgn);
           const barplotdata = data.map((v) =>
             moment(v.time)
               .startOf("day")
@@ -165,6 +164,7 @@ export default {
                 label: "Cumulative score",
                 data: lineplotdata,
                 lineTension: 0,
+                fill: false
               },
             ],
           };
