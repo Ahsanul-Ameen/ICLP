@@ -9,7 +9,7 @@
             active
             :title-item-class="['border-left', 'border-right']"
           >
-            <pre>{{ statement }}</pre>
+            <pre class="mt-5 mb-5">{{ statement }}</pre>
             <div class="w-25" v-if="userid">
               submit solution:
               <b-form @submit.prevent="onsubmit">
@@ -21,6 +21,9 @@
             <div v-else>
               <h3>Login/signup to submit solution.</h3>
             </div>
+          </b-tab>
+          <b-tab title="Editor" :title-item-class="['border-right']" lazy>
+            <editor buttonAction="Submit" @editorDone="submitFromEditor" />
           </b-tab>
           <b-tab title="Submissions" :title-item-class="['border-right']" lazy>
             <Submissions :problemid="id" />
@@ -46,6 +49,7 @@ import Submissions from "@/components/Submissions";
 import FileSubmit from "@/components/FileSubmit";
 import SolutionLanguages from "@/components/SolutionLanguages";
 import thisuser from "@/mixins/thisuser";
+import Editor from "@/components/Editor";
 
 export default {
   name: "Problem",
@@ -94,11 +98,16 @@ export default {
           this.judging = false;
         });
     },
+    submitFromEditor(payload) {
+      console.log(payload);
+      alert("Hasn't implemented yet. See console for the object.");
+    },
   },
   components: {
     Submissions,
     FileSubmit,
     SolutionLanguages,
+    Editor,
   },
   mounted() {
     /**
