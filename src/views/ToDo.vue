@@ -96,6 +96,21 @@ export default {
 	methods: {
 		refresh() {
 			console.log("refreshing messages...");
+			
+			this.apiPostPromise("/dual/archive")
+			.then(() => {
+				console.log("outdated pending message archived...");
+			})
+			.catch (() => {
+				this.$root.$bvToast.toast("ERROR! dual/archive failed", {
+					variant: "danger",
+					autoHideDelay: 2000,
+					appendToast: true,
+					noCloseButton: true,
+					toaster: "b-toaster-top-center",
+				});
+			});
+
 			this.apiGet(`/dual/invitations?userid=${this.userId}&days=${this.days}`)
 			.then((data) => {
 				this.messages = data;
