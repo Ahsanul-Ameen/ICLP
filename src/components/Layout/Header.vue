@@ -13,8 +13,10 @@
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
         <b-nav-item :to="{ name: 'Challenges' }">Challenges</b-nav-item>
-        <b-nav-item :to="{ name: 'Admin' }">Admin</b-nav-item>
         <b-nav-item :to="{ name: 'Rank' }">Rank</b-nav-item>
+        <b-nav-item v-if="affiliation == 'admin'" :to="{ name: 'Admin' }">
+          Admin
+        </b-nav-item>
         <!-- <b-nav-item :to="{ name: 'Courses' }">Courses</b-nav-item>
         <b-nav-item :to="{ name: 'Blog' }">Blog</b-nav-item> -->
       </b-navbar-nav>
@@ -96,7 +98,7 @@ export default {
   mixins: [thisuser],
   data() {
     return {
-      newMessages: 6,
+      newMessages: 0,
       profile: "https://placekitten.com/300/300",
     };
   },
