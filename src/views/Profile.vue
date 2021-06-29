@@ -38,7 +38,8 @@
     <b-form-group label="Topic" label-for="topic">
       <b-select id="topic" v-model="topicid" :options="topics" required />
     </b-form-group>
-
+    Topic-rank: {{rank}}
+    Topic-score: {{total_score}}
     <b-row>
       <b-col>
         <line-chart :chart-data="linedata" :options="chartoptions" />
