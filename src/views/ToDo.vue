@@ -19,7 +19,7 @@
 					</h4>
 				</b-col>
 				<b-col cols="2">	
-					<b-form-select v-model="days" :options="options" class="m-2 pl-3">
+					<b-form-select v-model="days" :options="options" class="m-2 pl-3" @change="refresh">
 						<!-- This slot appears above the options from 'options' prop -->
 						<template #first>
 							<b-form-select-option :value="null" disabled>-- time-span --</b-form-select-option>
