@@ -55,7 +55,7 @@ export default {
               autoHideDelay: 2000,
               appendToast: true,
               noCloseButton: true,
-              solid: true,
+              solid: false,
             });
             this.$emit("loggedIn");
           },
@@ -65,7 +65,7 @@ export default {
               autoHideDelay: 2000,
               appendToast: true,
               noCloseButton: true,
-              solid: true,
+              solid: false,
             });
           }
         )

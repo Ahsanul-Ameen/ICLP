@@ -35,11 +35,19 @@
     </b-card>
 
     <h3>Statistics</h3>
-    <b-form-group label="Topic" label-for="topic">
-      <b-select id="topic" v-model="topicid" :options="topics" required />
-    </b-form-group>
-    Topic-rank: {{rank}}
-    Topic-score: {{total_score}}
+    <b-card class="text-primary">
+      <b-row>
+        <b-col cols="6">
+          <b-form-group label="Topic" label-for="topic">
+            <b-select id="topic" v-model="topicid" :options="topics" required />
+          </b-form-group>
+        </b-col>
+        <b-col></b-col>
+        <b-col align-self="center"> Topic-rank: {{ rank }} </b-col>
+        <b-col align-self="center"> Topic-score: {{ total_score }} </b-col>
+      </b-row>
+    </b-card>
+
     <b-row>
       <b-col>
         <line-chart :chart-data="linedata" :options="chartoptions" />
@@ -146,7 +154,13 @@ export default {
           const lineplotdata = data.map(
             ((s) => (v) => ({ x: moment(v.time), y: (s += v.score) }))(0)
           );
-          const bgn = { x: data.length === 0 ? moment().startOf("day") : moment(lineplotdata[0].x).subtract(1, 'days'), y: 0 };
+          const bgn = {
+            x:
+              data.length === 0
+                ? moment().startOf("day")
+                : moment(lineplotdata[0].x).subtract(1, "days"),
+            y: 0,
+          };
           lineplotdata.unshift(bgn);
           const barplotdata = data.map((v) =>
             moment(v.time)
@@ -164,7 +178,7 @@ export default {
                 label: "Cumulative score",
                 data: lineplotdata,
                 lineTension: 0,
-                fill: false
+                fill: false,
               },
             ],
           };

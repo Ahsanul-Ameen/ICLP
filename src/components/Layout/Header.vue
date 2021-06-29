@@ -112,7 +112,7 @@ export default {
             autoHideDelay: 1000,
             appendToast: true,
             noCloseButton: true,
-            solid: true,
+            solid: false,
           });
           this.$router.push({ name: "Home" });
         },
@@ -122,7 +122,7 @@ export default {
             autoHideDelay: 1000,
             appendToast: true,
             noCloseButton: true,
-            solid: true,
+            solid: false,
           });
         }
       );
