@@ -176,6 +176,31 @@
 							<b-icon :icon="iconInfo(message.status)" :variant="variantInfo(message.status)" v-b-popover.hover="message.status"></b-icon>
 							<b-badge mt-2 variant="light"> {{ message.last_accessed }} </b-badge>
 						</b-button>
+						<!-- archived in challengee/challenger -->
+						<b-button
+							v-if='(userId === message.challengee_id || userId === message.challenger_id) && message.status === "archived"'
+							:disabled='true'
+							block
+							variant="light"
+							class="shadow-sm font-weight-bold text-left shadow hover-zoom"
+							@click.prevent="selectMessage(message)"
+							v-bind:class="{ 'highlight' : selected_message && message.index === selected_message.index}"
+						> 
+							<span class="dot"> {{ index + 1 }} </span>
+							<b-badge mt-2 :to="{ name: 'Profile', params: { id: `${message.challenger_id}` } }" variant="light">
+								<span style="color: blue"> {{ message.challenger_name }} </span>
+							</b-badge>
+							<span style="color: #f59300"> 's invitation to </span>
+							<b-badge mt-2 :to="{ name: 'Profile', params: { id: `${message.challengee_id}` } }" variant="light">
+								<span style="color: blue"> {{ message.challengee_name }} </span>
+							</b-badge>
+							<span style="color: #f59300"> on </span>
+							<span style="color: brown"> {{ message.topic_name }} </span>
+							<span style="color: #f59300"> archived due to inactivity </span>
+
+							<b-icon :icon="iconInfo(message.status)" :variant="variantInfo(message.status)" v-b-popover.hover="message.status"></b-icon>
+							<b-badge mt-2 variant="light"> {{ message.last_accessed }} </b-badge>
+						</b-button>						
 					</b-col>
 				</b-row>
 			</b-card-body>
@@ -216,6 +241,7 @@ export default {
 		else if (status === "rejected") icon = 'x-circle';
 		else if (status === "half_completed") icon = 'droplet-half';
 		else if (status === "full_completed") icon = "droplet-fill";
+		else if (status === "archived") icon = "archive";
 		return icon;
 	},
 	variantInfo(status) {
