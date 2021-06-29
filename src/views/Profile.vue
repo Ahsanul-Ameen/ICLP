@@ -164,6 +164,7 @@ export default {
               {
                 label: "Cumulative score",
                 data: lineplotdata,
+                lineTension: 0,
               },
             ],
           };
