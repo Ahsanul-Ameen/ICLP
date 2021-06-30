@@ -114,7 +114,7 @@ export default {
             noCloseButton: true,
             solid: false,
           });
-          this.$router.push({ name: "Home" });
+          if (this.$route.name != "Home") this.$router.push({ name: "Home" });
         },
         () => {
           this.$root.$bvToast.toast("Logging out failed", {
