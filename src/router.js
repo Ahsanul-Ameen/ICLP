@@ -101,7 +101,7 @@ const routes = [{
             import ("./views/Admin"),
     },
     {
-        path: "/ide",
+        path: "/editor",
         name: "IDE",
         component: () =>
             import ("./views/Ide"),

@@ -14,7 +14,7 @@
       <b-navbar-nav>
         <b-nav-item :to="{ name: 'Challenges' }">Challenges</b-nav-item>
         <b-nav-item :to="{ name: 'Rank' }">Rank</b-nav-item>
-        <b-nav-item v-if="userid" :to="{ name: 'IDE' }">IDE</b-nav-item>
+        <!-- <b-nav-item v-if="userid" :to="{ name: 'IDE' }">Editor</b-nav-item> -->
         <b-nav-item v-if="affiliation == 'admin'" :to="{ name: 'Admin' }">
           Admin
         </b-nav-item>
