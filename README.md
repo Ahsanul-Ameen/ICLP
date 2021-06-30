@@ -61,3 +61,7 @@ npm run lint
 ### Customize configuration
 
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+---
+## Architecture used
+![ICLP Architecture](./ICLP_Architecture.png)
