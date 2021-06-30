@@ -43,7 +43,7 @@
           </b-form-group>
         </b-col>
         <b-col></b-col>
-        <b-col align-self="center"> Topic-rank: {{ rank }} </b-col>
+        <b-col align-self="center"> Topic-rank: {{ rank }} out of {{ solidusercount}} </b-col>
         <b-col align-self="center"> Topic-score: {{ total_score }} </b-col>
       </b-row>
     </b-card>
@@ -71,6 +71,14 @@
           '#fd593c',
         ]"
       />
+    </b-row>
+    <b-row>
+      <h3 class="mt-5">Activities</h3>
+      <b-table striped hover :items="activities">
+        <template #cell(id)="data">
+          <router-link :to="{name: 'Submission', params: {id: data.value}}">{{data.value}}</router-link>
+        </template>
+      </b-table>
     </b-row>
   </b-container>
 </template>
@@ -127,7 +135,9 @@ export default {
       combinedRank: null,
       combinedScore: null,
       rank: null,
+      solidusercount: null,
       total_score: null,
+      activities: []
     };
   },
   mounted() {
@@ -141,9 +151,6 @@ export default {
     });
     this.apiGet(`/public/user/${this.id}`).then(([{ user }]) => {
       this.user = user;
-    });
-    this.apiGet(`/public/activity/${this.id}`).then((data) => {
-      this.activity = data;
     });
     this.fillData();
   },
@@ -198,6 +205,15 @@ export default {
       ).then(([data]) => {
         this.rank = data.rank;
         this.total_score = data.total_score;
+      });
+      this.apiGet(`/public/solidusercount/${this.topicid}`).then(([{count}]) => {
+        this.solidusercount = count;
+      });
+      this.apiGet(`/public/activity/${this.id}?topicid=${this.topicid}`).then((data) => {
+        this.activity = data;
+      });
+      this.apiGet(`/public/activities/${this.id}?topicid=${this.topicid}`).then((data) => {
+        this.activities = data;
       });
     },
   },
