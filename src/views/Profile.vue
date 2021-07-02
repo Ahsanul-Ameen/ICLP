@@ -75,8 +75,8 @@
     <b-row>
       <h3 class="mt-5">Activities</h3>
       <b-table striped hover :items="activities">
-        <template #cell(id)="data">
-          <router-link :to="{name: 'Submission', params: {id: data.value}}">{{data.value}}</router-link>
+        <template #cell(challenge_id)="data">
+          <router-link :to="{name: 'Problem', params: {id: data.value}}">{{data.value}}</router-link>
         </template>
       </b-table>
     </b-row>
@@ -137,7 +137,7 @@ export default {
       rank: null,
       solidusercount: null,
       total_score: null,
-      activities: []
+      activities: [],
     };
   },
   mounted() {
@@ -170,9 +170,7 @@ export default {
           };
           lineplotdata.unshift(bgn);
           const barplotdata = data.map((v) =>
-            moment(v.time)
-              .startOf("day")
-              .format("YYYY-MM-DD")
+            moment(v.time).startOf("day").format("YYYY-MM-DD")
           );
           const counts = {};
           for (var i = 0; i < barplotdata.length; i++) {
@@ -206,15 +204,34 @@ export default {
         this.rank = data.rank;
         this.total_score = data.total_score;
       });
-      this.apiGet(`/public/solidusercount/${this.topicid}`).then(([{count}]) => {
-        this.solidusercount = count;
-      });
-      this.apiGet(`/public/activity/${this.id}?topicid=${this.topicid}`).then((data) => {
-        this.activity = data;
-      });
-      this.apiGet(`/public/activities/${this.id}?topicid=${this.topicid}`).then((data) => {
-        this.activities = data;
-      });
+      this.apiGet(`/public/solidusercount/${this.topicid}`).then(
+        ([{ count }]) => {
+          this.solidusercount = count;
+        }
+      );
+      this.apiGet(`/public/activities/${this.id}?topicid=${this.topicid}`).then(
+        (data) => {
+          this.activities = data;
+          let acitivity_per_date = {};
+          data.forEach((activity) => {
+            const activity_date = moment(activity.time)
+              .startOf("day")
+              .format("YYYY-MM-DD");
+            acitivity_per_date[activity_date] =
+              (acitivity_per_date[activity_date]
+                ? acitivity_per_date[activity_date]
+                : 0) + 1;
+          });
+          this.activity = Array.from(
+            Object.entries(acitivity_per_date),
+            ([date, count]) => ({
+              date,
+              count,
+            })
+          );
+          console.log(acitivity_per_date);
+        }
+      );
     },
   },
   watch: {

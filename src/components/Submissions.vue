@@ -3,9 +3,9 @@
     problem id: {{problemid}}, current user id: {{userid}}
     <div>
       <b-table striped hover :items="submissions">
-        <template #cell(id)="data">
+        <!-- <template #cell(id)="data">
           <router-link :to="{name: 'Submission', params: {id: data.value}}">{{data.value}}</router-link>
-        </template>
+        </template>-->
       </b-table>
     </div>
   </div>
