@@ -8,7 +8,7 @@ export default {
     }
   },
   methods: {
-    fill_level(userid, topicid) {
+    fill_level(userid, topicid = 0) {
       this.apiGet(
         `/public/bestcodingscores/${userid}?topicid=${topicid}`
       ).then((data) => {

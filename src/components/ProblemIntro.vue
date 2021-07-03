@@ -4,6 +4,9 @@
       <b-col cols="9">
         <h3 class="link">{{probleminfo.title}}</h3>
         {{probleminfo.difficulty}}, Max score: {{probleminfo.maxscore}}, Your score: {{probleminfo.score}}
+        <div
+          v-if="probleminfo.score !== probleminfo.maxscore"
+        >Solving probability: {{probleminfo.solvability}}</div>
       </b-col>
       <b-col cols="3" class="align-self-center">
         <!-- .row is display:flex; flex-direction:row  -->
