@@ -130,7 +130,7 @@ export default {
           data.forEach((problem) => {
             problem.solvability = Math.max(
               0,
-              Math.min(1, (this.level + 50 - problem.maxscore) / 100)
+              Math.min(1, (this.level + 50 - problem.max_score) / 100)
             );
           });
           this.problems = data;

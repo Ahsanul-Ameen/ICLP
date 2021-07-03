@@ -3,9 +3,9 @@
     <b-row>
       <b-col cols="9">
         <h3 class="link">{{probleminfo.title}}</h3>
-        {{probleminfo.difficulty}}, Max score: {{probleminfo.maxscore}}, Your score: {{probleminfo.score}}
+        {{probleminfo.difficulty}}, Max score: {{probleminfo.max_score}}, Your score: {{probleminfo.score}}
         <div
-          v-if="probleminfo.score !== probleminfo.maxscore"
+          v-if="probleminfo.score !== probleminfo.max_score"
         >Solving probability: {{probleminfo.solvability}}</div>
       </b-col>
       <b-col cols="3" class="align-self-center">
@@ -13,8 +13,8 @@
         <b-card no-body class="solvecard">
           <b-card-body
             class="p-2 d-flex justify-content-center solve"
-            :class="{solved: probleminfo.score === probleminfo.maxscore}"
-          >{{probleminfo.score === probleminfo.maxscore ? "Solved" : "Solve challenge"}}</b-card-body>
+            :class="{solved: probleminfo.score === probleminfo.max_score}"
+          >{{probleminfo.score === probleminfo.max_score ? "Solved" : "Solve challenge"}}</b-card-body>
         </b-card>
       </b-col>
     </b-row>
