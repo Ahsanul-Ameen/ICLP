@@ -43,8 +43,14 @@
           </b-form-group>
         </b-col>
         <b-col></b-col>
-        <b-col align-self="center"> Topic-rank: {{ rank }} out of {{ solidusercount}} </b-col>
-        <b-col align-self="center"> Topic-score: {{ total_score }} </b-col>
+        <b-col align-self="center">rank: {{ rank }} out of {{ solidusercount}}</b-col>
+        <b-col align-self="center">score: {{ total_score }}</b-col>
+        <b-col align-self="center">
+          coding-level: {{ level }}
+          <b-icon-info-circle
+            v-b-popover.hover="{html: true, content:'level to minimize total <a href=\'https://en.wikipedia.org/wiki/Hinge_loss\'>hinge loss</a> of last 20 submissions, assuming probability to solve a problem with score x = (level+50-x)/100'}"
+          />
+        </b-col>
       </b-row>
     </b-card>
 
@@ -88,12 +94,13 @@ import { CalendarHeatmap } from "vue-calendar-heatmap";
 import LineChart from "@/components/LineChart.js";
 import BarChart from "@/components/BarChart.js";
 import apiUtil from "@/mixins/apiUtil";
+import userlevel from "@/mixins/userlevel";
 import moment from "moment";
 
 export default {
   name: "Profile",
   props: ["id"],
-  mixins: [apiUtil],
+  mixins: [apiUtil, userlevel],
   components: {
     LineChart,
     BarChart,
@@ -117,7 +124,7 @@ export default {
                 unit: "day",
               },
 
-              // unique defaults for bar chart which doesn't get merged once you specify xAxes :)
+              // unique defaults for bar chart which wouldn't get merged once you specify xAxes :)
               offset: true,
               gridLines: { offsetGridLines: true },
             },
@@ -198,6 +205,7 @@ export default {
           };
         }
       );
+      this.fill_level(this.id, this.topicid);
       this.apiGet(
         `/public/rank?userid=${this.id}&topicid=${this.topicid}`
       ).then(([data]) => {
@@ -229,7 +237,6 @@ export default {
               count,
             })
           );
-          console.log(acitivity_per_date);
         }
       );
     },
