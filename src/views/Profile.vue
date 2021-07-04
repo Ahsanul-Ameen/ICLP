@@ -35,21 +35,27 @@
     </b-card>
 
     <h3>Statistics</h3>
-    <b-card class="text-primary">
+    <b-card class="text-primary font-weight-bold">
       <b-row>
-        <b-col cols="6">
+        <b-col cols="5">
           <b-form-group label="Topic" label-for="topic">
             <b-select id="topic" v-model="topicid" :options="topics" required />
           </b-form-group>
         </b-col>
         <b-col></b-col>
-        <b-col align-self="center">rank: {{ rank }} out of {{ solidusercount}}</b-col>
+        <b-col align-self="center">
+          rank: {{ rank }} out of {{ solidusercount }}
+        </b-col>
         <b-col align-self="center">score: {{ total_score }}</b-col>
         <b-col align-self="center">
-          coding-level: {{ level }}
           <b-icon-info-circle
-            v-b-popover.hover="{html: true, content:'level to minimize total <a href=\'https://en.wikipedia.org/wiki/Hinge_loss\'>hinge loss</a> of last 20 submissions, assuming probability to solve a problem with score x = (level+50-x)/100'}"
+            v-b-popover.hover="{
+              html: true,
+              content:
+                'level to minimize total <a href=\'https://en.wikipedia.org/wiki/Hinge_loss\'>hinge loss</a> of last 20 submissions, assuming probability to solve a problem with score x = (level+50-x)/100',
+            }"
           />
+          coding-level: {{ level }}
         </b-col>
       </b-row>
     </b-card>
@@ -80,11 +86,30 @@
     </b-row>
     <b-row>
       <h3 class="mt-5">Activities</h3>
-      <b-table striped hover :items="activities">
+      <b-table
+        id="activity-table"
+        striped
+        hover
+        :items="activities"
+        per-page="4"
+        :current-page="currentPage"
+      >
         <template #cell(challenge_id)="data">
-          <router-link :to="{name: 'Problem', params: {id: data.value}}">{{data.value}}</router-link>
+          <router-link :to="{ name: 'Problem', params: { id: data.value } }">{{
+            data.value
+          }}</router-link>
         </template>
       </b-table>
+    </b-row>
+    <b-row align-h="center" class="mt-4">
+      <b-pagination
+        v-model="currentPage"
+        :total-rows="rows"
+        per-page="4"
+        aria-controls="activity-table"
+        pills
+        size="sm"
+      ></b-pagination>
     </b-row>
   </b-container>
 </template>
@@ -108,6 +133,7 @@ export default {
   },
   data() {
     return {
+      currentPage: 1,
       user: null,
       topics: [],
       topicid: 0,
@@ -177,7 +203,9 @@ export default {
           };
           lineplotdata.unshift(bgn);
           const barplotdata = data.map((v) =>
-            moment(v.time).startOf("day").format("YYYY-MM-DD")
+            moment(v.time)
+              .startOf("day")
+              .format("YYYY-MM-DD")
           );
           const counts = {};
           for (var i = 0; i < barplotdata.length; i++) {
@@ -246,6 +274,11 @@ export default {
       handler() {
         this.fillData();
       },
+    },
+  },
+  computed: {
+    rows() {
+      return this.activities.length;
     },
   },
 };
