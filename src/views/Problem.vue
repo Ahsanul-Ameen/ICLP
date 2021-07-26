@@ -39,6 +39,21 @@
           </b-tab>
         </b-tabs>
       </div>
+      <b-modal id="result-modal" centered>
+        <b-row
+          align-h="center"
+          class="text-uppercase"
+          :class="{
+            'text-success': details === 'correct answer',
+            'text-danger': details !== 'correct answer',
+          }"
+        >
+          <h2>
+            {{ details }}
+          </h2>
+        </b-row>
+        <b-row align-h="center" class="mt-3"> Score: {{ score }} </b-row>
+      </b-modal>
     </b-overlay>
   </b-container>
 </template>
@@ -70,6 +85,8 @@ export default {
       submission: null,
       language: "c++ 17",
       judging: false,
+      score: 0,
+      details: "",
     };
   },
   methods: {
@@ -88,7 +105,9 @@ export default {
         },
       })
         .then(({ score, details }) => {
-          alert(`You received score: ${score}, ${details}`);
+          this.score = score;
+          this.details = details;
+          this.$root.$bvModal.show("result-modal");
         })
         .catch((err) => {
           alert("error " + err);
