@@ -74,14 +74,7 @@
         :values="activity"
         :endDate="new Date()"
         tooltip-unit="submissions"
-        :range-color="[
-          '#eeeeee',
-          '#ffded8',
-          '#fecdc5',
-          '#feac9e',
-          '#fe8b77',
-          '#fd593c',
-        ]"
+        :range-color="['#eeeeee', '#fecdc5', '#feac9e', '#fe8b77', '#fd593c']"
       />
     </b-row>
     <b-row>
@@ -90,7 +83,7 @@
         id="activity-table"
         striped
         hover
-        :items="activities"
+        :items="activitiesFiltered"
         per-page="4"
         :current-page="currentPage"
       >
@@ -108,7 +101,6 @@
         per-page="4"
         aria-controls="activity-table"
         pills
-        size="sm"
       ></b-pagination>
     </b-row>
   </b-container>
@@ -279,6 +271,15 @@ export default {
   computed: {
     rows() {
       return this.activities.length;
+    },
+    activitiesFiltered() {
+      console.log(this.activities);
+      return this.activities.map((item) => {
+        /* eslint-disable no-unused-vars */
+        const { details, ...obj } = item;
+        /* eslint-enable no-unused-vars */
+        return obj;
+      });
     },
   },
 };
