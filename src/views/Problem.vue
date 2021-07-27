@@ -22,9 +22,9 @@
               <h3>Login/signup to submit solution.</h3>
             </div>
           </b-tab>
-          <b-tab title="Editor" :title-item-class="['border-right']" lazy>
+          <!--b-tab title="Editor" :title-item-class="['border-right']" lazy>
             <editor buttonAction="Submit" @editorDone="submitFromEditor" />
-          </b-tab>
+          </!--b-tab-->
           <b-tab title="Submissions" :title-item-class="['border-right']" lazy>
             <Submissions :problemid="id" />
           </b-tab>
@@ -64,7 +64,6 @@ import Submissions from "@/components/Submissions";
 import FileSubmit from "@/components/FileSubmit";
 import SolutionLanguages from "@/components/SolutionLanguages";
 import thisuser from "@/mixins/thisuser";
-import Editor from "@/components/Editor";
 
 export default {
   name: "Problem",
@@ -126,7 +125,6 @@ export default {
     Submissions,
     FileSubmit,
     SolutionLanguages,
-    Editor,
   },
   mounted() {
     /**
