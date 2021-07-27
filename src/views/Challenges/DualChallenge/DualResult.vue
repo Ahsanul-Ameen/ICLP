@@ -17,7 +17,7 @@
         {{title}}
       <b-icon icon="grip-horizontal" class="text-primary" />
     </h2>
-
+    <hr>
     <div style="margin-top: 25px;">
       <b-row class="text-center">
         <b-col sm=6>
@@ -154,6 +154,7 @@
         </b-container>
       </challenge-banner>
     </div>
+    <hr>
   </b-container>
 </template>
 

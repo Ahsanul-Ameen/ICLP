@@ -5,6 +5,43 @@
 				Your Notifications
 			<b-icon icon="grip-horizontal" class="text-primary"></b-icon>
 		</h2>
+		<hr>
+		<div class="selection-box">
+			<b-form-group>
+				<template #label>
+					<b>Select status:</b><br>
+					<b-form-checkbox
+					v-model="allSelected"
+					:indeterminate="indeterminate"
+					aria-describedby="status"
+					aria-controls="status"
+					@change="toggleAll"
+					>
+						{{ allSelected ? 'Un-select All' : 'Select All' }}
+					</b-form-checkbox>
+				</template>
+
+				<template v-slot="{ ariaDescribedby }">
+					<b-form-checkbox-group
+						id="status"
+						v-model="selected"
+						:options="status"
+						:aria-describedby="ariaDescribedby"
+						name="status"
+						class="ml-4"
+						aria-label="Individual statuses"
+						switches
+					>
+					</b-form-checkbox-group>
+					<!-- <div>
+						Selected: <strong>{{ selected }}</strong><br>
+						All Selected: <strong>{{ allSelected }}</strong><br>
+						Indeterminate: <strong>{{ indeterminate }}</strong>
+					</div> -->
+				</template>
+			</b-form-group>
+		</div>
+		<hr>
 		<div class="mt-5 message-box">
 			<b-row>
 				<b-col cols="9">
@@ -27,8 +64,9 @@
 					</b-form-select>
 				</b-col>
 			</b-row>
-			<Notifications :userId="userId" :userName="userName" :messages="messages" @choose-a-message="updateChoice"/>
+			<Notifications :userId="userId" :userName="userName" :messages="messages" :selected="selected"  @choose-a-message="updateChoice"/>
 		</div>
+		<hr>
 		<b-row
 			align-h="center"
 			class="mt-4 text-danger"
@@ -83,6 +121,10 @@ export default {
 				//	last_accessed: "timestamp"
 				// },
 			],
+			status: ["pending", "accepted", "rejected", "half_completed", "full_completed", "archived"],
+			selected: ["pending", "accepted", "rejected", "half_completed", "full_completed", "archived"],
+			allSelected: true,
+			indeterminate: false,
 			choosedMessage: null,
 			days: 1,
 			options: [
@@ -132,6 +174,9 @@ export default {
 		updateChoice(message) {
 			this.choosedMessage = message;
 		},
+		toggleAll(checked) {
+			this.selected = checked ? this.status.slice() : []
+		},
 	},
 	computed: {
 		DualConfirm() {
@@ -168,11 +213,33 @@ export default {
 	created() {
 		this.setUser(this.userid, this.username);
 	},
+	watch: {
+		selected(newValue, oldValue) {
+			console.log(oldValue);
+			// Handle changes in individual status checkboxes
+			if (newValue.length === 0) {
+				this.indeterminate = false
+				this.allSelected = false
+			} else if (newValue.length === this.status.length) {
+				this.indeterminate = false
+				this.allSelected = true
+			} else {
+				this.indeterminate = true
+				this.allSelected = false
+			}
+		}
+	},
 	mixins: [thisuser, apiUtil],
 };
 </script>
 
 <style lang="scss" scoped>
+	.selection-box {
+		border-radius: 10px;
+		border: 1px solid #ffab73;
+		background-color: rgb(251, 247, 242);
+		padding: 10px;
+	}
 	.message-box {
 		border-radius: 25px;
 		border: 2px solid #0e0b09;

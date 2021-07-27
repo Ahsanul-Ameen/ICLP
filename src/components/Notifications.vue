@@ -24,7 +24,7 @@
 					v-else
 					v-for="(message, index) in messages" :key="index"
 				>
-					<b-col>
+					<b-col v-if="selected.some(e => e === message.status)">
 						<!-- pending in challengee -->
 						<b-button
 							v-if='userId === message.challengee_id && message.status === "pending"'
@@ -227,7 +227,11 @@ export default {
 	messages: {
 		type: Array,
 		required: true
-    }
+    },
+	selected: {
+		type: Array,
+		required: true
+	}
   },
   methods: {
 	selectMessage(message) {
