@@ -209,12 +209,22 @@ export default {
     this.status = this.$route.params.status;
   },
   mounted() {
-    this.apiGet(`/mcq/find/${this.topicId}`).then((data) => {
-      this.marks = data.marks;
-      this.difficulty = data.difficulty;
-      this.challengeId = data.challengeId;
-      this.time = data.time;
-    });
+    if (this.throwingType === true) {
+      this.apiGet(`/mcq/find/${this.topicId}`).then((data) => {
+        this.marks = data.marks;
+        this.difficulty = data.difficulty;
+        this.challengeId = data.challengeId;
+        this.time = data.time;
+      });
+    } else if(this.throwingType === false) {
+      this.apiGet(`/mcq/find2/${this.examId}`).then((data) => {
+        this.marks = data.marks;
+        this.difficulty = data.difficulty;
+        this.challengeId = data.challengeId;
+        this.time = data.time;
+      });
+    }
+    
   },
   computed: {
     title() {

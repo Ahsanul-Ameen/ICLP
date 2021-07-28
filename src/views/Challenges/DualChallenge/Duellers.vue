@@ -47,19 +47,19 @@
 							variant="light"
 							class="shadow-sm font-weight-bold text-left shadow hover-zoom"
 							:to="{
-									name: 'DualConfirm',	
-									params: { 
-										topicId: topicId,
-										topicName: topicName,
-										challengerName: challengerName,
-										challengerId: challengerId,
-										challengeeName: participant.name,
-										challengeeId: participant.userid,
-										throwingType: true,
-										examId: null,
-										status: null
-									},
-								}"
+								name: 'DualConfirm',	
+								params: { 
+									topicId: topicId,
+									topicName: topicName,
+									challengerName: challengerName,
+									challengerId: challengerId,
+									challengeeName: participant.name,
+									challengeeId: participant.userid,
+									throwingType: true,
+									examId: null,
+									status: null
+								},
+							}"
 						>	
 							<b-row align-h="center">
 								<b-col
