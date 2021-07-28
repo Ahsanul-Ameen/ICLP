@@ -87,11 +87,6 @@
         per-page="4"
         :current-page="currentPage"
       >
-        <template #cell(challenge_id)="data">
-          <router-link :to="{ name: 'Problem', params: { id: data.value } }">{{
-            data.value
-          }}</router-link>
-        </template>
       </b-table>
     </b-row>
     <b-row align-h="center" class="mt-4">
