@@ -28,13 +28,13 @@
           <b-tab title="Submissions" :title-item-class="['border-right']" lazy>
             <Submissions :problemid="id" />
           </b-tab>
-          <b-tab title="Discussions" :title-item-class="['border-right']" lazy>
+          <b-tab title="Discussions" :title-item-class="['border-right']">
             <div id="disqus_thread"></div>
             <noscript>
               Please enable JavaScript to view the
-              <a href="https://disqus.com/?ref_noscript"
-                >comments powered by Disqus.</a
-              >
+              <a
+                href="https://disqus.com/?ref_noscript"
+              >comments powered by Disqus.</a>
             </noscript>
           </b-tab>
         </b-tabs>
@@ -48,11 +48,9 @@
             'text-danger': details !== 'correct answer',
           }"
         >
-          <h2>
-            {{ details }}
-          </h2>
+          <h2>{{ details }}</h2>
         </b-row>
-        <b-row align-h="center" class="mt-3"> Score: {{ score }} </b-row>
+        <b-row align-h="center" class="mt-3">Score: {{ score }}</b-row>
       </b-modal>
     </b-overlay>
   </b-container>
@@ -142,6 +140,7 @@ export default {
       s.setAttribute("data-timestamp", +new Date());
       (d.head || d.body).appendChild(s);
     })();
+
     this.apiGet(`/public/problem/${this.id}`).then(([data]) => {
       this.ancestors[this.ancestors.length - 1].text = data.title;
       this.statement = data.content;

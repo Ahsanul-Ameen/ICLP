@@ -107,13 +107,13 @@ const routes = [{
             import ("./views/Ide"),
     },
     {
-        path: "/admin/create-problem",
+        path: "/admin/add-quiz",
         name: "AddQuiz",
         component: () =>
             import ("./views/modifyChallenges/AddQuiz"),
     },
     {
-        path: "/admin/add-quiz",
+        path: "/admin/create-problem",
         name: "CreateProblem",
         component: () =>
             import ("./views/modifyChallenges/CreateProblem"),

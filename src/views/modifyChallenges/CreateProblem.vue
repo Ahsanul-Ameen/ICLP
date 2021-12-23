@@ -11,39 +11,24 @@
         <b-textarea id="statement" v-model="statement" rows="8" required />
       </b-form-group>
       <b-form-group label="Difficulty" label-for="difficulty">
-        <b-select
-          id="difficulty"
-          v-model="difficulty"
-          :options="difficulties"
-          required
-        />
+        <b-select id="difficulty" v-model="difficulty" :options="difficulties" required />
       </b-form-group>
       <b-form-group label="Score" label-for="score">
-        <b-input
-          type="number"
-          id="score"
-          v-model="score"
-          min="5"
-          max="100"
-          step="5"
-          required
-        />
+        <b-input type="number" id="score" v-model="score" min="5" max="100" step="5" required />
       </b-form-group>
       <div>
         Tests:
-        <b-list-group>
-          <b-list-group-item v-for="(test, index) in tests" :key="index">
-            <b-form-group :label="`Test ${index}`" :label-for="`test_${index}`">
-              <b-textarea
-                :id="`test_${index}`"
-                v-model="tests[index]"
-                rows="5"
-                required
-              />
-            </b-form-group>
-          </b-list-group-item>
-        </b-list-group>
-        <b-button @click="addTest">Add test</b-button>
+        <deletable-card
+          @delete-card="deleteTest(index)"
+          class="mb-2"
+          v-for="(test, index) in tests"
+          :key="index"
+        >
+          <b-form-group :label="`Test ${index}`" :label-for="`test_${index}`">
+            <b-textarea :id="`test_${index}`" v-model="tests[index]" rows="5" required />
+          </b-form-group>
+        </deletable-card>
+        <b-button class="mt-4" @click="addTest">Add test</b-button>
         <b-form-group label="Checker executable for linux" label-for="checker">
           <FileSubmit id="checker" v-model="checker" />
         </b-form-group>
@@ -56,6 +41,7 @@
 <script>
 import apiUtil from "@/mixins/apiUtil";
 import FileSubmit from "@/components/FileSubmit";
+import DeletableCard from "@/components/DeletableCard.vue";
 
 export default {
   name: "CreateProblem",
@@ -104,8 +90,11 @@ export default {
     addTest() {
       this.tests.push("");
     },
+    deleteTest(index) {
+      this.tests.splice(index, 1);
+    }
   },
-  components: { FileSubmit },
+  components: { FileSubmit, DeletableCard },
 };
 </script>
 

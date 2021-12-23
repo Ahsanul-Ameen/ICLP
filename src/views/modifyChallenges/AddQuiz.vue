@@ -61,14 +61,7 @@
           class="mt-2"
         >
           <b-col>
-            <b-card>
-              <b-row class="mr-3 mb-3">
-                <b-col>
-                  <b-row align-h="end">
-                    <b-icon @click="deleteQuestion(index)" icon="x-circle" />
-                  </b-row> </b-col
-              ></b-row>
-
+            <deletable-card @delete-card="deleteQuestion(index)">
               <b-form-group>
                 <b-form-input
                   v-model="question.statement"
@@ -80,7 +73,7 @@
                 <b-form-select
                   :id="question.type + String(index)"
                   v-model="question.type"
-                  :options="[1, 2]"
+                  :options="[{value: 1, text: 'single select'}, {value: 2, text: 'multiple select'}]"
                   @change="changeRoutine(index)"
                 ></b-form-select>
                 <label :for="question.points + String(index)" class="mt-2">
@@ -128,7 +121,7 @@
                   >Add option</b-button
                 >
               </b-form-group>
-            </b-card>
+            </deletable-card>
           </b-col>
         </b-row>
       </b-form>
@@ -149,6 +142,8 @@
 <script>
 import validator from "validator";
 import apiUtil from "@/mixins/apiUtil";
+import DeletableCard from "@/components/DeletableCard.vue"
+
 export default {
   data() {
     return {
@@ -163,6 +158,7 @@ export default {
     };
   },
   mixins: [apiUtil],
+  components: {DeletableCard},
   methods: {
     validateTitle() {
       if (this.title.length == 0) return undefined;
