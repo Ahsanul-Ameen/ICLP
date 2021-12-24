@@ -18,8 +18,6 @@
         <b-nav-item v-if="affiliation == 'admin'" :to="{ name: 'Admin' }">
           Admin
         </b-nav-item>
-        <!-- <b-nav-item :to="{ name: 'Courses' }">Courses</b-nav-item>
-        <b-nav-item :to="{ name: 'Blog' }">Blog</b-nav-item> -->
       </b-navbar-nav>
 
       <b-navbar-nav class="ml-auto" v-if="this.$store.getters.isLoggedIn">
