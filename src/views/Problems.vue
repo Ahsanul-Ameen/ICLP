@@ -1,7 +1,5 @@
 <template>
   <div>
-    You should try solving problems where you have around 0.5 solving probability
-    <!-- TODO: recommend some unsolved problems with solvability around 0.5 -->
     <h1>{{topic}}</h1>
     <b-row>
       <b-col cols="12" lg="9">
@@ -47,17 +45,15 @@
 import ProblemIntro from "@/components/ProblemIntro";
 import apiUtil from "@/mixins/apiUtil";
 import thisuser from "@/mixins/thisuser";
-import userlevel from "@/mixins/userlevel";
 
 export default {
   name: "Problems",
-  mixins: [apiUtil, thisuser, userlevel],
+  mixins: [apiUtil, thisuser],
   props: ["topic", "solved", "unsolved", "easy", "medium", "hard"],
   components: {
     ProblemIntro,
   },
   data: (vm) => ({
-    topicid: null,
     problems: null,
     filters: [
       {
@@ -112,27 +108,12 @@ export default {
     },
   },
   mounted() {
-    this.apiGet("/public/problem-topics").then((data) => {
-      const topicname = this.topic;
-      let topicid = null;
-      data.forEach((topic) => {
-        if (topic.name === topicname) topicid = topic.id;
-      });
-      this.topicid = topicid;
-      this.fill_level(this.userid, this.topicid);
-      this.getScore(this.userid);
-    });
+    this.getScore(this.userid);
   },
   methods: {
     getScore(val) {
       this.apiGet(`/public/problems/${this.topic}?userid=${val}`).then(
         (data) => {
-          data.forEach((problem) => {
-            problem.solvability = Math.max(
-              0,
-              Math.min(1, (this.level + 50 - problem.max_score) / 100)
-            );
-          });
           this.problems = data;
         }
       );
