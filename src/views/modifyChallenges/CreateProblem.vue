@@ -24,14 +24,20 @@
           v-for="(test, index) in tests"
           :key="index"
         >
-          <b-form-group :label="`Test ${index}`" :label-for="`test_${index}`">
-            <b-textarea :id="`test_${index}`" v-model="tests[index]" rows="5" required />
+          <p>Test {{index}}</p>
+          <b-form-group :label="`input`" :label-for="`test_${index}_input`">
+            <b-textarea :id="`test_${index}_input`" v-model="tests[index].input" rows="5" required />
+          </b-form-group>
+          <b-form-group :label="`output`" :label-for="`test_${index}_output`">
+            <b-textarea
+              :id="`test_${index}_output`"
+              v-model="tests[index].output"
+              rows="5"
+              required
+            />
           </b-form-group>
         </deletable-card>
-        <b-button class="mt-4" @click="addTest">Add test</b-button>
-        <b-form-group label="Checker executable for linux" label-for="checker">
-          <FileSubmit id="checker" v-model="checker" />
-        </b-form-group>
+        <b-button class="my-4" @click="addTest">Add test</b-button>
       </div>
       <b-button type="submit" variant="primary">Submit</b-button>
     </b-form>
@@ -40,7 +46,6 @@
 
 <script>
 import apiUtil from "@/mixins/apiUtil";
-import FileSubmit from "@/components/FileSubmit";
 import DeletableCard from "@/components/DeletableCard.vue";
 
 export default {
@@ -55,10 +60,12 @@ export default {
       statement: `
       you will be given an integer n (1 < n < 100) as input. output n*5.
       `,
-      checker: null,
       difficulty: "easy",
       score: 5,
-      tests: ["3", "5"],
+      tests: [
+        { input: "3", output: "15\n" },
+        { input: "5", output: "25\n" },
+      ],
     };
   },
   mounted() {
@@ -68,33 +75,41 @@ export default {
   },
   methods: {
     onSubmit() {
-      let formData = new FormData();
-      formData.append("topicid", this.topicid);
-      formData.append("title", this.title);
-      formData.append("statement", this.statement);
-      formData.append("difficulty", this.difficulty);
-      formData.append("score", this.score);
-      formData.append("tests", this.tests);
-      formData.append("checker", this.checker);
-      for (var pair of formData.entries()) {
-        console.log(pair[0] + ", " + pair[1]);
-      }
-      this.apiPost("/admin/create-problem", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }).then(([data]) => {
-        alert(`problem created with id: ${data.id}`);
-      });
+      let body = {};
+      body.topicid = this.topicid;
+      body.title = this.title;
+      body.content = {
+        statement: this.statement,
+        tests: this.tests,
+      };
+      body.difficulty = this.difficulty;
+      body.score = this.score;
+      this.apiPost("/admin/create-problem", body, {})
+        .then(([{ id }]) => {
+          this.$root.$bvToast.toast(`problem created with id: ${id}`, {
+            variant: "success",
+            noCloseButton: true,
+          });
+          this.$router.push({ name: "Admin" });
+        })
+        .catch(() => {
+          this.$root.$bvToast.toast(
+            "Question set submission unsuccessful. Try again.",
+            {
+              variant: "danger",
+              noCloseButton: true,
+            }
+          );
+        });
     },
     addTest() {
-      this.tests.push("");
+      this.tests.push({});
     },
     deleteTest(index) {
       this.tests.splice(index, 1);
-    }
+    },
   },
-  components: { FileSubmit, DeletableCard },
+  components: { DeletableCard },
 };
 </script>
 

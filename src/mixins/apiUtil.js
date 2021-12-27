@@ -12,18 +12,18 @@ export default {
         }
       );
     },
-    apiPost(endpoint, data, config = {}) {
+    // if post isn't supposed to return anything, have to use apiPostPromise for checking error
+    apiPostPromise(endpoint, data, config = {}) {
       config.withCredentials = true;
-      return axios.post(endpoint, data, config).then(
+      return axios.post(endpoint, data, config);
+    },
+    apiPost(endpoint, data, config = {}) {
+      return this.apiPostPromise(endpoint, data, config).then(
         (result) => result.data,
         (err) => {
           console.error(err);
         }
       );
-    },
-    apiPostPromise(endpoint, data, config = {}) {
-      config.withCredentials = true;
-      return axios.post(endpoint, data, config);
     },
   },
 };

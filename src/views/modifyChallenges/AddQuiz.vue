@@ -149,12 +149,27 @@ export default {
     return {
       difficultyLevel: ["easy", "medium", "difficult"],
       topicsAvailable: [],
-      topic: null,
+      topic: 1,
       loading: false,
-      title: "",
+      title: "dummy",
       difficulty: "easy",
       time: 30,
-      questions: [],
+      questions: [
+        {
+          type: 1,
+          points: 1,
+          statement: 'j vs l',
+          options: [ 'l', 'j' ],
+          answer: 'l'
+        },
+        {
+          type: 2,
+          points: 1,
+          statement: 'which ones do u like',
+          options: [ 'apple', 'orange', 'banana' ],
+          answer: [ 'apple', 'orange' ]
+        }
+      ],
     };
   },
   mixins: [apiUtil],
@@ -221,7 +236,7 @@ export default {
       for (let i = 0; i < this.questions.length; i++)
         if (this.validateQuestion(i)) questions.push(this.questions[i]);
       //this.questions = questions;
-      if (questions.length < 3) {
+      if (questions.length < 2) {
         this.$root.$bvToast.toast("Question set is not complete. Try again.", {
           variant: "danger",
           autoHideDelay: 2000,
@@ -237,15 +252,15 @@ export default {
           score += parseInt(questions[i].points);
         }
         let body = {};
-        body.content = JSON.stringify({ questions: questions });
+        body.content = { questions: questions };
         body.time = this.time;
         body.topic = this.topic;
         body.difficulty = this.difficulty;
         body.title = this.title;
         body.score = score;
-        this.apiPostPromise(`/admin/add-quiz`, body)
-          .then(() => {
-            this.$root.$bvToast.toast("Question set submission successful.", {
+        this.apiPost(`/admin/add-quiz`, body)
+          .then(([{id}]) => {
+            this.$root.$bvToast.toast(`Question set successfully with id: ${id}`, {
               variant: "success",
               autoHideDelay: 2000,
               appendToast: true,

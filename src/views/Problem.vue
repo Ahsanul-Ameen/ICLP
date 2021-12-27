@@ -143,7 +143,7 @@ export default {
 
     this.apiGet(`/public/problem/${this.id}`).then(([data]) => {
       this.ancestors[this.ancestors.length - 1].text = data.title;
-      this.statement = data.content;
+      this.statement = data.statement;
     });
   },
 };
