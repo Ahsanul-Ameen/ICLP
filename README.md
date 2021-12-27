@@ -38,15 +38,19 @@ npm run serve
 
   
 
-### Compiles and minifies for production
+### Compile, minify for production & Deploy
+
+
+If you wanna deploy to a site with address ...../REPO_NAME/ (e.g. shafinkhadem.github.io/iclp) instead of ..../ (e.g. iclp.netlify.app), you have to add `publicPath: process.env.NODE_ENV === "production" ? "/REPO_NAME/" : "/"` to module.exports of vue.config.js.
 
 ```
 
-npm run build
+export VUE_APP_SERVER_URL=<DEPLOYED_BACKEND_URL>
+npm run build && cp dist/index.html dist/404.html
 
 ```
 
-  
+without copying index.html to 404.html, direct links to vue routes wouldn't work. Deploy the created dist folder.
 
 ### Lints and fixes files
 
