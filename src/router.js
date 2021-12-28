@@ -179,6 +179,12 @@ const routes = [
         component: () =>
             import("./views/ToDo"),
     },
+
+
+
+
+    { path: '/404', component: () => import("./views/NotFound") },
+    { path: '*', redirect: '/404' },
 ];
 
 const router = new VueRouter({
