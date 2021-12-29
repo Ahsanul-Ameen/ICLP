@@ -97,6 +97,7 @@ import LineChart from "@/components/LineChart.js";
 import BarChart from "@/components/BarChart.js";
 import apiUtil from "@/mixins/apiUtil";
 import moment from "moment";
+import cssProperty from "@/utils/cssProperty";
 
 export default {
   name: "Profile",
@@ -195,6 +196,7 @@ export default {
                 data: lineplotdata,
                 lineTension: 0,
                 fill: false,
+                borderColor: cssProperty('--primary')
               },
             ],
           };
@@ -204,6 +206,7 @@ export default {
               {
                 label: "Best attempts",
                 data: Object.values(counts),
+                backgroundColor: Array(Object.keys(counts).length).fill(cssProperty('--primary'))
               },
             ],
           };
@@ -256,7 +259,6 @@ export default {
       return this.activities.length;
     },
     activitiesFiltered() {
-      console.log(this.activities);
       return this.activities.map((item) => {
         /* eslint-disable no-unused-vars */
         const { details, ...obj } = item;
