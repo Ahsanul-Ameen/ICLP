@@ -1,20 +1,25 @@
 <template>
   <b-container>
     <b-form-input v-model="search" placeholder="Search"></b-form-input>
-    <b-table
-      id="rank-table"
-      striped
-      hover
-      :items="ranksFiltered"
-      :per-page="perPage"
-      :current-page="currentPage"
-    >
-      <template #cell(user_id)="data">
-        <router-link :to="{ name: 'Profile', params: { id: data.value } }">{{
-          data.value
-        }}</router-link>
-      </template>
-    </b-table>
+    <loading :show="!ranksLoaded">
+      <b-table
+        id="rank-table"
+        striped
+        hover
+        :items="ranksFiltered"
+        :per-page="perPage"
+        :current-page="currentPage"
+      >
+        <template #cell(user_id)="data">
+          <router-link :to="{ name: 'Profile', params: { id: data.value } }">{{
+            data.value
+          }}</router-link>
+        </template>
+      </b-table>
+    </loading>
+    <p :hidden="!(ranksLoaded && ranks.length==0)">
+      No user has participated yet.
+    </p>
     <b-row align-h="end">
       <b-pagination
         v-model="currentPage"
@@ -29,22 +34,26 @@
 
 <script>
 import apiUtil from "@/mixins/apiUtil";
+import Loading from '@/components/Loading.vue';
+
 export default {
   name: "Rank",
   props: [],
   mixins: [apiUtil],
-  components: {},
+  components: { Loading },
   data() {
     return {
       perPage: 10,
       currentPage: 1,
       search: "",
       ranks: [],
+      ranksLoaded: false
     };
   },
   mounted() {
     this.apiGet("/public/rank").then((data) => {
       this.ranks = data;
+      this.ranksLoaded = true;
     });
   },
   computed: {
@@ -61,4 +70,6 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+</style>

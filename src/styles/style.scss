@@ -1,0 +1,20 @@
+// NOTE: this file is auto-imported to every vue component (has been configured by vue.config.js)
+
+// bootstrap only provides vh-100, min-vh-100
+@each $i in 25, 50, 75 {
+  .vh-#{$i} {
+    height: #{$i}vh;
+  }
+  .min-vh-#{$i} {
+    min-height: #{$i}vh;
+  }
+}
+
+@for $i from 1 through 25 {
+  .min-h-#{$i}em {
+    min-height: #{$i}em;
+  }
+  .min-h-#{$i}rem {
+    min-height: #{$i}rem;
+  }
+}

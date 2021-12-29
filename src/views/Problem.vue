@@ -9,18 +9,20 @@
             active
             :title-item-class="['border-left', 'border-right']"
           >
-            <pre class="mt-5 mb-5">{{ statement }}</pre>
-            <div class="w-25" v-if="userid">
-              submit solution:
-              <b-form @submit.prevent="onsubmit">
-                <FileSubmit id="submission" v-model="submission" />
-                <SolutionLanguages id="language" v-model="language" />
-                <b-button type="submit" variant="primary">Submit</b-button>
-              </b-form>
-            </div>
-            <div v-else>
-              <h3>Login/signup to submit solution.</h3>
-            </div>
+            <loading :show="statement.length==0">
+              <pre class="mb-5">{{ statement }}</pre>
+              <div class="w-25" v-if="userid">
+                submit solution:
+                <b-form @submit.prevent="onsubmit">
+                  <FileSubmit id="submission" v-model="submission" />
+                  <SolutionLanguages id="language" v-model="language" />
+                  <b-button type="submit" variant="primary">Submit</b-button>
+                </b-form>
+              </div>
+              <div v-else>
+                <h3>Login/signup to submit solution.</h3>
+              </div>
+            </loading>
           </b-tab>
           <!--b-tab title="Editor" :title-item-class="['border-right']" lazy>
             <editor buttonAction="Submit" @editorDone="submitFromEditor" />
@@ -62,6 +64,7 @@ import Submissions from "@/components/Submissions";
 import FileSubmit from "@/components/FileSubmit";
 import SolutionLanguages from "@/components/SolutionLanguages";
 import thisuser from "@/mixins/thisuser";
+import Loading from '@/components/Loading.vue';
 
 export default {
   name: "Problem",
@@ -78,7 +81,7 @@ export default {
           text: null,
         },
       ],
-      statement: null,
+      statement: "",
       submission: null,
       language: "c++ 17",
       judging: false,
@@ -123,6 +126,7 @@ export default {
     Submissions,
     FileSubmit,
     SolutionLanguages,
+    Loading
   },
   mounted() {
     /**
@@ -149,4 +153,4 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped></style>

@@ -45,8 +45,7 @@ If you wanna deploy to a site with address ...../REPO_NAME/ (e.g. shafinkhadem.g
 
 ```
 
-export VUE_APP_SERVER_URL=<DEPLOYED_BACKEND_URL>
-npm run build && cp dist/index.html dist/404.html
+VUE_APP_SERVER_URL=<DEPLOYED_BACKEND_URL> npm run build && cp dist/index.html dist/404.html
 
 ```
 

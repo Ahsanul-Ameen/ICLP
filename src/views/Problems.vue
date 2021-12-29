@@ -1,43 +1,48 @@
 <template>
   <div>
     <h1>{{topic}}</h1>
-    <b-row>
-      <b-col cols="12" lg="9">
-        <b-list-group>
-          <b-list-group-item
-            v-for="problem in problems"
-            :key="problem.id"
-            :probleminfo="problem"
-            :to=" { name: 'Problem', params: {id: problem.id } }"
-            class="shadow hover-zoom hover-color-link py-3"
-          >
-            <ProblemIntro :probleminfo="problem" />
-          </b-list-group-item>
-        </b-list-group>
-      </b-col>
-      <!-- TODO: implement the filers and pagination -->
-      <!-- <b-col cols="3" class="d-none d-lg-block">
-        <b-list-group flush>
-          <b-list-group-item v-for="(filter, index) in filters" :key="index" class="default-bg">
-            <div class="filtertype">{{filter.type}}</div>
-            <div
-              class="form-check filtervalue"
-              v-for="(filtervalue, index) in filter.values"
-              :key="index"
+    <loading :show="!problemsLoaded">
+      <b-row>
+        <b-col cols="12" lg="9">
+          <b-list-group>
+            <b-list-group-item
+              v-for="problem in problems"
+              :key="problem.id"
+              :probleminfo="problem"
+              :to=" { name: 'Problem', params: {id: problem.id } }"
+              class="shadow hover-zoom hover-color-link py-3"
             >
-              <input
-                type="checkbox"
-                :value="filtervalue.label"
-                :id="index"
-                class="form-check-input"
-                v-model="filtervalue.active"
-              />
-              <label :for="index" class="form-check-label">{{filtervalue.label}}</label>
-            </div>
-          </b-list-group-item>
-        </b-list-group>
-      </b-col>-->
-    </b-row>
+              <ProblemIntro :probleminfo="problem" />
+            </b-list-group-item>
+          </b-list-group>
+        </b-col>
+        <!-- TODO: implement the filers and pagination -->
+        <!-- <b-col cols="3" class="d-none d-lg-block">
+          <b-list-group flush>
+            <b-list-group-item v-for="(filter, index) in filters" :key="index" class="default-bg">
+              <div class="filtertype">{{filter.type}}</div>
+              <div
+                class="form-check filtervalue"
+                v-for="(filtervalue, index) in filter.values"
+                :key="index"
+              >
+                <input
+                  type="checkbox"
+                  :value="filtervalue.label"
+                  :id="index"
+                  class="form-check-input"
+                  v-model="filtervalue.active"
+                />
+                <label :for="index" class="form-check-label">{{filtervalue.label}}</label>
+              </div>
+            </b-list-group-item>
+          </b-list-group>
+        </b-col>-->
+      </b-row>
+    </loading>
+    <p :hidden="!(problemsLoaded && problems.length==0)">
+      This topic has no problem yet.
+    </p>
   </div>
 </template>
 
@@ -45,6 +50,7 @@
 import ProblemIntro from "@/components/ProblemIntro";
 import apiUtil from "@/mixins/apiUtil";
 import thisuser from "@/mixins/thisuser";
+import Loading from '@/components/Loading.vue';
 
 export default {
   name: "Problems",
@@ -52,9 +58,11 @@ export default {
   props: ["topic", "solved", "unsolved", "easy", "medium", "hard"],
   components: {
     ProblemIntro,
+    Loading
   },
   data: (vm) => ({
-    problems: null,
+    problems: [],
+    problemsLoaded: false,
     filters: [
       {
         type: "Status",
@@ -115,6 +123,7 @@ export default {
       this.apiGet(`/public/problems/${this.topic}?userid=${val}`).then(
         (data) => {
           this.problems = data;
+          this.problemsLoaded = true;
         }
       );
     },
@@ -122,7 +131,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .filtertype {
   color: grey;
   padding: 3px;

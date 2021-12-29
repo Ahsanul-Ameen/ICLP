@@ -156,7 +156,7 @@ export default {
       this.combinedScore = data.total_score;
     });
     this.apiGet("/public/problem-topics").then((result) => {
-      this.topics = result.map((a) => ({ value: a.id, text: a.name })) || [];
+      this.topics = result.map((a) => ({ value: a.id, text: a.name }));
       this.topics.push({ value: 0, text: "all" });
     });
     this.apiGet(`/public/user/${this.id}`).then(([{ user }]) => {
@@ -270,7 +270,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .table td {
   text-align: center;
 }
