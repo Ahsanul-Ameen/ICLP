@@ -9,8 +9,15 @@
             active
             :title-item-class="['border-left', 'border-right']"
           >
-            <loading :show="statement.length==0">
+            <loading :show="statement.length == 0">
               <pre class="mb-5">{{ statement }}</pre>
+              <p>
+                You can find sample submissions
+                <a href="https://github.com/mwashief/ICLP/tree/main/sample_submissions"
+                  >here</a
+                >
+                for testing
+              </p>
               <div class="w-25" v-if="userid">
                 submit solution:
                 <b-form @submit.prevent="onsubmit">
