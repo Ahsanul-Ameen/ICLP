@@ -3,6 +3,7 @@
     <b-jumbotron
       header="Programming Knowledge Tester"
       lead="A website to test programming knowledge with MCQs and programming problems with an automatic judging system."
+      header-level="5"
     >
       <b-button-group class="mt-5" v-if="!this.$store.getters.isLoggedIn">
         <b-button variant="primary" :to="{ name: 'Signup' }">Join Us</b-button>

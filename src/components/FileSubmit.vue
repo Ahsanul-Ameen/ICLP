@@ -5,11 +5,11 @@
       :value="value"
       @input="$emit('input', $event)"
       :state="Boolean(value)"
-      placeholder="Choose a file or drop it here..."
+      placeholder="Choose a file or drop here..."
       drop-placeholder="Drop file here..."
       required
     />
-    <div class="mt-3">Selected file: {{ value ? value.name : '' }}</div>
+    <div class="mt-3">Selected file: {{ value ? value.name : "" }}</div>
   </div>
 </template>
 

@@ -17,4 +17,10 @@
   .min-h-#{$i}rem {
     min-height: #{$i}rem;
   }
+  .max-w-#{$i}em {
+    max-width: #{$i}em;
+  }
+  .max-w-#{$i}rem {
+    max-width: #{$i}rem;
+  }
 }

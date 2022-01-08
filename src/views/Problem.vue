@@ -1,5 +1,5 @@
 <template>
-  <b-container>
+  <div>
     <b-breadcrumb :items="ancestors" />
     <b-overlay :show="judging">
       <div>
@@ -10,15 +10,16 @@
             :title-item-class="['border-left', 'border-right']"
           >
             <loading :show="statement.length == 0">
-              <pre class="mb-5">{{ statement }}</pre>
+              <p class="mb-5">{{ statement }}</p>
               <p>
                 You can find sample submissions
-                <a href="https://github.com/mwashief/ICLP/tree/main/sample_submissions"
+                <a
+                  href="https://github.com/mwashief/ICLP/tree/main/sample_submissions"
                   >here</a
                 >
-                for testing
+                for testing.
               </p>
-              <div class="w-25" v-if="userid">
+              <div v-if="userid" class="max-w-20rem">
                 submit solution:
                 <b-form @submit.prevent="onsubmit">
                   <FileSubmit id="submission" v-model="submission" />
@@ -41,9 +42,9 @@
             <div id="disqus_thread"></div>
             <noscript>
               Please enable JavaScript to view the
-              <a
-                href="https://disqus.com/?ref_noscript"
-              >comments powered by Disqus.</a>
+              <a href="https://disqus.com/?ref_noscript"
+                >comments powered by Disqus.</a
+              >
             </noscript>
           </b-tab>
         </b-tabs>
@@ -62,7 +63,7 @@
         <b-row align-h="center" class="mt-3">Score: {{ score }}</b-row>
       </b-modal>
     </b-overlay>
-  </b-container>
+  </div>
 </template>
 
 <script>
@@ -71,7 +72,7 @@ import Submissions from "@/components/Submissions";
 import FileSubmit from "@/components/FileSubmit";
 import SolutionLanguages from "@/components/SolutionLanguages";
 import thisuser from "@/mixins/thisuser";
-import Loading from '@/components/Loading.vue';
+import Loading from "@/components/Loading.vue";
 
 export default {
   name: "Problem",
@@ -133,17 +134,17 @@ export default {
     Submissions,
     FileSubmit,
     SolutionLanguages,
-    Loading
+    Loading,
   },
   mounted() {
     /**
      *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
      *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-    window.disqus_config = function() {
+    window.disqus_config = function () {
       // this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
       this.page.identifier = `problem_${this.id}`; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
-    (function() {
+    (function () {
       // DON'T EDIT BELOW THIS LINE
       var d = document,
         s = d.createElement("script");

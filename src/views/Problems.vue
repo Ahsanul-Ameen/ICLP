@@ -1,15 +1,15 @@
 <template>
   <div>
-    <h1>{{topic}}</h1>
+    <h1>{{ topic }}</h1>
     <loading :show="!problemsLoaded">
       <b-row>
-        <b-col cols="12" lg="9">
+        <b-col cols="12" lg="9" class="mx-lg-auto">
           <b-list-group>
             <b-list-group-item
               v-for="problem in problems"
               :key="problem.id"
               :probleminfo="problem"
-              :to=" { name: 'Problem', params: {id: problem.id } }"
+              :to="{ name: 'Problem', params: { id: problem.id } }"
               class="shadow hover-zoom hover-color-link py-3"
             >
               <ProblemIntro :probleminfo="problem" />
@@ -40,7 +40,7 @@
         </b-col>-->
       </b-row>
     </loading>
-    <p :hidden="!(problemsLoaded && problems.length==0)">
+    <p :hidden="!(problemsLoaded && problems.length == 0)">
       This topic has no problem yet.
     </p>
   </div>
@@ -50,7 +50,7 @@
 import ProblemIntro from "@/components/ProblemIntro";
 import apiUtil from "@/mixins/apiUtil";
 import thisuser from "@/mixins/thisuser";
-import Loading from '@/components/Loading.vue';
+import Loading from "@/components/Loading.vue";
 
 export default {
   name: "Problems",
@@ -58,7 +58,7 @@ export default {
   props: ["topic", "solved", "unsolved", "easy", "medium", "hard"],
   components: {
     ProblemIntro,
-    Loading
+    Loading,
   },
   data: (vm) => ({
     problems: [],

@@ -1,13 +1,13 @@
 <template>
   <div>
     <loading :show="!submissionsLoaded">
-      <b-table striped hover :items="submissions">
+      <b-table striped hover :items="submissions" responsive="sm">
         <!-- <template #cell(id)="data">
           <router-link :to="{name: 'Submission', params: {id: data.value}}">{{data.value}}</router-link>
         </template>-->
       </b-table>
     </loading>
-    <p :hidden="!(submissionsLoaded && submissions.length==0)">
+    <p :hidden="!(submissionsLoaded && submissions.length == 0)">
       This problem has no submission yet.
     </p>
   </div>

@@ -58,27 +58,25 @@
         <bar-chart :chart-data="bardata" :options="chartoptions" />
       </b-col>
     </b-row>
-    <b-row>
-      <h3 class="mt-5">Activity</h3>
-      <calendar-heatmap
-        :values="activity"
-        :endDate="new Date()"
-        tooltip-unit="submissions"
-        :range-color="['#eeeeee', '#fecdc5', '#feac9e', '#fe8b77', '#fd593c']"
-      />
-    </b-row>
-    <b-row>
-      <h3 class="mt-5">Activities</h3>
-      <b-table
-        id="activity-table"
-        striped
-        hover
-        :items="activitiesFiltered"
-        per-page="4"
-        :current-page="currentPage"
-      >
-      </b-table>
-    </b-row>
+    <h3 class="mt-5">Activity</h3>
+    <calendar-heatmap
+      :values="activity"
+      :endDate="new Date()"
+      tooltip-unit="submissions"
+      :range-color="['#eeeeee', '#fecdc5', '#feac9e', '#fe8b77', '#fd593c']"
+    />
+    <h3 class="mt-5">Activities</h3>
+    <b-table
+      id="activity-table"
+      striped
+      hover
+      :items="activitiesFiltered"
+      per-page="4"
+      :current-page="currentPage"
+      responsive="sm"
+    >
+    </b-table>
+
     <b-row align-h="center" class="mt-4">
       <b-pagination
         v-model="currentPage"
@@ -180,9 +178,7 @@ export default {
           };
           lineplotdata.unshift(bgn);
           const barplotdata = data.map((v) =>
-            moment(v.time)
-              .startOf("day")
-              .format("YYYY-MM-DD")
+            moment(v.time).startOf("day").format("YYYY-MM-DD")
           );
           const counts = {};
           for (var i = 0; i < barplotdata.length; i++) {
@@ -196,7 +192,7 @@ export default {
                 data: lineplotdata,
                 lineTension: 0,
                 fill: false,
-                borderColor: cssProperty('--primary')
+                borderColor: cssProperty("--primary"),
               },
             ],
           };
@@ -206,7 +202,9 @@ export default {
               {
                 label: "Best attempts",
                 data: Object.values(counts),
-                backgroundColor: Array(Object.keys(counts).length).fill(cssProperty('--primary'))
+                backgroundColor: Array(Object.keys(counts).length).fill(
+                  cssProperty("--primary")
+                ),
               },
             ],
           };
