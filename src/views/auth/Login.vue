@@ -25,7 +25,7 @@ export default {
   components: { Login },
   methods: {
     loginRoutine() {
-      this.$router.push({ name: "Home" });
+      this.$router.back();
     },
   },
   created() {
