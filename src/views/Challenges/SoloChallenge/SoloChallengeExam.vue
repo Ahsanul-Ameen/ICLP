@@ -7,7 +7,7 @@
             icon="grip-horizontal"
             class="text-primary d-none d-md-inline"
           />
-          Solo Challenge
+          MCQ Challenge
           <b-icon
             icon="grip-horizontal"
             class="text-primary d-none d-md-inline"
@@ -78,7 +78,7 @@
           </b-form-group>
         </b-col>
         <b-col>
-          <b-row align-h="end" style="opacity: .5">
+          <b-row align-h="end" style="opacity: 0.5">
             {{ question.points }} Points
           </b-row>
         </b-col>
@@ -124,7 +124,7 @@ export default {
       })
         .then((data) => {
           this.$root.$bvToast.toast(`Your answers are submitted successfully`, {
-            title: "Solo challenge has ended",
+            title: "MCQ challenge has ended",
             variant: "success",
             autoHideDelay: 5000,
             appendToast: true,

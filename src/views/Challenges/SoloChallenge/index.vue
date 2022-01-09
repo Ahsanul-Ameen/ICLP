@@ -1,5 +1,5 @@
 <template>
-  <topics :topiclink="topiclink" header="Solo Challenge" />
+  <topics :topiclink="topiclink" header="MCQ Challenge" />
 </template>
 
 <script>

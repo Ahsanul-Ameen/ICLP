@@ -11,7 +11,7 @@
     />
     <h2 class="text-center">
       <b-icon icon="grip-horizontal" class="text-primary" />
-      Solo Challenge
+      MCQ Challenge
       <b-icon icon="grip-horizontal" class="text-primary" />
     </h2>
 

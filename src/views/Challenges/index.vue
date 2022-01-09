@@ -7,8 +7,8 @@
 
     <challenge-banner heading="Take a quiz">
       <p>
-        A solo challenge where you can choose your preferable topic and perform
-        a quiz based on that topic.
+        A MCQ challenge where you can choose your preferable topic and perform a
+        quiz based on that topic.
       </p>
       <b-button
         pill
