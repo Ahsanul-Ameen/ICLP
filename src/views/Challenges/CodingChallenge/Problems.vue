@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>{{ topic }}</h1>
+    <b-breadcrumb :items="ancestors" />
     <loading :show="!problemsLoaded">
       <b-row>
         <b-col cols="12" lg="9" class="mx-lg-auto">
@@ -59,6 +59,19 @@ export default {
   components: {
     ProblemIntro,
     Loading,
+  },
+  computed: {
+    ancestors() {
+      return [
+        {
+          text: "Coding challenge",
+          href: "/problems",
+        },
+        {
+          text: this.topic,
+        },
+      ];
+    },
   },
   data: (vm) => ({
     problems: [],
