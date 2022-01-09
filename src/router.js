@@ -131,13 +131,13 @@ const routes = [
         path: "/problems",
         name: "ProblemTopics",
         component: () =>
-            import("./views/ProblemTopics"),
+            import("./views/Challenges/CodingChallenge/ProblemTopics"),
     },
     {
         path: "/problems/:topic",
         name: "Problems",
         component: () =>
-            import("./views/Problems"),
+            import("./views/Challenges/CodingChallenge/Problems"),
         props: ({ params, query }) => ({
             ...params,
             solved: query.solved !== "false",
@@ -151,7 +151,7 @@ const routes = [
         path: "/problem/:id",
         name: "Problem",
         component: () =>
-            import("./views/Problem"),
+            import("./views/Challenges/CodingChallenge/Problem"),
         props: true,
     },
     {
