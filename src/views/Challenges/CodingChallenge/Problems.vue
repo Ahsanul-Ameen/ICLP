@@ -156,4 +156,3 @@ export default {
 
 // NOTE: router-link exact should be default but isn't, use append for relative link 
 //      , relative link doesn't work correctly with href
-// FIXME: navbar color doesn't change when using keyboard to go back

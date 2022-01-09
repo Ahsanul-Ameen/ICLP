@@ -11,17 +11,41 @@
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
     <b-collapse id="nav-collapse" is-nav>
+      <!-- whenever key of a component changes, it's re-rendered.
+      Without it, the hover-color was persisting after clicking
+      until some other click / event causing re-render -->
       <b-navbar-nav>
-        <b-nav-item :to="{ name: 'Challenges' }">Challenges</b-nav-item>
-        <b-nav-item :to="{ name: 'Rank' }">Rank</b-nav-item>
-        <!-- <b-nav-item v-if="userid" :to="{ name: 'IDE' }">Editor</b-nav-item> -->
-        <b-nav-item v-if="affiliation == 'admin'" :to="{ name: 'Admin' }">
+        <b-nav-item
+          :to="{ name: 'Challenges' }"
+          @click="navcount++"
+          :key="`Challenges${navcount}`"
+          >Challenges</b-nav-item
+        >
+        <b-nav-item
+          :to="{ name: 'Rank' }"
+          @click="navcount++"
+          :key="`Rank${navcount}`"
+          >Rank</b-nav-item
+        >
+        <!-- <b-nav-item
+          v-if="userid"
+          :to="{ name: 'IDE' }"
+          @click="navcount++"
+          :key="`Editor${navcount}`"
+          >Editor</b-nav-item
+        > -->
+        <b-nav-item
+          v-if="affiliation == 'admin'"
+          :to="{ name: 'Admin' }"
+          @click="navcount++"
+          :key="`Admin${navcount}`"
+        >
           Admin
         </b-nav-item>
       </b-navbar-nav>
 
       <b-navbar-nav class="ml-auto" v-if="this.$store.getters.isLoggedIn">
-        <b-nav-item @click="newMessages = 0" :to="{ name: 'ToDo' }">
+        <b-nav-item :to="{ name: 'ToDo' }" @click="newMessages = 0">
           <b-iconstack font-scale="1">
             <b-icon icon="bell-fill" class="border rounded p-2"></b-icon>
           </b-iconstack>
@@ -99,6 +123,7 @@ export default {
     return {
       newMessages: 0,
       profile: "https://placekitten.com/300/300",
+      navcount: 0,
     };
   },
   methods: {
