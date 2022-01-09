@@ -17,27 +17,31 @@
         :to="{ name: 'BrowseTopics' }"
       >Browse Topics</b-button>
     </challenge-banner>
-    <challenge-banner heading="Play">
-      <p>
-        A dual challenge where you will be able to choose a particular topic and compete against someone interested in same topic.
-      </p>
-      <b-button
-        pill
-        variant="primary"
-        class="shadow-lg font-weight-bold"
-        :to="{ name: 'DualTypes' }"
-      >Proceed</b-button>
-    </challenge-banner>
     <challenge-banner heading="Coding Challenge">
       <p>
-        A coding challenge where you can choose your preferable topic and solve coding problem on it within fixed time limit.
+        A coding challenge where you can choose your preferable topic and solve
+        coding problem on it within fixed time limit.
       </p>
       <b-button
         pill
         variant="primary"
         class="shadow-lg font-weight-bold"
         :to="{ name: 'ProblemTopics' }"
-      >Browse Topics</b-button>
+        >Browse Topics</b-button
+      >
+    </challenge-banner>
+    <challenge-banner heading="Play">
+      <p>
+        A dual challenge where you will be able to choose a particular topic and
+        compete against someone interested in same topic.
+      </p>
+      <b-button
+        pill
+        variant="primary"
+        class="shadow-lg font-weight-bold"
+        :to="{ name: 'DualTypes' }"
+        >Proceed</b-button
+      >
     </challenge-banner>
   </b-container>
 </template>
