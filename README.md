@@ -1,7 +1,30 @@
+# Programming knowledge tester
+**The project has been deployed [here](https://iclp-sms.netlify.app/).
+This is our front-end repo. Backend repo is [here](https://github.com/mwashief/iclp-api).**
 
+## Features
+- MCQ challenges
+- Coding challenges
+- Dual challenges
+- Automatic scoring
+- User statistics & ranking
+- Admins can add new challenges
 
-# Interactive Code Learning Platform
-This is our front-end development repo.
+## Technologies used
+
+### Frontend
+- Vue.js
+- Vuex
+- bootstrap-vue
+- Sass
+- Adobe XD (for UI design)
+
+### Backend
+- Node.js
+- Express
+- PostgreSQL
+- Docker (for deployment, as we needed external dependency GCC to automatically evaluate users' programs)
+- Passport.js cookie-session for authentication
 
 ## How to run
 1. First, download and install  [Node](https://nodejs.org/en/) if it is not already installed. Make sure that node version is 14 (latest stable).
