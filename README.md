@@ -1,6 +1,5 @@
 # Programming knowledge tester
-**The project has been deployed [here](https://iclp-sms.netlify.app/).
-This is our front-end repo. Backend repo is [here](https://github.com/mwashief/iclp-api).**
+**This is our front-end repo. Backend repo is [here](https://github.com/mwashief/iclp-api).**
 
 ## Features
 - MCQ challenges
