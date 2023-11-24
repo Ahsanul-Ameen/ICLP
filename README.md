@@ -18,7 +18,7 @@
 - Sass
 - Adobe XD (for UI design)
 
-### Backend
+### Backend (https://github.com/mwashief/iclp-api)
 - Node.js
 - Express
 - PostgreSQL
